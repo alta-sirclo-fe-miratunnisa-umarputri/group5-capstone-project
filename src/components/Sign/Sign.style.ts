@@ -1,10 +1,6 @@
 import { SxProps } from "@mui/material";
-import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
 import { primary, tertiary } from "../../styles/color.styles";
-
-const theme = createTheme();
-export const responsiveFontSize = responsiveFontSizes(theme);
 
 export const complimentContent: SxProps = {
   backgroundColor: primary.color,
