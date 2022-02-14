@@ -12,10 +12,8 @@ export const tertiary = {
 
 export const quaternary = {
   backgroundColor: "#CACBD5",
-}
+};
 
 export const bgwhite = {
   backgroundColor: "#FFFFFF",
-}
-
-
+};
