@@ -1,16 +1,16 @@
-import { FormEvent, FormEventHandler } from "react";
+import { FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { LoadingButton } from "@mui/lab";
 import {
   Box,
   createTheme,
-  FormLabel,
   Grid,
   responsiveFontSizes,
-  TextField,
   ThemeProvider,
   Typography,
 } from "@mui/material";
+
+import CustomFormInput from "../components/Sign/CustomFormInput";
 
 const theme = createTheme();
 const responsiveFontSize = responsiveFontSizes(theme);
@@ -20,9 +20,9 @@ const SignUp = () => {
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
-    // console.log("event =>", data.get("name"));
-    // console.log("event =>", data.get("email"));
-    // console.log("event =>", data.get("password"));
+    console.log("event =>", data.get("name"));
+    console.log("event =>", data.get("email"));
+    console.log("event =>", data.get("password"));
   };
 
   return (
@@ -72,76 +72,23 @@ const SignUp = () => {
 
             {/* form */}
             <Box component="form" sx={{ marginY: 2 }} onSubmit={handleSubmit}>
-              <Box
-                sx={{ display: "flex", flexDirection: "column", marginY: 2 }}
-              >
-                <FormLabel
-                  required={true}
-                  sx={{
-                    mb: 1,
-                    color: "#3D4251",
-                    fontFamily: "Poppins",
-                    fontSize: "20px",
-                    fontWeight: "medium",
-                  }}
-                >
-                  Name
-                </FormLabel>
-                <TextField
-                  required
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="John Doe"
-                />
-              </Box>
-
-              <Box
-                sx={{ display: "flex", flexDirection: "column", marginY: 2 }}
-              >
-                <FormLabel
-                  required={true}
-                  sx={{
-                    mb: 1,
-                    color: "#3D4251",
-                    fontFamily: "Poppins",
-                    fontSize: "20px",
-                    fontWeight: "medium",
-                  }}
-                >
-                  Email
-                </FormLabel>
-                <TextField
-                  required
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="example@domain.com"
-                />
-              </Box>
-
-              <Box
-                sx={{ display: "flex", flexDirection: "column", marginY: 2 }}
-              >
-                <FormLabel
-                  required={true}
-                  sx={{
-                    mb: 1,
-                    color: "#3D4251",
-                    fontFamily: "Poppins",
-                    fontSize: "20px",
-                    fontWeight: "medium",
-                  }}
-                >
-                  Password
-                </FormLabel>
-                <TextField
-                  required
-                  type="password"
-                  id="password"
-                  name="password"
-                />
-              </Box>
+              <CustomFormInput
+                label="Name"
+                type="text"
+                desc="name"
+                placeholder="John Doe"
+              />
+              <CustomFormInput
+                label="Email"
+                type="email"
+                desc="email"
+                placeholder="example@domain.com"
+              />
+              <CustomFormInput
+                label="Password"
+                type="password"
+                desc="password"
+              />
 
               {/* button */}
               <LoadingButton
