@@ -28,10 +28,6 @@ const SignIn = () => {
 
   return (
     <Grid container minHeight="100vh">
-      <Grid item xs={12} md={6} sx={complimentContent}>
-        <img src={logo} alt="Logo" width="60%" height="auto" />
-      </Grid>
-
       <Grid item xs={12} md={6} sx={mainContent}>
         <Box width="70%">
           <LogoSmallScreen />
@@ -59,6 +55,10 @@ const SignIn = () => {
             />
           </Box>
         </Box>
+      </Grid>
+
+      <Grid item xs={12} md={6} sx={complimentContent}>
+        <img src={logo} alt="Logo" width="60%" height="auto" />
       </Grid>
     </Grid>
   );
