@@ -18,6 +18,7 @@ export const formLabel: SxProps = {
 };
 
 export const CustomTextField = styled(TextField)({
+  input: primary,
   "& label.Mui-focused": {
     color: tertiary.color,
   },
