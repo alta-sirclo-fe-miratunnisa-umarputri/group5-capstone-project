@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 
 import CustomFormInput from "../components/Sign/CustomFormInput";
+import Greetings from "../components/Sign/Greetings";
 
 const theme = createTheme();
 const responsiveFontSize = responsiveFontSizes(theme);
@@ -49,28 +50,11 @@ const SignUp = () => {
           }}
         >
           <Box sx={{ width: "70%" }}>
-            <Typography
-              variant="h3"
-              sx={{
-                fontFamily: "Poppins",
-                fontWeight: "medium",
-                color: "#3D4251",
-              }}
-            >
-              Hello There
-            </Typography>
-            <Typography
-              variant="h6"
-              sx={{
-                fontFamily: "Poppins",
-                fontWeight: "medium",
-                color: "#3D4251",
-              }}
-            >
-              Please enter your details!
-            </Typography>
+            <Greetings
+              title="Hello There"
+              subtitle="Please enter your details!"
+            />
 
-            {/* form */}
             <Box component="form" sx={{ marginY: 2 }} onSubmit={handleSubmit}>
               <CustomFormInput
                 label="Name"
@@ -97,6 +81,7 @@ const SignUp = () => {
                 variant="contained"
                 type="submit"
                 size="large"
+                fullWidth
                 sx={{
                   textTransform: "none",
                   marginY: 1,
@@ -107,7 +92,6 @@ const SignUp = () => {
                     backgroundColor: "#D35E35",
                   },
                 }}
-                fullWidth
               >
                 Sign Up
               </LoadingButton>

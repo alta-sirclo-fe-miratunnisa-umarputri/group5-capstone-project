@@ -4,3 +4,8 @@ export type SignForm = {
   desc: string;
   placeholder: string;
 };
+
+export type SignGreetings = {
+  title: string;
+  subtitle: string;
+};
