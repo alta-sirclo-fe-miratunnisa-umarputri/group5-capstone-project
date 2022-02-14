@@ -1,20 +1,15 @@
 import { FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
-import {
-  Box,
-  createTheme,
-  Grid,
-  responsiveFontSizes,
-  ThemeProvider,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, ThemeProvider } from "@mui/material";
 
 import CustomFormInput from "../components/Sign/CustomFormInput";
 import Greetings from "../components/Sign/Greetings";
 import SecondaryFullButton from "../components/Button/SecondaryFullButton";
-
-const theme = createTheme();
-const responsiveFontSize = responsiveFontSizes(theme);
+import {
+  complimentContent,
+  mainContent,
+  responsiveFontSize,
+} from "../components/Sign/Sign.style";
+import Help from "../components/Sign/Help";
 
 const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,33 +32,16 @@ const SignUp = () => {
   return (
     <ThemeProvider theme={responsiveFontSize}>
       <Grid container minHeight="100vh">
-        <Grid
-          item
-          xs={12}
-          md={6}
-          sx={{
-            backgroundColor: "#3D4251",
-            display: { xs: "none", md: "flex" },
-          }}
-        ></Grid>
+        <Grid item xs={12} md={6} sx={complimentContent}></Grid>
 
-        <Grid
-          item
-          xs={12}
-          md={6}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Box sx={{ width: "70%" }}>
+        <Grid item xs={12} md={6} sx={mainContent}>
+          <Box width="70%">
             <Greetings
               title="Hello There"
               subtitle="Please enter your details!"
             />
 
-            <Box component="form" sx={{ marginY: 2 }} onSubmit={handleSubmit}>
+            <Box component="form" marginY={2} onSubmit={handleSubmit}>
               <CustomFormInput
                 label="Name"
                 type="text"
@@ -84,24 +62,11 @@ const SignUp = () => {
 
               <SecondaryFullButton label="Sign Up" loading={isLoading} />
 
-              {/* link to sign in */}
-              <Typography
-                variant="caption"
-                sx={{
-                  color: "#666F88",
-                  textAlign: "end",
-                  fontFamily: "Poppins",
-                  fontWeight: "medium",
-                  mt: 1,
-                }}
-              >
-                <Box>
-                  {"Already have an account? "}
-                  <Link to="/sign-in">
-                    <span style={{ color: "#3D4251" }}>Sign in now</span>
-                  </Link>
-                </Box>
-              </Typography>
+              <Help
+                tag="Already have an account?"
+                instruction="Sign in now"
+                path="/sign-in"
+              />
             </Box>
           </Box>
         </Grid>

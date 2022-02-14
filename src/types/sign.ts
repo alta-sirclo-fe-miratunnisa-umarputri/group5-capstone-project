@@ -9,3 +9,9 @@ export type SignGreetings = {
   title: string;
   subtitle: string;
 };
+
+export type SignHelp = {
+  tag: string;
+  instruction: string;
+  path: string;
+};
