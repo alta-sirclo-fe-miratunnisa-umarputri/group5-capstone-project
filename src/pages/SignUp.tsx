@@ -11,6 +11,7 @@ import {
   mainContent,
   responsiveFontSize,
 } from "../components/Sign/Sign.style";
+import LogoSmallScreen from "../components/Sign/LogoSmallScreen";
 
 const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,6 +40,8 @@ const SignUp = () => {
 
         <Grid item xs={12} md={6} sx={mainContent}>
           <Box width="70%">
+            <LogoSmallScreen />
+
             <Greetings
               title="Hello There"
               subtitle="Please enter your details!"
