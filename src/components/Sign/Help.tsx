@@ -11,6 +11,7 @@ const Help = ({ tag, instruction, path }: SignHelp) => {
       <Box>
         {tag}
         <Link to={path}>
+          {" "}
           <span style={primary}>{instruction}</span>
         </Link>
       </Box>
