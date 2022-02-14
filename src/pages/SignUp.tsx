@@ -1,6 +1,5 @@
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import { LoadingButton } from "@mui/lab";
 import {
   Box,
   createTheme,
@@ -12,11 +11,14 @@ import {
 
 import CustomFormInput from "../components/Sign/CustomFormInput";
 import Greetings from "../components/Sign/Greetings";
+import SecondaryFullButton from "../components/Button/SecondaryFullButton";
 
 const theme = createTheme();
 const responsiveFontSize = responsiveFontSizes(theme);
 
 const SignUp = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -24,6 +26,12 @@ const SignUp = () => {
     console.log("event =>", data.get("name"));
     console.log("event =>", data.get("email"));
     console.log("event =>", data.get("password"));
+
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
   };
 
   return (
@@ -74,27 +82,7 @@ const SignUp = () => {
                 desc="password"
               />
 
-              {/* button */}
-              <LoadingButton
-                // loading={isLoading}
-                loadingIndicator="Loading..."
-                variant="contained"
-                type="submit"
-                size="large"
-                fullWidth
-                sx={{
-                  textTransform: "none",
-                  marginY: 1,
-                  fontWeight: "medium",
-                  fontFamily: "Poppins",
-                  backgroundColor: "#D35E35",
-                  "&:hover": {
-                    backgroundColor: "#D35E35",
-                  },
-                }}
-              >
-                Sign Up
-              </LoadingButton>
+              <SecondaryFullButton label="Sign Up" loading={isLoading} />
 
               {/* link to sign in */}
               <Typography
