@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 
 import { primary } from "../../styles/color.styles";
 import { SignHelp } from "../../types/sign";
-import { help } from "./Sign.style";
+import { help, link } from "./Sign.style";
 
 const Help = ({ tag, instruction, path }: SignHelp) => {
   return (
     <Typography variant="caption" sx={help}>
       <Box>
         {tag}
-        <Link to={path}>
+        <Link to={path} style={link}>
           {" "}
           <span style={primary}>{instruction}</span>
         </Link>

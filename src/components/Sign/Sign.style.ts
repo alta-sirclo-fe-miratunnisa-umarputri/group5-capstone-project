@@ -27,3 +27,8 @@ export const help: SxProps = {
   fontWeight: "medium",
   mt: 1,
 };
+
+export const link = {
+  textDecoration: "underline",
+  textDecorationColor: primary.color,
+};
