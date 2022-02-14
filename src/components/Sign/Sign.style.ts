@@ -9,6 +9,7 @@ export const responsiveFontSize = responsiveFontSizes(theme);
 export const complimentContent: SxProps = {
   backgroundColor: primary.color,
   display: { xs: "none", md: "flex" },
+  justifyContent: "center",
 };
 
 export const mainContent: SxProps = {

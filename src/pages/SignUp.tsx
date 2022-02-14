@@ -1,15 +1,16 @@
 import { FormEvent, useState } from "react";
 import { Box, Grid, ThemeProvider } from "@mui/material";
 
+import logo from "../assets/logo.svg";
 import CustomFormInput from "../components/Sign/CustomFormInput";
 import Greetings from "../components/Sign/Greetings";
 import SecondaryFullButton from "../components/Button/SecondaryFullButton";
+import Help from "../components/Sign/Help";
 import {
   complimentContent,
   mainContent,
   responsiveFontSize,
 } from "../components/Sign/Sign.style";
-import Help from "../components/Sign/Help";
 
 const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +33,9 @@ const SignUp = () => {
   return (
     <ThemeProvider theme={responsiveFontSize}>
       <Grid container minHeight="100vh">
-        <Grid item xs={12} md={6} sx={complimentContent}></Grid>
+        <Grid item xs={12} md={6} sx={complimentContent}>
+          <img src={logo} alt="Logo" width="60%" height="auto" />
+        </Grid>
 
         <Grid item xs={12} md={6} sx={mainContent}>
           <Box width="70%">
