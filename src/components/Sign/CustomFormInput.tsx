@@ -20,7 +20,7 @@ const CustomFormInput = ({
           type={type}
           id={desc}
           name={desc}
-          placeholder={placeholder ? placeholder : ""}
+          placeholder={placeholder}
         />
       </Box>
     </>
