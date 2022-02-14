@@ -55,7 +55,12 @@ const SignUp = () => {
               desc="email"
               placeholder="example@domain.com"
             />
-            <CustomFormInput label="Password" type="password" desc="password" />
+            <CustomFormInput
+              label="Password"
+              type="password"
+              desc="password"
+              placeholder="New password"
+            />
 
             <SecondaryFullButton label="Sign Up" loading={isLoading} />
 

@@ -44,7 +44,12 @@ const SignIn = () => {
               desc="email"
               placeholder="example@domain.com"
             />
-            <CustomFormInput label="Password" type="password" desc="password" />
+            <CustomFormInput
+              label="Password"
+              type="password"
+              desc="password"
+              placeholder="Your password"
+            />
 
             <SecondaryFullButton label="Sign In" loading={isLoading} />
 
