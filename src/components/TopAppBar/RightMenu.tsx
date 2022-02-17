@@ -4,18 +4,12 @@ import {
   IconButton,
   Typography,
   Menu,
-  Button,
   MenuItem,
   Stack,
 } from "@mui/material";
 import AccountBoxRoundedIcon from "@mui/icons-material/AccountBoxRounded";
 
-import {
-  desktopButtonRight,
-  desktopRight,
-  mobileIcon,
-  mobileRight,
-} from "./TopAppBar.style";
+import { desktopRight, mobileIcon, mobileRight } from "./TopAppBar.style";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "./PrimaryButton";
 import SecondaryButton from "./SecondaryButton";
@@ -88,7 +82,11 @@ const RightMenu = () => {
   const desktop = (
     <Box sx={desktopRight}>
       <Stack spacing={1} direction="row">
-        <SecondaryButton label="Profile" />
+        {isAuth ? (
+          <SecondaryButton label="Profile" />
+        ) : (
+          <SecondaryButton label="Sign Up" />
+        )}
 
         {isAuth ? (
           <PrimaryButton label="Sign Out" loading={false} />

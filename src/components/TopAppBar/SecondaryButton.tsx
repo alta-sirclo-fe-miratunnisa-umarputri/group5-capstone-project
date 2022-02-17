@@ -1,11 +1,30 @@
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import { ButtonLoading } from "../../types/button";
-import { secondaryButton } from "../Button/SecondaryFullButton.style";
+import { secondaryButton } from "./SecondaryButton.style";
 
 const SecondaryButton = ({ label }: Partial<ButtonLoading>) => {
+  const navigate = useNavigate();
+
   const handleClick = (label: string) => {
-    console.log("label second =>", label);
+    if (label === "Profile") {
+      navigate("profile");
+      return;
+    }
+
+    if (label === "Sign Up") {
+      navigate("sign-up");
+      return;
+    }
+
+    if (label === "Home") {
+      navigate("/");
+      return;
+    }
+
+    console.log("second =>", label);
+    navigate("/");
   };
 
   return (

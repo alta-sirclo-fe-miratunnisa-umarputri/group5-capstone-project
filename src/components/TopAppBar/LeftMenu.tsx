@@ -1,16 +1,8 @@
 import { useState, MouseEvent } from "react";
-import {
-  Box,
-  IconButton,
-  Typography,
-  Menu,
-  Button,
-  MenuItem,
-} from "@mui/material";
+import { Box, IconButton, Typography, Menu, MenuItem } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 
 import {
-  desktopButton,
   desktopLeft,
   mobileIcon,
   mobileLeft,
