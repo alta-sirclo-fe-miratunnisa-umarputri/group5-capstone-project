@@ -17,11 +17,13 @@ import {
   mobileIcon,
   mobileRight,
 } from "./TopAppBar.style";
+import { useNavigate } from "react-router-dom";
 
 const settings = ["Profile", "Sign Out"];
 
 const RightMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
 
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -29,6 +31,26 @@ const RightMenu = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleClickProfile = () => {
+    navigate("profile");
+  };
+
+  const handleClickSignOut = () => {
+    console.log("sign out desktop");
+  };
+
+  const handleClickSetting = (setting: string) => {
+    if (setting === "Profile") {
+      handleClickProfile();
+      return;
+    }
+
+    if (setting === "Sign Out") {
+      handleClickSignOut();
+      return;
+    }
   };
 
   const mobile = (
@@ -53,7 +75,7 @@ const RightMenu = () => {
         onClose={handleCloseUserMenu}
       >
         {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
+          <MenuItem key={setting} onClick={() => handleClickSetting(setting)}>
             <Typography textAlign="center">{setting}</Typography>
           </MenuItem>
         ))}
@@ -64,10 +86,19 @@ const RightMenu = () => {
   const desktop = (
     <Box sx={desktopRight}>
       <Stack spacing={1} direction="row">
-        <Button size="small" sx={desktopButtonRight}>
+        <Button
+          size="small"
+          sx={desktopButtonRight}
+          onClick={handleClickProfile}
+        >
           Profile
         </Button>
-        <Button size="small" variant="contained" sx={desktopButtonRightPrimary}>
+        <Button
+          size="small"
+          variant="contained"
+          sx={desktopButtonRightPrimary}
+          onClick={handleClickSignOut}
+        >
           Sign Out
         </Button>
       </Stack>
