@@ -18,6 +18,7 @@ import {
 } from "./TopAppBar.style";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "./PrimaryButton";
+import SecondaryButton from "./SecondaryButton";
 
 const settings = ["Profile", "Sign Out"];
 
@@ -87,13 +88,7 @@ const RightMenu = () => {
   const desktop = (
     <Box sx={desktopRight}>
       <Stack spacing={1} direction="row">
-        <Button
-          size="small"
-          sx={desktopButtonRight}
-          onClick={handleClickProfile}
-        >
-          Profile
-        </Button>
+        <SecondaryButton label="Profile" />
 
         {isAuth ? (
           <PrimaryButton label="Sign Out" loading={false} />

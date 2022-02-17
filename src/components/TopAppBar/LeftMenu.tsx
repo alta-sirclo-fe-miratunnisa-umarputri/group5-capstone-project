@@ -17,6 +17,7 @@ import {
   mobileLeftMenu,
 } from "./TopAppBar.style";
 import { useNavigate } from "react-router-dom";
+import SecondaryButton from "./SecondaryButton";
 
 const pages = ["Home", "Menu", "About", "Contact", "Search"];
 
@@ -79,14 +80,9 @@ const LeftMenu = () => {
   const desktop = (
     <Box sx={desktopLeft}>
       {pages.map((page) => (
-        <Button
-          key={page}
-          onClick={() => handleClickPage(page)}
-          size="small"
-          sx={desktopButton}
-        >
-          {page}
-        </Button>
+        <Box key={page}>
+          <SecondaryButton label={page} />
+        </Box>
       ))}
     </Box>
   );
