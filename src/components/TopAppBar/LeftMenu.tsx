@@ -7,6 +7,7 @@ import {
   mobileIcon,
   mobileLeft,
   mobileLeftMenu,
+  mobileMenu,
 } from "./TopAppBar.style";
 import { useNavigate } from "react-router-dom";
 import SecondaryButton from "./SecondaryButton";
@@ -62,7 +63,9 @@ const LeftMenu = () => {
       >
         {pages.map((page) => (
           <MenuItem key={page} onClick={() => handleClickPage(page)}>
-            <Typography textAlign="center">{page}</Typography>
+            <Typography variant="subtitle2" sx={mobileMenu}>
+              {page}
+            </Typography>
           </MenuItem>
         ))}
       </Menu>

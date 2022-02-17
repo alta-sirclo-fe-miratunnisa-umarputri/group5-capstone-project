@@ -9,7 +9,12 @@ import {
 } from "@mui/material";
 import AccountBoxRoundedIcon from "@mui/icons-material/AccountBoxRounded";
 
-import { desktopRight, mobileIcon, mobileRight } from "./TopAppBar.style";
+import {
+  desktopRight,
+  mobileIcon,
+  mobileMenu,
+  mobileRight,
+} from "./TopAppBar.style";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "./PrimaryButton";
 import SecondaryButton from "./SecondaryButton";
@@ -72,7 +77,9 @@ const RightMenu = () => {
       >
         {settings.map((setting) => (
           <MenuItem key={setting} onClick={() => handleClickSetting(setting)}>
-            <Typography textAlign="center">{setting}</Typography>
+            <Typography variant="subtitle2" sx={mobileMenu}>
+              {setting}
+            </Typography>
           </MenuItem>
         ))}
       </Menu>

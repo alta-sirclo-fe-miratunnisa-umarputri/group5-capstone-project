@@ -1,5 +1,5 @@
 import { SxProps } from "@mui/material";
-import { bgwhite } from "../../styles/color.styles";
+import { bgwhite, primary } from "../../styles/color.styles";
 
 const mobile = {
   display: {
@@ -16,6 +16,13 @@ export const mobileIcon = { color: bgwhite.backgroundColor };
 
 export const mobileLeftMenu: SxProps = {
   display: { xs: "block", md: "none" },
+};
+
+export const mobileMenu: SxProps = {
+  ...primary,
+  textAlign: "center",
+  fontFamily: "Poppins",
+  fontWeight: "medium",
 };
 
 const desktop = { display: { xs: "none", md: "flex" } };
