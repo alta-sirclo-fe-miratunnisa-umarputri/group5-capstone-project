@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 
 import { SignGreetings } from "../../types/sign";
-import { titleAndSubtitle } from "./Sign.style";
+import { titleAndSubtitle } from "./Greetings.style";
 
 const Greetings = ({ title, subtitle }: SignGreetings) => {
   return (

@@ -1,9 +1,9 @@
 import { LoadingButton } from "@mui/lab";
 
-import { SecondaryButton } from "../../types/button";
+import { ButtonLoading } from "../../types/button";
 import { secondaryButton } from "./SecondaryFullButton.style";
 
-const SecondaryFullButton = ({ label, loading }: SecondaryButton) => {
+const SecondaryFullButton = ({ label, loading }: ButtonLoading) => {
   return (
     <LoadingButton
       loading={loading}

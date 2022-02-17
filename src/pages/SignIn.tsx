@@ -3,9 +3,9 @@ import { Box, Grid } from "@mui/material";
 
 import logo from "../assets/logo.svg";
 import LogoSmallScreen from "../components/Sign/LogoSmallScreen";
-import Greetings from "../components/Sign/Greetings";
+import Greetings from "../components/Typography/Greetings";
 import CustomFormInput from "../components/Sign/CustomFormInput";
-import SecondaryFullButton from "../components/Button/SecondaryFullButton";
+import SecondaryFullButton from "../components/Sign/SecondaryFullButton";
 import Help from "../components/Sign/Help";
 import { complimentContent, mainContent } from "../components/Sign/Sign.style";
 

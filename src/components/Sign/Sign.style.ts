@@ -14,12 +14,6 @@ export const mainContent: SxProps = {
   alignItems: "center",
 };
 
-export const titleAndSubtitle: SxProps = {
-  ...primary,
-  fontFamily: "Poppins",
-  fontWeight: "medium",
-};
-
 export const help: SxProps = {
   ...tertiary,
   textAlign: "end",
