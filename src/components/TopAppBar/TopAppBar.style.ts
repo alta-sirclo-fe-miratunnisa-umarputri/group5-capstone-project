@@ -33,10 +33,3 @@ export const desktopButtonRight: SxProps = {
   color: bgwhite.backgroundColor,
   mr: 1,
 };
-
-export const desktopButtonRightPrimary: SxProps = {
-  bgcolor: primary.color,
-  "&:hover": {
-    bgcolor: primary.color,
-  },
-};

@@ -12,16 +12,17 @@ import AccountBoxRoundedIcon from "@mui/icons-material/AccountBoxRounded";
 
 import {
   desktopButtonRight,
-  desktopButtonRightPrimary,
   desktopRight,
   mobileIcon,
   mobileRight,
 } from "./TopAppBar.style";
 import { useNavigate } from "react-router-dom";
+import PrimaryButton from "./PrimaryButton";
 
 const settings = ["Profile", "Sign Out"];
 
 const RightMenu = () => {
+  const [isAuth, setIsAuth] = useState(true);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
 
@@ -93,14 +94,12 @@ const RightMenu = () => {
         >
           Profile
         </Button>
-        <Button
-          size="small"
-          variant="contained"
-          sx={desktopButtonRightPrimary}
-          onClick={handleClickSignOut}
-        >
-          Sign Out
-        </Button>
+
+        {isAuth ? (
+          <PrimaryButton label="Sign Out" loading={false} />
+        ) : (
+          <PrimaryButton label="Sign In" loading={false} />
+        )}
       </Stack>
     </Box>
   );
