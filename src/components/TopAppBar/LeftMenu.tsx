@@ -9,7 +9,13 @@ import {
 } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 
-import { bgwhite } from "../../styles/color.styles";
+import {
+  desktopButton,
+  desktopLeft,
+  mobileIcon,
+  mobileLeft,
+  mobileLeftMenu,
+} from "./TopAppBar.style";
 
 const pages = ["Home", "Menu", "About", "Contact", "Search"];
 
@@ -25,12 +31,7 @@ const LeftMenu = () => {
   };
 
   const mobile = (
-    <Box
-      sx={{
-        flexGrow: 1,
-        display: { xs: "flex", md: "none" },
-      }}
-    >
+    <Box sx={mobileLeft}>
       <IconButton
         size="medium"
         aria-label="account of current user"
@@ -38,11 +39,9 @@ const LeftMenu = () => {
         aria-haspopup="true"
         onClick={handleOpenNavMenu}
       >
-        <MenuRoundedIcon
-          fontSize="medium"
-          style={{ color: bgwhite.backgroundColor }}
-        />
+        <MenuRoundedIcon fontSize="medium" style={mobileIcon} />
       </IconButton>
+
       <Menu
         id="menu-appbar"
         anchorEl={anchorElNav}
@@ -57,9 +56,7 @@ const LeftMenu = () => {
         }}
         open={Boolean(anchorElNav)}
         onClose={handleCloseNavMenu}
-        sx={{
-          display: { xs: "block", md: "none" },
-        }}
+        sx={mobileLeftMenu}
       >
         {pages.map((page) => (
           <MenuItem key={page} onClick={handleCloseNavMenu}>
@@ -71,18 +68,13 @@ const LeftMenu = () => {
   );
 
   const desktop = (
-    <Box
-      sx={{
-        flexGrow: 1,
-        display: { xs: "none", md: "flex" },
-      }}
-    >
+    <Box sx={desktopLeft}>
       {pages.map((page) => (
         <Button
           key={page}
           onClick={handleCloseNavMenu}
           size="small"
-          sx={{ color: "white", display: "block" }}
+          sx={desktopButton}
         >
           {page}
         </Button>

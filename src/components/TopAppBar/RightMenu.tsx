@@ -10,7 +10,13 @@ import {
 } from "@mui/material";
 import AccountBoxRoundedIcon from "@mui/icons-material/AccountBoxRounded";
 
-import { bgwhite, primary } from "../../styles/color.styles";
+import {
+  desktopButtonRight,
+  desktopButtonRightPrimary,
+  desktopRight,
+  mobileIcon,
+  mobileRight,
+} from "./TopAppBar.style";
 
 const settings = ["Profile", "Sign Out"];
 
@@ -26,21 +32,11 @@ const RightMenu = () => {
   };
 
   const mobile = (
-    <Box
-      sx={{
-        flexGrow: 0,
-        display: {
-          xs: "block",
-          md: "none",
-        },
-      }}
-    >
+    <Box sx={mobileRight}>
       <IconButton onClick={handleOpenUserMenu}>
-        <AccountBoxRoundedIcon
-          fontSize="medium"
-          style={{ color: bgwhite.backgroundColor }}
-        />
+        <AccountBoxRoundedIcon fontSize="medium" style={mobileIcon} />
       </IconButton>
+
       <Menu
         id="menu-appbar"
         anchorEl={anchorElUser}
@@ -66,29 +62,12 @@ const RightMenu = () => {
   );
 
   const desktop = (
-    <Box
-      sx={{
-        flexGrow: 0,
-        display: {
-          xs: "none",
-          md: "block",
-        },
-      }}
-    >
+    <Box sx={desktopRight}>
       <Stack spacing={1} direction="row">
-        <Button size="small" sx={{ color: bgwhite.backgroundColor, mr: 1 }}>
+        <Button size="small" sx={desktopButtonRight}>
           Profile
         </Button>
-        <Button
-          size="small"
-          variant="contained"
-          sx={{
-            bgcolor: primary.color,
-            "&:hover": {
-              bgcolor: primary.color,
-            },
-          }}
-        >
+        <Button size="small" variant="contained" sx={desktopButtonRightPrimary}>
           Sign Out
         </Button>
       </Stack>
