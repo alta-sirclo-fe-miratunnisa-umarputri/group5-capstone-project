@@ -15,3 +15,9 @@ export type SignHelp = {
   instruction: string;
   path: string;
 };
+
+export type SignFormData = {
+  name: FormDataEntryValue;
+  email: FormDataEntryValue;
+  password: FormDataEntryValue;
+};
