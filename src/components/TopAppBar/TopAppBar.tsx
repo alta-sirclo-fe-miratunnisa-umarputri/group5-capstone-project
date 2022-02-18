@@ -5,7 +5,7 @@ import RightMenu from "./RightMenu";
 
 const TopAppBar = () => {
   return (
-    <AppBar position="static">
+    <AppBar position="sticky" color="transparent">
       <Container maxWidth="xl" sx={{ bgcolor: secondary.color }}>
         <Toolbar disableGutters={true} variant="dense">
           <LeftMenu />

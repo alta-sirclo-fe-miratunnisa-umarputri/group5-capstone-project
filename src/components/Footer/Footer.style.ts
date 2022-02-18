@@ -7,7 +7,7 @@ export const wrapper: SxProps = {
   flexDirection: "column",
   justifyContent: "start",
   alignItems: "start",
-  px: 5,
+  px: 7,
   py: 2,
 };
 
