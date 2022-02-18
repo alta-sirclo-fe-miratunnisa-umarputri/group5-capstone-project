@@ -34,22 +34,15 @@ const RightMenu = () => {
     setAnchorElUser(null);
   };
 
-  const handleClickProfile = () => {
-    navigate("profile");
-  };
-
-  const handleClickSignOut = () => {
-    console.log("sign out desktop");
-  };
-
   const handleClickSetting = (setting: string) => {
     if (setting === "Profile") {
-      handleClickProfile();
+      navigate("profile");
       return;
     }
 
     if (setting === "Sign Out") {
-      handleClickSignOut();
+      console.log("sign out desktop");
+      navigate("/");
       return;
     }
   };
