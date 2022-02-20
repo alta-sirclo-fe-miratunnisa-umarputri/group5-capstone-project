@@ -1,4 +1,7 @@
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
+import { useMutation } from "react-query";
+import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 import { Box, Grid } from "@mui/material";
 
 import logo from "../assets/logo.svg";
@@ -7,24 +10,36 @@ import Greetings from "../components/Typography/Greetings";
 import CustomFormInput from "../components/Sign/CustomFormInput";
 import SecondaryFullButton from "../components/Sign/SecondaryFullButton";
 import Help from "../components/Sign/Help";
+import Error from "../components/Alert/Error";
+import { capstoneAxios } from "../axios-instance";
 import { complimentContent, mainContent } from "../components/Sign/Sign.style";
+import { SignFormData } from "../types/sign";
 
 const SignUp = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const { mutateAsync, isLoading, isError, error } = useMutation(
+    async (newUser: SignFormData) => {
+      const { data } = await capstoneAxios({
+        url: "/users",
+        method: "POST",
+        data: newUser,
+      });
+      return data;
+    }
+  );
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
-    console.log("event =>", data.get("name"));
-    console.log("event =>", data.get("email"));
-    console.log("event =>", data.get("password"));
+    await mutateAsync({
+      name: data.get("name")!,
+      email: data.get("email")!,
+      password: data.get("password")!,
+    });
 
-    setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
+    navigate("/");
   };
 
   return (
@@ -32,6 +47,10 @@ const SignUp = () => {
       <Grid item xs={12} md={6} sx={complimentContent}>
         <img src={logo} alt="Logo" width="60%" height="auto" />
       </Grid>
+
+      {isError && (
+        <Error message={(error as AxiosError).response!.data!.message!} />
+      )}
 
       <Grid item xs={12} md={6} sx={mainContent}>
         <Box width="70%">
