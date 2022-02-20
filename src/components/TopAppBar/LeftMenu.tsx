@@ -11,12 +11,26 @@ import {
 } from "./TopAppBar.style";
 import { useNavigate } from "react-router-dom";
 import SecondaryButton from "./SecondaryButton";
+import Logo from "./Logo";
 
-const pages = ["Home", "Menu", "About", "Contact", "Search"];
+const employeePages = ["Beranda", "Direktori Aset"];
+const adminPages = [
+  "Beranda",
+  "Direktori Aset",
+  "Pengguna Aset",
+  "Pengadaan Aset",
+];
+const managerPages = [
+  "Beranda",
+  "Permohonan Persetujuan",
+  "Permohonan Pengadaan",
+];
 
 const LeftMenu = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
+
+  const role: string = "admin";
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -61,24 +75,60 @@ const LeftMenu = () => {
         onClose={handleCloseNavMenu}
         sx={mobileLeftMenu}
       >
-        {pages.map((page) => (
-          <MenuItem key={page} onClick={() => handleClickPage(page)}>
-            <Typography variant="subtitle2" sx={mobileMenu}>
-              {page}
-            </Typography>
-          </MenuItem>
-        ))}
+        {role === "employee" &&
+          employeePages.map((page) => (
+            <MenuItem key={page} onClick={() => handleClickPage(page)}>
+              <Typography variant="subtitle2" sx={mobileMenu}>
+                {page}
+              </Typography>
+            </MenuItem>
+          ))}
+
+        {role === "admin" &&
+          adminPages.map((page) => (
+            <MenuItem key={page} onClick={() => handleClickPage(page)}>
+              <Typography variant="subtitle2" sx={mobileMenu}>
+                {page}
+              </Typography>
+            </MenuItem>
+          ))}
+
+        {role === "manager" &&
+          managerPages.map((page) => (
+            <MenuItem key={page} onClick={() => handleClickPage(page)}>
+              <Typography variant="subtitle2" sx={mobileMenu}>
+                {page}
+              </Typography>
+            </MenuItem>
+          ))}
       </Menu>
     </Box>
   );
 
   const desktop = (
     <Box sx={desktopLeft}>
-      {pages.map((page) => (
-        <Box key={page}>
-          <SecondaryButton label={page} />
-        </Box>
-      ))}
+      <Logo />
+
+      {role === "employee" &&
+        employeePages.map((page) => (
+          <Box key={page}>
+            <SecondaryButton label={page} />
+          </Box>
+        ))}
+
+      {role === "admin" &&
+        adminPages.map((page) => (
+          <Box key={page}>
+            <SecondaryButton label={page} />
+          </Box>
+        ))}
+
+      {role === "manager" &&
+        managerPages.map((page) => (
+          <Box key={page}>
+            <SecondaryButton label={page} />
+          </Box>
+        ))}
     </Box>
   );
 
