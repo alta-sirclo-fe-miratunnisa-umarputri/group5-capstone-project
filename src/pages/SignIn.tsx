@@ -33,8 +33,8 @@ const SignIn = () => {
           <LogoSmallScreen />
 
           <Greetings
-            title="Welcome Back"
-            subtitle="Please enter your details!"
+            title="Selamat Datang"
+            subtitle="Masuk dengan akun Avengers Anda"
           />
 
           <Box component="form" marginY={2} onSubmit={handleSubmit}>
@@ -45,18 +45,18 @@ const SignIn = () => {
               placeholder="example@domain.com"
             />
             <CustomFormInput
-              label="Password"
+              label="Kata Sandi"
               type="password"
               desc="password"
               placeholder="Your password"
             />
 
-            <SecondaryFullButton label="Sign In" loading={isLoading} />
+            <SecondaryFullButton label="Masuk" loading={isLoading} />
 
             <Help
-              tag="Don't have an account?"
-              instruction="Sign up for free"
-              path="/sign-up"
+              tag="Belum punya akun?"
+              instruction="Daftar di sini"
+              path="#"
             />
           </Box>
         </Box>
