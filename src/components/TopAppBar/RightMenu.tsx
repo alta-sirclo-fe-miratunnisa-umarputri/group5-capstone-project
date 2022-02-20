@@ -8,6 +8,7 @@ import {
   Stack,
 } from "@mui/material";
 import AccountBoxRoundedIcon from "@mui/icons-material/AccountBoxRounded";
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 
 import {
   desktopRight,
@@ -15,14 +16,13 @@ import {
   mobileMenu,
   mobileRight,
 } from "./TopAppBar.style";
+import { bgwhite } from "../../styles/color.styles";
 import { useNavigate } from "react-router-dom";
-import PrimaryButton from "./PrimaryButton";
 import SecondaryButton from "./SecondaryButton";
 
-const settings = ["Profile", "Sign Out"];
+const settings = ["Sign Out"];
 
 const RightMenu = () => {
-  const [isAuth, setIsAuth] = useState(true);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
 
@@ -35,11 +35,6 @@ const RightMenu = () => {
   };
 
   const handleClickSetting = (setting: string) => {
-    if (setting === "Profile") {
-      navigate("profile");
-      return;
-    }
-
     if (setting === "Sign Out") {
       console.log("sign out desktop");
       navigate("/");
@@ -82,17 +77,37 @@ const RightMenu = () => {
   const desktop = (
     <Box sx={desktopRight}>
       <Stack spacing={1} direction="row">
-        {isAuth ? (
-          <SecondaryButton label="Profile" />
-        ) : (
-          <SecondaryButton label="Sign Up" />
-        )}
+        <SecondaryButton label="Hi, User!" />
 
-        {isAuth ? (
-          <PrimaryButton label="Sign Out" loading={false} />
-        ) : (
-          <PrimaryButton label="Sign In" loading={false} />
-        )}
+        <IconButton onClick={handleOpenUserMenu}>
+          <AccountCircleRoundedIcon
+            style={{ color: bgwhite.backgroundColor }}
+          />
+        </IconButton>
+
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchorElUser}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          open={Boolean(anchorElUser)}
+          onClose={handleCloseUserMenu}
+        >
+          {settings.map((setting) => (
+            <MenuItem key={setting} onClick={() => handleClickSetting(setting)}>
+              <Typography variant="subtitle2" sx={mobileMenu}>
+                {setting}
+              </Typography>
+            </MenuItem>
+          ))}
+        </Menu>
       </Stack>
     </Box>
   );
