@@ -1,4 +1,6 @@
 import { Box } from "@mui/material";
+import { Outlet } from "react-router-dom";
+
 import ContentContainer from "../components/ContentContainer";
 import CardAsset from "../components/DirektoriAset/CardAsset";
 import SearchBar from "../components/DirektoriAset/SearchBar";
@@ -16,6 +18,7 @@ const DirektoriAset = () => {
         consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
         adipiscing elit."
       />
+      <Outlet />
 
       <ContentContainer>
         <Box
