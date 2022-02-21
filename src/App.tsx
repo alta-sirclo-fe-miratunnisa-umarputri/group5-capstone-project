@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Routes, Route } from "react-router-dom";
 
 import Layout from "./components/Layout";
+import DirektoriAset from "./pages/DirektoriAset";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="direktori-aset" element={<DirektoriAset />} />
           </Route>
 
           <Route path="sign-in" element={<SignIn />} />
