@@ -14,11 +14,10 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={responsiveFontSize}>
         <Routes>
+          <Route path="/" element={<SignIn />} />
           <Route path="direktori-aset" element={<DirektoriAset />}>
             <Route path=":id" element={<Detail />} />
           </Route>
-
-          <Route path="sign-in" element={<SignIn />} />
         </Routes>
       </ThemeProvider>
     </QueryClientProvider>

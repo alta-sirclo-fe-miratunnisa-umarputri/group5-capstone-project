@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext } from "react";
+import { ChangeEvent } from "react";
 import { InputBase } from "@mui/material";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import { styled, alpha } from "@mui/material/styles";

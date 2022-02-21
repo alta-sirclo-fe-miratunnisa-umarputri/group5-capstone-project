@@ -10,7 +10,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { LoadingButton, Masonry } from "@mui/lab";
+import { Masonry } from "@mui/lab";
 import {
   aboveButton,
   availability,
@@ -74,34 +74,14 @@ const CardAsset = ({ assets }: any) => {
             </CardContent>
 
             <CardActions sx={cardActions}>
-              {/* <Link
-                to={`/detail/${book.id}`}
-                style={{ textDecoration: "none" }}
-              > */}
-              <Button variant="contained" size="small" fullWidth sx={button}>
-                Lihat Detail
-              </Button>
-              {/* </Link> */}
-
-              {/* {clickedBookId === book.id ? (
-                <LoadingButton
-                  onClick={() => handleRent(book.id)}
-                  loading={loadingRent}
-                  loadingIndicator="Loading..."
-                  size="small"
-                  color="inherit"
-                >
-                  Rent
-                </LoadingButton>
-              ) : (
-                <Button
-                  size="small"
-                  sx={{ color: "black" }}
-                  onClick={() => handleRent(book.id)}
-                >
-                  Rent
+              <Link
+                to={`/direktori-aset/${asset.id}`}
+                style={{ textDecoration: "none", width: "100%" }}
+              >
+                <Button variant="contained" size="small" fullWidth sx={button}>
+                  Lihat Detail
                 </Button>
-              )} */}
+              </Link>
             </CardActions>
           </Card>
         </Box>
