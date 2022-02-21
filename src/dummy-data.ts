@@ -1,5 +1,6 @@
 export const dummyAssets = [
   {
+    id: 1,
     kategori: "laptop",
     judul: "lenovo think pad",
     gambar:
@@ -7,9 +8,10 @@ export const dummyAssets = [
     deskripsi:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     pengguna: ["user 1", "user 2", "user 3", "user 4", "user 5", "user 6"],
-    tersedia: 102,
+    tersedia: 10,
   },
   {
+    id: 2,
     kategori: "laptop",
     judul: "lenovo idea pad",
     gambar:
@@ -20,6 +22,7 @@ export const dummyAssets = [
     tersedia: 102,
   },
   {
+    id: 3,
     kategori: "laptop",
     judul: "lenovo think pad",
     gambar:
@@ -27,9 +30,10 @@ export const dummyAssets = [
     deskripsi:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     pengguna: ["user 1", "user 2", "user 3", "user 4", "user 5", "user 6"],
-    tersedia: 102,
+    tersedia: 40,
   },
   {
+    id: 4,
     kategori: "elektronik",
     judul: "kipas cosmos wadesta",
     gambar:
@@ -37,9 +41,10 @@ export const dummyAssets = [
     deskripsi:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     pengguna: ["user 1", "user 2", "user 3", "user 4", "user 5", "user 6"],
-    tersedia: 102,
+    tersedia: 100,
   },
   {
+    id: 5,
     kategori: "elektronik",
     judul: "kipas maspion",
     gambar:
@@ -47,9 +52,10 @@ export const dummyAssets = [
     deskripsi:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     pengguna: ["user 1", "user 2", "user 3", "user 4", "user 5", "user 6"],
-    tersedia: 102,
+    tersedia: 65,
   },
   {
+    id: 6,
     kategori: "alat tulis",
     judul: "papan tulis",
     gambar:
@@ -57,9 +63,10 @@ export const dummyAssets = [
     deskripsi:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. consectetur adipiscing elit.",
     pengguna: ["user 1", "user 2", "user 3", "user 4", "user 5", "user 6"],
-    tersedia: 102,
+    tersedia: 75,
   },
   {
+    id: 7,
     kategori: "elektronik",
     judul: "kipas maspion",
     gambar:
@@ -67,9 +74,10 @@ export const dummyAssets = [
     deskripsi:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     pengguna: ["user 1", "user 2", "user 3", "user 4", "user 5", "user 6"],
-    tersedia: 102,
+    tersedia: 16,
   },
   {
+    id: 8,
     kategori: "laptop",
     judul: "lenovo idea pad",
     gambar:
@@ -77,9 +85,10 @@ export const dummyAssets = [
     deskripsi:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     pengguna: ["user 1", "user 2", "user 3", "user 4", "user 5", "user 6"],
-    tersedia: 102,
+    tersedia: 80,
   },
   {
+    id: 9,
     kategori: "laptop",
     judul: "lenovo think pad",
     gambar:
@@ -87,9 +96,10 @@ export const dummyAssets = [
     deskripsi:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     pengguna: ["user 1", "user 2", "user 3", "user 4", "user 5", "user 6"],
-    tersedia: 102,
+    tersedia: 44,
   },
   {
+    id: 10,
     kategori: "laptop",
     judul: "lenovo idea pad",
     gambar:
@@ -97,9 +107,10 @@ export const dummyAssets = [
     deskripsi:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     pengguna: ["user 1", "user 2", "user 3", "user 4", "user 5", "user 6"],
-    tersedia: 102,
+    tersedia: 46,
   },
   {
+    id: 11,
     kategori: "elektronik",
     judul: "kipas maspion",
     gambar:
@@ -107,9 +118,10 @@ export const dummyAssets = [
     deskripsi:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     pengguna: ["user 1", "user 2", "user 3", "user 4", "user 5", "user 6"],
-    tersedia: 102,
+    tersedia: 14,
   },
   {
+    id: 12,
     kategori: "laptop",
     judul: "lenovo think pad",
     gambar:
@@ -117,6 +129,6 @@ export const dummyAssets = [
     deskripsi:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     pengguna: ["user 1", "user 2", "user 3", "user 4", "user 5", "user 6"],
-    tersedia: 102,
+    tersedia: 100,
   },
 ];
