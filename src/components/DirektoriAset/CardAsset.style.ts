@@ -1,6 +1,8 @@
 import { SxProps } from "@mui/material";
 import { primary, tertiary, bgwhite } from "../../styles/color.styles";
 
+export const masonry: SxProps = { mt: 2 };
+
 export const card: SxProps = {
   height: "100%",
   display: "flex",

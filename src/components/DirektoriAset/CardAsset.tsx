@@ -23,12 +23,13 @@ import {
   category,
   description,
   groupAvatar,
+  masonry,
   title,
 } from "./CardAsset.style";
 
 const CardAsset = ({ assets }: any) => {
   return (
-    <Masonry columns={{ xs: 1, sm: 3, md: 5 }} spacing={3} sx={{ pl: 3 }}>
+    <Masonry columns={{ xs: 1, sm: 3, md: 5 }} spacing={2} sx={masonry}>
       {assets.map((asset: any) => (
         <Box key={asset.id}>
           <Card sx={card}>
