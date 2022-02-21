@@ -3,12 +3,20 @@ import ContentContainer from "../components/ContentContainer";
 import CardAsset from "../components/DirektoriAset/CardAsset";
 import SearchBar from "../components/DirektoriAset/SearchBar";
 import Header from "../components/Header";
+import Layout from "../components/Layout";
 import { dummyAssets } from "../dummy-data";
 
 const DirektoriAset = () => {
   return (
-    <>
-      <Header />
+    <Layout>
+      <Header
+        title="Direktori Aset"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+        dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit."
+      />
+
       <ContentContainer>
         <Box
           sx={{
@@ -23,7 +31,7 @@ const DirektoriAset = () => {
           <CardAsset assets={dummyAssets} />
         </Box>
       </ContentContainer>
-    </>
+    </Layout>
   );
 };
 

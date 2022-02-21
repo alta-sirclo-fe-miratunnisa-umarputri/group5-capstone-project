@@ -31,7 +31,7 @@ const LeftMenu = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
 
-  const role: string = "employee"; // dari backend.
+  const role: string = "admin"; // dari backend.
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);

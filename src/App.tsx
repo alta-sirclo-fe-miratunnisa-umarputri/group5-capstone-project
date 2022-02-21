@@ -17,15 +17,13 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={responsiveFontSize}>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          {/* <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="profile" element={<Profile />} />
-            <Route path="direktori-aset" element={<DirektoriAset />} />
-          </Route>
+          </Route> */}
+          <Route path="direktori-aset" element={<DirektoriAset />} />
 
           <Route path="sign-in" element={<SignIn />} />
-
-          <Route path="sign-up" element={<SignUp />} />
         </Routes>
       </ThemeProvider>
     </QueryClientProvider>
