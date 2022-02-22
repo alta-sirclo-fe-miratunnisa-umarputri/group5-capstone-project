@@ -2,11 +2,10 @@ import { ThemeProvider } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Routes, Route } from "react-router-dom";
 
-import Layout from "./components/Layout";
-import Home from "./pages/Home";
-import Profile from "./pages/Profile";
+import Detail from "./components/DirektoriAset/Detail";
+import User from "./components/DirektoriAset/User";
+import DirektoriAset from "./pages/DirektoriAset";
 import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
 import { responsiveFontSize } from "./styles/theme.styles";
 
 const queryClient = new QueryClient();
@@ -16,14 +15,17 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={responsiveFontSize}>
         <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="profile" element={<Profile />} />
+          <Route path="/" element={<SignIn />} />
+          <Route path="direktori-aset" element={<DirektoriAset />}>
+            <Route
+              path=":id"
+              element={<Detail isOpen={false} handleClose={() => {}} />}
+            />
+            <Route
+              path="pengguna"
+              element={<User isOpen={false} handleClose={() => {}} />}
+            />
           </Route>
-
-          <Route path="sign-in" element={<SignIn />} />
-
-          <Route path="sign-up" element={<SignUp />} />
         </Routes>
       </ThemeProvider>
     </QueryClientProvider>

@@ -1,15 +1,14 @@
 import { Box } from "@mui/material";
-import { Outlet } from "react-router-dom";
+
+import { TheLayout } from "../types/general";
 import Footer from "./Footer/Footer";
 import TopAppBar from "./TopAppBar/TopAppBar";
 
-const Layout = () => {
+const Layout = ({ children }: TheLayout) => {
   return (
     <>
       <TopAppBar />
-      <Box minHeight="100vh">
-        <Outlet />
-      </Box>
+      <Box minHeight="100vh">{children}</Box>
       <Footer />
     </>
   );
