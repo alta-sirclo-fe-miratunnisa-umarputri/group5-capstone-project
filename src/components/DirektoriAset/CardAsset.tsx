@@ -75,11 +75,20 @@ const CardAsset = ({ assets }: any) => {
 
             <CardActions sx={cardActions}>
               <Link
+                to={`/direktori-aset/pengguna`}
+                style={{ textDecoration: "none", width: "100%" }}
+              >
+                <Button variant="contained" size="small" fullWidth sx={button}>
+                  Pengguna
+                </Button>
+              </Link>
+
+              <Link
                 to={`/direktori-aset/${asset.id}`}
                 style={{ textDecoration: "none", width: "100%" }}
               >
                 <Button variant="contained" size="small" fullWidth sx={button}>
-                  Lihat Detail
+                  Detail
                 </Button>
               </Link>
             </CardActions>
