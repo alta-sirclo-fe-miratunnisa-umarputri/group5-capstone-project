@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Routes, Route } from "react-router-dom";
 
 import Detail from "./components/DirektoriAset/Detail";
-import Employee from "./components/DirektoriAset/Employee";
+import User from "./components/DirektoriAset/User";
 import DirektoriAset from "./pages/DirektoriAset";
 import SignIn from "./pages/SignIn";
 import { responsiveFontSize } from "./styles/theme.styles";
@@ -17,8 +17,11 @@ const App = () => {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="direktori-aset" element={<DirektoriAset />}>
-            <Route path=":id" element={<Detail />} />
-            <Route path="pengguna" element={<Employee />} />
+            <Route
+              path=":id"
+              element={<Detail isOpen={false} handleClose={() => {}} />}
+            />
+            <Route path="pengguna" element={<User />} />
           </Route>
         </Routes>
       </ThemeProvider>

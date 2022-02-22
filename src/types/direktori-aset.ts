@@ -5,7 +5,7 @@ export type FormRead = {
   defaultValue: string;
 };
 
-export type Details = {
+export type DetailAndEmployeeModal = {
   isOpen: boolean;
   handleClose: Dispatch<SetStateAction<boolean>>;
 };

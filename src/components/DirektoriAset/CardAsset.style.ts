@@ -45,7 +45,7 @@ export const cardActions: SxProps = {
 };
 
 export const button: SxProps = {
-  fontWeight: "bold",
+  fontWeight: "medium",
   fontFamily: "Poppins",
   color: bgwhite.backgroundColor,
   textTransform: "none",
