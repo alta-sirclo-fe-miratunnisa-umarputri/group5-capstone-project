@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import {
   Button,
   Dialog,
@@ -15,7 +14,6 @@ import { DetailAndEmployeeModal } from "../../types/direktori-aset";
 import {
   buttonActions,
   containerActionsUser,
-  detailImg,
   title,
   userImg,
 } from "./DetailAndUser.style";
@@ -23,13 +21,9 @@ import { primary } from "../../styles/color.styles";
 import UserTable from "./UserTable";
 
 const User = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
-  const { id } = useParams();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
-  // dummy
-  const isMaintenance = false;
-  console.log(id);
   return (
     <Dialog
       open={isOpen}
