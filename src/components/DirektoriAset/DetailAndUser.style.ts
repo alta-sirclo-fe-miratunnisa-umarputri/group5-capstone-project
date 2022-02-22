@@ -14,7 +14,7 @@ export const detailImg = {
   height: "auto",
 };
 
-export const containerActions: SxProps = {
+export const containerActionsDetail: SxProps = {
   display: "flex",
   justifyContent: "space-between",
 };
@@ -27,4 +27,15 @@ export const buttonActions: SxProps = {
   "&:hover": {
     backgroundColor: primary.color,
   },
+};
+
+export const containerActionsUser: SxProps = {
+  display: "flex",
+  justifyContent: "end",
+};
+
+export const userImg = {
+  borderRadius: "5px",
+  width: "100%",
+  height: "auto",
 };

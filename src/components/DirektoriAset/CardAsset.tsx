@@ -29,9 +29,11 @@ import {
   title,
 } from "./CardAsset.style";
 import Detail from "./Detail";
+import User from "./User";
 
 const CardAsset = ({ assets }: any) => {
   const [isOpenDetail, setIsOpenDetail] = useState(false);
+  const [isOpenUser, setIsOpenUser] = useState(false);
   const navigate = useNavigate();
 
   const handleCloseDetail = () => {
@@ -41,6 +43,15 @@ const CardAsset = ({ assets }: any) => {
 
   const handleOpenDetail = () => {
     setIsOpenDetail(true);
+  };
+
+  const handleOpenUser = () => {
+    setIsOpenUser(true);
+  };
+
+  const handleCloseUser = () => {
+    setIsOpenUser(false);
+    navigate("/direktori-aset");
   };
 
   return (
@@ -101,6 +112,7 @@ const CardAsset = ({ assets }: any) => {
                         size="small"
                         fullWidth
                         sx={button}
+                        onClick={handleOpenUser}
                       >
                         Pengguna
                       </Button>
@@ -131,6 +143,8 @@ const CardAsset = ({ assets }: any) => {
       </Masonry>
 
       <Detail isOpen={isOpenDetail} handleClose={handleCloseDetail} />
+
+      <User isOpen={isOpenUser} handleClose={handleCloseUser} />
     </>
   );
 };

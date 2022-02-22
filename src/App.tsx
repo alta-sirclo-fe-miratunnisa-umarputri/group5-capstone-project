@@ -21,7 +21,10 @@ const App = () => {
               path=":id"
               element={<Detail isOpen={false} handleClose={() => {}} />}
             />
-            <Route path="pengguna" element={<User />} />
+            <Route
+              path="pengguna"
+              element={<User isOpen={false} handleClose={() => {}} />}
+            />
           </Route>
         </Routes>
       </ThemeProvider>

@@ -14,10 +14,10 @@ import { CustomFormRead, CustomFormReadMulti } from "./CustomFormRead";
 import { DetailAndEmployeeModal } from "../../types/direktori-aset";
 import {
   buttonActions,
-  containerActions,
+  containerActionsDetail,
   detailImg,
   title,
-} from "./Detail.style";
+} from "./DetailAndUser.style";
 
 const Detail = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
   const { id } = useParams();
@@ -55,7 +55,7 @@ const Detail = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
         />
         <CustomFormRead label="Kategori Aset" defaultValue="Laptop" />
 
-        <Box sx={containerActions}>
+        <Box sx={containerActionsDetail}>
           {isMaintenance ? (
             <Button variant="contained" size="small" sx={buttonActions}>
               Pemeliharaan Aset Selesai
