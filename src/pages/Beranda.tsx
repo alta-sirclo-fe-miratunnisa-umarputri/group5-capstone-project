@@ -3,7 +3,9 @@ import { Grid } from "@mui/material";
 import Layout from "../components/Layout";
 import ContentContainer from "../components/ContentContainer";
 import Carousel from "../components/Beranda/Carousel";
-import RightButton from "../components/Beranda/RightButton";
+import RightButton, {
+  RightButtonDisable,
+} from "../components/Beranda/RightButton";
 import Statistics from "../components/Beranda/Statistics";
 import { ROLE } from "../constants";
 import ActivityCarousel from "../components/Beranda/Employee/ActivityCarousel";
@@ -33,7 +35,13 @@ const Beranda = () => {
 
         {/* row kedua, khusus utk employee (aktivitasku) */}
         {role === ROLE.EMPLOYEE && (
-          <Grid container sx={{ mt: 3 }}>
+          <Grid
+            container
+            sx={{
+              mt: 3,
+              display: { xs: "none", md: "block" },
+            }}
+          >
             <Grid item xs={12} md={8} /* border="1px solid green" */>
               <ActivityCarousel />
             </Grid>
@@ -60,8 +68,25 @@ const Beranda = () => {
               justifyContent: "start",
             }}
           >
-            <RightButton label="Tambah Aset Baru" path="#" />
-            <RightButton label="Assign Aset" path="#" />
+            {role === ROLE.EMPLOYEE && (
+              <>
+                <RightButton label="Peminjaman Aset" path="#" />
+                <RightButton label="Pengajuan Aset Baru" path="#" />
+              </>
+            )}
+
+            {role === ROLE.ADMIN && (
+              <>
+                <RightButton label="Tambah Aset Baru" path="#" />
+                <RightButton label="Assign Aset" path="#" />
+              </>
+            )}
+
+            {role === ROLE.MANAGER && (
+              <>
+                <RightButtonDisable label="Peminjaman Aset" path="#" />
+              </>
+            )}
           </Grid>
         </Grid>
       </ContentContainer>
