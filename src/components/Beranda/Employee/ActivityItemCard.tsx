@@ -34,6 +34,10 @@ const displayWord = (word: string) => {
 };
 
 const ActivityItemCard = ({ item }: any) => {
+  const handleClick = () => {
+    console.log("masuk");
+  };
+
   return (
     <Card sx={card}>
       <Grid container>
@@ -64,9 +68,9 @@ const ActivityItemCard = ({ item }: any) => {
           </Box>
         </Grid>
 
-        <Grid item xs={3}>
+        <Grid item xs={3} sx={statusGrid}>
           <CardActions sx={cardActions}>
-            <IconButton edge="end">
+            <IconButton edge="end" onClick={handleClick}>
               <MoreHorizRoundedIcon fontSize="medium" sx={dot} />
             </IconButton>
           </CardActions>

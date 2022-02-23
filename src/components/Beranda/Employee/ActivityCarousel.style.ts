@@ -17,7 +17,7 @@ export const outerContItem: SxProps = {
 export const card: SxProps = {
   ...quaternary,
   height: 160,
-  marginX: 1,
+  marginX: 0.5,
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",

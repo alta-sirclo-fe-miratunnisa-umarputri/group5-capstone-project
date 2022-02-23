@@ -39,6 +39,7 @@ const ActivityCarousel = () => {
       duration={1e3}
       sx={activityCarousel}
       indicators={false}
+      fullHeightHover={false}
     >
       {groupData(dummyActivity as Item[], 3).map((activity, i) => (
         <ActivityCarouselItem key={i} items={activity as unknown as Item[]} />
