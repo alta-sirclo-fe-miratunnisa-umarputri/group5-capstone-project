@@ -2,12 +2,12 @@ import { Box, Typography } from "@mui/material";
 
 import { labelFont, miniBox, totalFont } from "./StatisticsBox.style";
 
-type Box = {
+type BoxProps = {
   total: number;
   label: string;
 };
 
-const StatisticsBox = ({ total, label }: Box) => {
+const StatisticsBox = ({ total, label }: BoxProps) => {
   return (
     <Box sx={miniBox}>
       <Typography variant="h6" sx={totalFont}>

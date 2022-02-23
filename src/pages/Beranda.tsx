@@ -1,9 +1,10 @@
-import { Box, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 
 import Layout from "../components/Layout";
 import ContentContainer from "../components/ContentContainer";
 import Carousel from "../components/Beranda/Carousel";
 import RightButton from "../components/Beranda/RightButton";
+import Statistics from "../components/Beranda/Statistics";
 
 const Beranda = () => {
   return (
@@ -11,9 +12,12 @@ const Beranda = () => {
       <ContentContainer>
         {/* row pertama (jumbotron & statistik) */}
         <Grid container sx={{ mt: 3 }}>
+          {/* jumbotron */}
           <Grid item xs={12} md={8} border="1px solid green">
             <Carousel />
           </Grid>
+
+          {/* statistik */}
           <Grid
             item
             xs={12}
@@ -21,11 +25,7 @@ const Beranda = () => {
             border="1px solid blue"
             sx={{ display: "flex", justifyContent: "center" }}
           >
-            <Box
-              sx={{ width: "70%", height: "200px", bgcolor: "green", px: 2 }}
-            >
-              <Box border="1px solid blue" height="20px"></Box>
-            </Box>
+            <Statistics />
           </Grid>
         </Grid>
 
@@ -48,6 +48,7 @@ const Beranda = () => {
             item
             xs={12}
             md={4}
+            border="1px solid blue"
             sx={{
               display: "flex",
               flexDirection: "column",
