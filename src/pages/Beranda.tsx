@@ -12,12 +12,10 @@ const Beranda = () => {
       <ContentContainer>
         {/* row pertama (jumbotron & statistik) */}
         <Grid container sx={{ mt: 3 }}>
-          {/* jumbotron */}
           <Grid item xs={12} md={8} border="1px solid green">
             <Carousel />
           </Grid>
 
-          {/* statistik */}
           <Grid
             item
             xs={12}
