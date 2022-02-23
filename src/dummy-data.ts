@@ -132,3 +132,29 @@ export const dummyAssets = [
     tersedia: 100,
   },
 ];
+
+export const dummyActivity = [
+  {
+    date: new Date(),
+    item: "Lenovo Think Pad Laptop",
+    status: "Menunggu persetujuan",
+  },
+  { date: new Date(), item: "Acer Laptop", status: "Menunggu persetujuan" },
+  { date: new Date(), item: "Asus Laptop", status: "Ditolak" },
+  { date: new Date(), item: "Apple Laptop", status: "Disetujui" },
+  { date: new Date(), item: "Toshiba Laptophasdghjd", status: "Ditolak" },
+  {
+    date: new Date(),
+    item: "Toyota Fortunerdajh",
+    status: "Menunggu persetujuan",
+  },
+  { date: new Date(), item: "Kijang Innova", status: "Menunggu konfirmasi" },
+  {
+    date: new Date(),
+    item: "Toyota Avanza Veloz",
+    status: "Menunggu konfirmasi",
+  },
+  { date: new Date(), item: "Toyota Rush", status: "Ditolak" },
+  { date: new Date(), item: "Abc", status: "Ditolak" },
+  { date: new Date(), item: "Abc", status: "Ditolak" },
+];
