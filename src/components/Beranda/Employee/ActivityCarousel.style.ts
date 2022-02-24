@@ -64,3 +64,10 @@ export const cardActions: SxProps = {
 };
 
 export const dot: SxProps = { color: bgwhite.backgroundColor };
+
+export const dotMenu: SxProps = {
+  ...primary,
+  textAlign: "center",
+  fontFamily: "Poppins",
+  fontWeight: "medium",
+};

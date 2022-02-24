@@ -7,6 +7,8 @@ import {
   IconButton,
   Box,
   Avatar,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
 
@@ -18,11 +20,13 @@ import {
   cardActions,
   dateFont,
   dot,
+  dotMenu,
   itemFont,
   statusBox,
   statusFont,
   statusGrid,
 } from "./ActivityCarousel.style";
+import { MouseEvent, useState } from "react";
 
 const displayWord = (word: string) => {
   if (word.length > 13) {
@@ -33,9 +37,25 @@ const displayWord = (word: string) => {
   return word;
 };
 
+const activityMenus = ["Lihat Detail", "Batalkan Pengajuan"];
+
 const ActivityItemCard = ({ item }: any) => {
-  const handleClick = () => {
-    console.log("masuk");
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const handleOpenActivityMenu = (event: MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseActivityMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const handleClickMenu = (menu: string) => {
+    if (menu === "Lihat Detail") {
+      console.log("mau lihat detail");
+    } else {
+      console.log("ajukan pengembalian");
+    }
   };
 
   return (
@@ -70,9 +90,33 @@ const ActivityItemCard = ({ item }: any) => {
 
         <Grid item xs={3} sx={statusGrid}>
           <CardActions sx={cardActions}>
-            <IconButton edge="end" onClick={handleClick}>
+            <IconButton edge="end" onClick={handleOpenActivityMenu}>
               <MoreHorizRoundedIcon fontSize="medium" sx={dot} />
             </IconButton>
+
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseActivityMenu}
+            >
+              {activityMenus.map((menu) => (
+                <MenuItem key={menu} onClick={() => handleClickMenu(menu)}>
+                  <Typography variant="subtitle2" sx={dotMenu}>
+                    {menu}
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Menu>
           </CardActions>
         </Grid>
       </Grid>
