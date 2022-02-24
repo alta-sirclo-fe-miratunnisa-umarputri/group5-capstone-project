@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import { Grid } from "@mui/material";
 
 import Layout from "../components/Layout";
@@ -7,9 +8,15 @@ import RightButton, {
   RightButtonDisable,
 } from "../components/Beranda/RightButton";
 import Statistics from "../components/Beranda/Statistics";
-import { ROLE } from "../constants";
 import ActivityCarousel from "../components/Beranda/Employee/ActivityCarousel";
-import { Outlet } from "react-router-dom";
+import { ROLE } from "../constants";
+import {
+  botCarousel,
+  buttonBerandaContainer,
+  statisticsContainer,
+  tableContainer,
+  topCarousel,
+} from "../components/Beranda/Beranda.style";
 
 const Beranda = () => {
   const role: string = "employee";
@@ -18,66 +25,30 @@ const Beranda = () => {
     <Layout>
       <ContentContainer>
         <Outlet />
-        {/* row pertama (jumbotron & statistik) */}
-        <Grid container sx={{ mt: 3 }}>
-          <Grid item xs={12} md={8} lg={9} border="1px solid green">
+        <Grid container sx={topCarousel}>
+          <Grid item xs={12} md={8} lg={9}>
             <Carousel />
           </Grid>
 
-          <Grid
-            item
-            xs={12}
-            md={4}
-            lg={3}
-            border="1px solid blue"
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: { xs: "center", md: "center", lg: "center" },
-              // alignItems:
-              pl: { md: 3, lg: 3 },
-            }}
-          >
+          <Grid item xs={12} md={4} lg={3} sx={statisticsContainer}>
             <Statistics />
           </Grid>
         </Grid>
 
-        {/* row kedua, khusus utk employee (aktivitasku) */}
         {role === ROLE.EMPLOYEE && (
-          <Grid
-            container
-            sx={{
-              mt: 3,
-              display: { xs: "none", lg: "block" },
-            }}
-          >
-            <Grid item xs={12} md={8} lg={9} border="1px solid green">
+          <Grid container sx={botCarousel}>
+            <Grid item xs={12} md={8} lg={9}>
               <ActivityCarousel />
             </Grid>
           </Grid>
         )}
 
-        {/* row ketiga (tabel & tombol2) */}
-        <Grid container sx={{ mt: 3 }}>
-          {/* tabel */}
+        <Grid container sx={tableContainer}>
           <Grid item xs={12} md={8} lg={9} border="1px solid green">
             tabel
           </Grid>
 
-          {/* tombol */}
-          <Grid
-            item
-            xs={12}
-            md={4}
-            lg={3}
-            border="1px solid blue"
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: { xs: "center", lg: "end" },
-              justifyContent: "start",
-            }}
-          >
+          <Grid item xs={12} md={4} lg={3} sx={buttonBerandaContainer}>
             {role === ROLE.EMPLOYEE && (
               <>
                 <RightButton label="Peminjaman Aset" path="#" />
