@@ -18,7 +18,7 @@ const Beranda = () => {
       <ContentContainer>
         {/* row pertama (jumbotron & statistik) */}
         <Grid container sx={{ mt: 3 }}>
-          <Grid item xs={12} md={8} /* border="1px solid green" */>
+          <Grid item xs={12} md={8} lg={9} border="1px solid green">
             <Carousel />
           </Grid>
 
@@ -26,8 +26,15 @@ const Beranda = () => {
             item
             xs={12}
             md={4}
-            // border="1px solid blue"
-            sx={{ display: "flex", justifyContent: "center" }}
+            lg={3}
+            border="1px solid blue"
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: { xs: "center", md: "center", lg: "center" },
+              // alignItems:
+              pl: { md: 3, lg: 3 },
+            }}
           >
             <Statistics />
           </Grid>
@@ -39,10 +46,10 @@ const Beranda = () => {
             container
             sx={{
               mt: 3,
-              display: { xs: "none", md: "block" },
+              display: { xs: "none", lg: "block" },
             }}
           >
-            <Grid item xs={12} md={8} /* border="1px solid green" */>
+            <Grid item xs={12} md={8} lg={9} border="1px solid green">
               <ActivityCarousel />
             </Grid>
           </Grid>
@@ -51,7 +58,7 @@ const Beranda = () => {
         {/* row ketiga (tabel & tombol2) */}
         <Grid container sx={{ mt: 3 }}>
           {/* tabel */}
-          <Grid item xs={12} md={8} border="1px solid green">
+          <Grid item xs={12} md={8} lg={9} border="1px solid green">
             tabel
           </Grid>
 
@@ -60,11 +67,12 @@ const Beranda = () => {
             item
             xs={12}
             md={4}
+            lg={3}
             border="1px solid blue"
             sx={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
+              alignItems: { xs: "center", lg: "end" },
               justifyContent: "start",
             }}
           >
