@@ -31,7 +31,10 @@ const App = () => {
           </Route>
 
           <Route path="beranda" element={<Beranda />}>
-            <Route path="detail-aktivitas/:id" element={<DetailActivity />} />
+            <Route
+              path="detail-aktivitas/:id"
+              element={<DetailActivity isOpen={false} handleClose={() => {}} />}
+            />
           </Route>
         </Routes>
       </ThemeProvider>
