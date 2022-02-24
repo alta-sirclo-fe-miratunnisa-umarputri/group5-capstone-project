@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Routes, Route } from "react-router-dom";
+import Application from "./components/Beranda/Employee/Application";
 import DetailActivity from "./components/Beranda/Employee/DetailActivity";
 
 import Detail from "./components/DirektoriAset/Detail";
@@ -35,6 +36,7 @@ const App = () => {
               path="detail-aktivitas/:id"
               element={<DetailActivity isOpen={false} handleClose={() => {}} />}
             />
+            <Route path="peminjaman-aset" element={<Application />} />
           </Route>
         </Routes>
       </ThemeProvider>
