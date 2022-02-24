@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import {
   Button,
   Dialog,
@@ -14,8 +14,6 @@ import {
 } from "@mui/material";
 
 import { DetailAndEmployeeModal } from "../../../types/direktori-aset";
-import { title } from "../../DirektoriAset/DetailAndUser.style";
-import { primary } from "../../../styles/color.styles";
 import DetailActivityInfo from "./DetailActivityInfo";
 import {
   availabilityFont,
@@ -27,6 +25,7 @@ import {
   categoryFont,
   itemFont,
 } from "./DetailActivity.style";
+import { generalFont } from "../../../styles/font.style";
 
 const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
   // const { id } = useParams();
@@ -46,7 +45,7 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
     >
       <DialogTitle>
         <Box>
-          <Typography variant="h5" sx={title}>
+          <Typography variant="h5" sx={generalFont}>
             Detail Permohonan
           </Typography>
         </Box>
