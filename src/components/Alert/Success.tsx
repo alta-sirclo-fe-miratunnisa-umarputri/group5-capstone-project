@@ -13,7 +13,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const Error = ({ message }: TheAlert) => {
+const Success = ({ message }: TheAlert) => {
   const [open, setOpen] = useState(true);
 
   const handleClose = () => {
@@ -27,11 +27,11 @@ const Error = ({ message }: TheAlert) => {
       onClose={handleClose}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
     >
-      <Alert onClose={handleClose} severity="error">
+      <Alert onClose={handleClose} severity="success">
         {message}
       </Alert>
     </Snackbar>
   );
 };
 
-export default Error;
+export default Success;

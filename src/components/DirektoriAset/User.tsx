@@ -34,7 +34,7 @@ const User = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
       <DialogTitle>
         <Box>
           <Typography variant="h5" sx={title}>
-            Pengguna Aset
+            Pengguna Item
           </Typography>
         </Box>
       </DialogTitle>
