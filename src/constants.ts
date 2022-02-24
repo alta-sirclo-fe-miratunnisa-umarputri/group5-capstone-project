@@ -3,3 +3,8 @@ export const ROLE = {
   ADMIN: "admin",
   EMPLOYEE: "employee",
 };
+
+export const EMPLOYEE_STATUS = {
+  APPROVE: "Disetujui",
+  WAITING_APROVAL: "Menunggu Persetujuan",
+};

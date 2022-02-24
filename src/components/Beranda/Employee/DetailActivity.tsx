@@ -26,6 +26,7 @@ import {
   itemFont,
 } from "./DetailActivity.style";
 import { generalFont } from "../../../styles/font.style";
+import { EMPLOYEE_STATUS } from "../../../constants";
 
 const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
   // const { id } = useParams();
@@ -35,6 +36,12 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
   const handleCancellation = () => {
     console.log("batalkan pengajuan");
   };
+
+  const handleReturn = () => {
+    console.log("ajukan pengembalian");
+  };
+
+  const status = "Disetujui"; //data dari backend
 
   return (
     <Dialog
@@ -79,7 +86,7 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
             <DetailActivityInfo label="Pemohon" description="Ratu" />
             <DetailActivityInfo
               label="Status Pengajuan"
-              description="Disetujui"
+              description="Menunggu Persetujuan"
             />
           </Grid>
 
@@ -100,16 +107,38 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
           <Grid container mt={2}>
             <Grid item xs={4}></Grid>
             <Grid item xs={8} sx={buttonContainer}>
-              <Button sx={cancellationButton} onClick={handleCancellation}>
-                Batalkan Pengajuan
-              </Button>
-              <Button
-                variant="contained"
-                sx={backButton}
-                onClick={() => handleClose(true)}
-              >
-                Kembali
-              </Button>
+              {status === EMPLOYEE_STATUS.APPROVE && (
+                <>
+                  <Button
+                    sx={cancellationButton}
+                    onClick={() => handleClose(true)}
+                  >
+                    Kembali
+                  </Button>
+                  <Button
+                    variant="contained"
+                    sx={backButton}
+                    onClick={handleReturn}
+                  >
+                    Ajukan Pengembalian
+                  </Button>
+                </>
+              )}
+
+              {status === EMPLOYEE_STATUS.WAITING_APROVAL && (
+                <>
+                  <Button sx={cancellationButton} onClick={handleCancellation}>
+                    Batalkan Pengajuan
+                  </Button>
+                  <Button
+                    variant="contained"
+                    sx={backButton}
+                    onClick={() => handleClose(true)}
+                  >
+                    Kembali
+                  </Button>
+                </>
+              )}
             </Grid>
             <Grid item></Grid>
           </Grid>
