@@ -55,7 +55,10 @@ const Beranda = () => {
                   label="Peminjaman Aset"
                   path="/beranda/peminjaman-aset"
                 />
-                <RightButton label="Pengajuan Aset Baru" path="#" />
+                <RightButton
+                  label="Pengajuan Aset Baru"
+                  path="/beranda/pengajuan-aset-baru"
+                />
               </>
             )}
 

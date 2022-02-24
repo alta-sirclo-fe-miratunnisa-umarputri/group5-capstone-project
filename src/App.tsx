@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Routes, Route } from "react-router-dom";
 import Application from "./components/Beranda/Employee/Application";
 import DetailActivity from "./components/Beranda/Employee/DetailActivity";
+import Procurement from "./components/Beranda/Employee/Procurement";
 
 import Detail from "./components/DirektoriAset/Detail";
 import User from "./components/DirektoriAset/User";
@@ -37,6 +38,7 @@ const App = () => {
               element={<DetailActivity isOpen={false} handleClose={() => {}} />}
             />
             <Route path="peminjaman-aset" element={<Application />} />
+            <Route path="pengajuan-aset-baru" element={<Procurement />} />
           </Route>
         </Routes>
       </ThemeProvider>
