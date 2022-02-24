@@ -11,12 +11,17 @@ import {
 } from "@mui/material";
 
 import { generalFont } from "../../../styles/font.style";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomFormInput from "../../CustomFormInput";
+import CustomFormSelect from "../../CustomFormSelect";
 
 const Application = () => {
+  // dummy
+  const categories = ["kategori1", "kategori2", "kategori3"];
+
   const [isOpen, setIsOpen] = useState(true);
+  const [category, setCategory] = useState(categories[0]);
 
   const navigate = useNavigate();
 
@@ -28,8 +33,16 @@ const Application = () => {
     navigate("/beranda");
   };
 
-  const handleApplication = () => {
-    console.log("ajukan peminjaman");
+  const handleChangeCategory = (e: any) => {
+    setCategory(e.target.value);
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("tersubmit");
+
+    setIsOpen(false);
+    navigate("/beranda");
   };
 
   return (
@@ -42,37 +55,40 @@ const Application = () => {
       <DialogTitle>
         <Box>
           <Typography variant="h5" sx={generalFont}>
-            Peminjaman Aset
+            Peminjaman Aset {category}
           </Typography>
         </Box>
       </DialogTitle>
 
       <DialogContent>
-        <CustomFormInput
-          label="Spesifikasi Kebutuhan"
-          type="text"
-          desc="spesifikasi-kebutuhan"
-          placeholder="Deskripsikan barang yang dibutuhkan"
-        />
-        <CustomFormInput
-          label="Keterangan"
-          type="text"
-          desc="keterangan"
-          placeholder="Deskripsikan tujuan penggunaan barang yang akan dipinjam"
-        />
-        <DialogActions>
-          <Button onClick={handleClose}>Batal</Button>
-          <Button onClick={handleApplication}>Ajukan Peminjaman</Button>
-        </DialogActions>
+        <Box component="form" onSubmit={handleSubmit}>
+          <CustomFormSelect
+            label="Kategori"
+            desc="kategori"
+            selections={categories}
+            value={category}
+            handleChange={handleChangeCategory}
+          />
+          <CustomFormInput
+            label="Spesifikasi Kebutuhan"
+            type="text"
+            desc="spesifikasi-kebutuhan"
+            placeholder="Deskripsikan barang yang dibutuhkan"
+          />
+          <CustomFormInput
+            label="Keterangan"
+            type="text"
+            desc="keterangan"
+            placeholder="Deskripsikan tujuan penggunaan barang yang akan dipinjam"
+          />
+          <DialogActions>
+            <Button onClick={handleClose}>Batal</Button>
+            <Button type="submit">Ajukan Peminjaman</Button>
+          </DialogActions>
+        </Box>
       </DialogContent>
     </Dialog>
   );
 };
 
 export default Application;
-
-// const Application = () => {
-//   return <h1>Application</h1>;
-// };
-
-// export default Application;
