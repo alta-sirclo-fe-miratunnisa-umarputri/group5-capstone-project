@@ -1,6 +1,11 @@
 import { SxProps } from "@mui/material";
 import { bgwhite, primary, quaternary } from "../../../styles/color.styles";
 
+export const titleCarousel: SxProps = {
+  fontFamily: "Poppins",
+  fontWeight: "medium",
+};
+
 export const activityCarousel: SxProps = {
   ...bgwhite,
   borderRadius: "5px",

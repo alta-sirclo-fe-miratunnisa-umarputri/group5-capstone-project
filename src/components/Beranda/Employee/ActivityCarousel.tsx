@@ -1,7 +1,8 @@
+import { Typography } from "@mui/material";
 import CarouselMUI from "react-material-ui-carousel";
 
 import { dummyActivity } from "../../../dummy-data";
-import { activityCarousel } from "./ActivityCarousel.style";
+import { activityCarousel, titleCarousel } from "./ActivityCarousel.style";
 import ActivityCarouselItem from "./ActivityCarouselItem";
 
 type Item = {
@@ -31,20 +32,25 @@ const groupData = (data: any[], total: number) => {
 
 const ActivityCarousel = () => {
   return (
-    <CarouselMUI
-      autoPlay={false}
-      interval={3e3}
-      navButtonsAlwaysVisible
-      animation="slide"
-      duration={1e3}
-      sx={activityCarousel}
-      indicators={false}
-      fullHeightHover={false}
-    >
-      {groupData(dummyActivity as Item[], 3).map((activity, i) => (
-        <ActivityCarouselItem key={i} items={activity as unknown as Item[]} />
-      ))}
-    </CarouselMUI>
+    <>
+      <Typography variant="h6" sx={titleCarousel}>
+        Aktivitasmu
+      </Typography>
+      <CarouselMUI
+        autoPlay={false}
+        interval={3e3}
+        navButtonsAlwaysVisible
+        animation="slide"
+        duration={1e3}
+        sx={activityCarousel}
+        indicators={false}
+        fullHeightHover={false}
+      >
+        {groupData(dummyActivity as Item[], 3).map((activity, i) => (
+          <ActivityCarouselItem key={i} items={activity as unknown as Item[]} />
+        ))}
+      </CarouselMUI>
+    </>
   );
 };
 
