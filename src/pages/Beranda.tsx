@@ -9,6 +9,7 @@ import RightButton, {
 import Statistics from "../components/Beranda/Statistics";
 import { ROLE } from "../constants";
 import ActivityCarousel from "../components/Beranda/Employee/ActivityCarousel";
+import { Outlet } from "react-router-dom";
 
 const Beranda = () => {
   const role: string = "employee";
@@ -16,6 +17,7 @@ const Beranda = () => {
   return (
     <Layout>
       <ContentContainer>
+        <Outlet />
         {/* row pertama (jumbotron & statistik) */}
         <Grid container sx={{ mt: 3 }}>
           <Grid item xs={12} md={8} lg={9} border="1px solid green">

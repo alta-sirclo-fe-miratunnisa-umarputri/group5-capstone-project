@@ -27,6 +27,7 @@ import {
   statusGrid,
 } from "./ActivityCarousel.style";
 import { MouseEvent, useState } from "react";
+import { Link } from "react-router-dom";
 
 const displayWord = (word: string) => {
   if (word.length > 13) {
@@ -36,8 +37,6 @@ const displayWord = (word: string) => {
 
   return word;
 };
-
-const activityMenus = ["Lihat Detail", "Batalkan Pengajuan"];
 
 const ActivityItemCard = ({ item }: any) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -50,12 +49,8 @@ const ActivityItemCard = ({ item }: any) => {
     setAnchorElUser(null);
   };
 
-  const handleClickMenu = (menu: string) => {
-    if (menu === "Lihat Detail") {
-      console.log("mau lihat detail");
-    } else {
-      console.log("ajukan pengembalian");
-    }
+  const handleCancellation = () => {
+    console.log("ajukan pembatalan");
   };
 
   return (
@@ -109,13 +104,22 @@ const ActivityItemCard = ({ item }: any) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseActivityMenu}
             >
-              {activityMenus.map((menu) => (
-                <MenuItem key={menu} onClick={() => handleClickMenu(menu)}>
+              <Link
+                to={`/beranda/detail-aktivitas/2`}
+                style={{ textDecoration: "none" }}
+              >
+                <MenuItem>
                   <Typography variant="subtitle2" sx={dotMenu}>
-                    {menu}
+                    Lihat Detail
                   </Typography>
                 </MenuItem>
-              ))}
+              </Link>
+
+              <MenuItem onClick={handleCancellation}>
+                <Typography variant="subtitle2" sx={dotMenu}>
+                  Batalkan Pengajuan
+                </Typography>
+              </MenuItem>
             </Menu>
           </CardActions>
         </Grid>

@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Routes, Route } from "react-router-dom";
+import DetailActivity from "./components/Beranda/Employee/DetailActivity";
 
 import Detail from "./components/DirektoriAset/Detail";
 import User from "./components/DirektoriAset/User";
@@ -29,7 +30,9 @@ const App = () => {
             />
           </Route>
 
-          <Route path="beranda" element={<Beranda />}></Route>
+          <Route path="beranda" element={<Beranda />}>
+            <Route path="detail-aktivitas/:id" element={<DetailActivity />} />
+          </Route>
         </Routes>
       </ThemeProvider>
     </QueryClientProvider>
