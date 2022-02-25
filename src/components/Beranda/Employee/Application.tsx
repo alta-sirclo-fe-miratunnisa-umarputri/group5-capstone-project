@@ -15,6 +15,7 @@ import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomFormInput from "../../CustomFormInput";
 import CustomFormSelect from "../../CustomFormSelect";
+import { backButton, cancellationButton } from "./DetailActivity.style";
 
 const Application = () => {
   // dummy
@@ -82,8 +83,12 @@ const Application = () => {
             placeholder="Deskripsikan tujuan penggunaan barang yang akan dipinjam"
           />
           <DialogActions>
-            <Button onClick={handleClose}>Batal</Button>
-            <Button type="submit">Ajukan Peminjaman</Button>
+            <Button sx={cancellationButton} onClick={handleClose}>
+              Batal
+            </Button>
+            <Button type="submit" variant="contained" sx={backButton}>
+              Ajukan Peminjaman
+            </Button>
           </DialogActions>
         </Box>
       </DialogContent>
