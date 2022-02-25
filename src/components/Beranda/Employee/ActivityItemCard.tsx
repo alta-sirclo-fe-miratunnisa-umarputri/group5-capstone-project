@@ -29,6 +29,7 @@ import {
 import { MouseEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DetailActivity from "./DetailActivity";
+import { EMPLOYEE_STATUS } from "../../../constants";
 
 const displayWord = (word: string) => {
   if (word.length > 13) {
@@ -65,6 +66,16 @@ const ActivityItemCard = ({ item }: any) => {
   const handleCancellation = () => {
     console.log("ajukan pembatalan");
   };
+
+  const handleReturn = () => {
+    console.log("ajukan pengembalian");
+  };
+
+  const handleReapply = () => {
+    console.log("ajukan peminjaman ulang");
+  };
+
+  const status = "Ditolak";
 
   return (
     <>
@@ -129,11 +140,29 @@ const ActivityItemCard = ({ item }: any) => {
                   </MenuItem>
                 </Link>
 
-                <MenuItem onClick={handleCancellation}>
-                  <Typography variant="subtitle2" sx={dotMenu}>
-                    Batalkan Pengajuan
-                  </Typography>
-                </MenuItem>
+                {status === EMPLOYEE_STATUS.WAITING_APROVAL && (
+                  <MenuItem onClick={handleCancellation}>
+                    <Typography variant="subtitle2" sx={dotMenu}>
+                      Batalkan Pengajuan
+                    </Typography>
+                  </MenuItem>
+                )}
+
+                {status === EMPLOYEE_STATUS.APPROVED && (
+                  <MenuItem onClick={handleReturn}>
+                    <Typography variant="subtitle2" sx={dotMenu}>
+                      Ajukan Pengembalian
+                    </Typography>
+                  </MenuItem>
+                )}
+
+                {status === EMPLOYEE_STATUS.REJECTED && (
+                  <MenuItem onClick={handleReapply}>
+                    <Typography variant="subtitle2" sx={dotMenu}>
+                      Ajukan Peminjaman Ulang
+                    </Typography>
+                  </MenuItem>
+                )}
               </Menu>
             </CardActions>
           </Grid>
