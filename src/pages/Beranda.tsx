@@ -68,7 +68,7 @@ const Beranda = () => {
                   label="Tambah Aset Baru"
                   path="/beranda/tambah-aset-baru"
                 />
-                <RightButton label="Assign Aset" path="#" />
+                <RightButton label="Assign Aset" path="/beranda/assign-aset" />
               </>
             )}
 
