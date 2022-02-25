@@ -41,7 +41,11 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
     console.log("ajukan pengembalian");
   };
 
-  const status = "Disetujui"; //data dari backend
+  const handleReapply = () => {
+    console.log("ajukan peminjaman ulang");
+  };
+
+  const status = "Ditolak"; //data dari backend
 
   return (
     <Dialog
@@ -107,7 +111,22 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
           <Grid container mt={2}>
             <Grid item xs={4}></Grid>
             <Grid item xs={8} sx={buttonContainer}>
-              {status === EMPLOYEE_STATUS.APPROVE && (
+              {status === EMPLOYEE_STATUS.WAITING_APROVAL && (
+                <>
+                  <Button sx={cancellationButton} onClick={handleCancellation}>
+                    Batalkan Pengajuan
+                  </Button>
+                  <Button
+                    variant="contained"
+                    sx={backButton}
+                    onClick={() => handleClose(true)}
+                  >
+                    Kembali
+                  </Button>
+                </>
+              )}
+
+              {status === EMPLOYEE_STATUS.APPROVED && (
                 <>
                   <Button
                     sx={cancellationButton}
@@ -125,17 +144,20 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
                 </>
               )}
 
-              {status === EMPLOYEE_STATUS.WAITING_APROVAL && (
+              {status === EMPLOYEE_STATUS.REJECTED && (
                 <>
-                  <Button sx={cancellationButton} onClick={handleCancellation}>
-                    Batalkan Pengajuan
+                  <Button
+                    sx={cancellationButton}
+                    onClick={() => handleClose(true)}
+                  >
+                    Kembali
                   </Button>
                   <Button
                     variant="contained"
                     sx={backButton}
-                    onClick={() => handleClose(true)}
+                    onClick={handleReapply}
                   >
-                    Kembali
+                    Ajukan Peminjaman Ulang
                   </Button>
                 </>
               )}

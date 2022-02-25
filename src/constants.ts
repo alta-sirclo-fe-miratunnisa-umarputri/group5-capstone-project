@@ -5,6 +5,7 @@ export const ROLE = {
 };
 
 export const EMPLOYEE_STATUS = {
-  APPROVE: "Disetujui",
   WAITING_APROVAL: "Menunggu Persetujuan",
+  APPROVED: "Disetujui",
+  REJECTED: "Ditolak",
 };
