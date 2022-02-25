@@ -17,6 +17,7 @@ import {
   tableContainer,
   topCarousel,
 } from "../components/Beranda/Beranda.style";
+import AdminTable from "../components/Beranda/Admin/AdminTable";
 
 const Beranda = () => {
   const role: string = "admin";
@@ -44,8 +45,8 @@ const Beranda = () => {
         )}
 
         <Grid container sx={tableContainer}>
-          <Grid item xs={12} md={8} lg={9} border="1px solid green">
-            tabel
+          <Grid item xs={12} md={8} lg={9}>
+            {role === ROLE.ADMIN && <AdminTable />}
           </Grid>
 
           <Grid item xs={12} md={4} lg={3} sx={buttonBerandaContainer}>
