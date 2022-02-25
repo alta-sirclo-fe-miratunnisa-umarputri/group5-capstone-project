@@ -19,7 +19,7 @@ import {
   title,
 } from "./DetailAndUser.style";
 
-const Detail = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
+const DetailItemAdmin = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
   const { id } = useParams();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -81,4 +81,4 @@ const Detail = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
   );
 };
 
-export default Detail;
+export default DetailItemAdmin;

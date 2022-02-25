@@ -28,10 +28,10 @@ import {
   masonry,
   title,
 } from "./CardAsset.style";
-import Detail from "./Detail";
 import { ROLE } from "../../constants";
 import DetailAssetEmployee from "./DetailAssetEmployee";
 import UserList from "./UserList";
+import DetailItemAdmin from "./DetailItemAdmin";
 
 const CardAsset = ({ assets, role }: any) => {
   const [isOpenDetailItem, setIsOpenDetailItem] = useState(false);
@@ -173,7 +173,10 @@ const CardAsset = ({ assets, role }: any) => {
         ))}
       </Masonry>
 
-      <Detail isOpen={isOpenDetailItem} handleClose={handleCloseDetailItem} />
+      <DetailItemAdmin
+        isOpen={isOpenDetailItem}
+        handleClose={handleCloseDetailItem}
+      />
       <DetailAssetEmployee
         isOpen={isOpenDetailAsset}
         handleClose={handleCloseDetailAsset}

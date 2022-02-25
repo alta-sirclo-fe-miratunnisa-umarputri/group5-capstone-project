@@ -5,7 +5,7 @@ import Application from "./components/Beranda/Employee/Application";
 import DetailActivity from "./components/Beranda/Employee/DetailActivity";
 import Procurement from "./components/Beranda/Employee/Procurement";
 
-import Detail from "./components/DirektoriAset/Detail";
+import DetailItemAdmin from "./components/DirektoriAset/DetailItemAdmin";
 import DetailAssetEmployee from "./components/DirektoriAset/DetailAssetEmployee";
 import UserList from "./components/DirektoriAset/UserList";
 import Beranda from "./pages/Beranda";
@@ -25,7 +25,9 @@ const App = () => {
           <Route path="direktori-aset" element={<DirektoriAset />}>
             <Route
               path="admin/:id"
-              element={<Detail isOpen={false} handleClose={() => {}} />}
+              element={
+                <DetailItemAdmin isOpen={false} handleClose={() => {}} />
+              }
             />
             <Route
               path="pengguna"
