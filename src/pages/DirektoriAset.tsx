@@ -10,6 +10,9 @@ import Layout from "../components/Layout";
 import { dummyAssets } from "../dummy-data";
 
 const DirektoriAset = () => {
+  // cek if employee or admin here
+  // if role === employee fetch data assets
+  // if role === admin fetch data items
   return (
     <Layout>
       <Header
@@ -24,7 +27,7 @@ const DirektoriAset = () => {
       <ContentContainer>
         <Box sx={containerDir}>
           <SearchBar />
-          <CardAsset assets={dummyAssets} />
+          <CardAsset assets={dummyAssets} role="employee" />
         </Box>
       </ContentContainer>
     </Layout>

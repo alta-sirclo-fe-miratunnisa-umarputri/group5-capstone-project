@@ -1,10 +1,13 @@
 import { ThemeProvider } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Routes, Route } from "react-router-dom";
+import Application from "./components/Beranda/Employee/Application";
 import DetailActivity from "./components/Beranda/Employee/DetailActivity";
+import Procurement from "./components/Beranda/Employee/Procurement";
 
-import Detail from "./components/DirektoriAset/Detail";
-import User from "./components/DirektoriAset/User";
+import DetailItemAdmin from "./components/DirektoriAset/DetailItemAdmin";
+import DetailAssetEmployee from "./components/DirektoriAset/DetailAssetEmployee";
+import UserList from "./components/DirektoriAset/UserList";
 import Beranda from "./pages/Beranda";
 import DirektoriAset from "./pages/DirektoriAset";
 import SignIn from "./pages/SignIn";
@@ -21,12 +24,20 @@ const App = () => {
 
           <Route path="direktori-aset" element={<DirektoriAset />}>
             <Route
-              path=":id"
-              element={<Detail isOpen={false} handleClose={() => {}} />}
+              path="admin/:id"
+              element={
+                <DetailItemAdmin isOpen={false} handleClose={() => {}} />
+              }
             />
             <Route
               path="pengguna"
-              element={<User isOpen={false} handleClose={() => {}} />}
+              element={<UserList isOpen={false} handleClose={() => {}} />}
+            />
+            <Route
+              path="employee/:id"
+              element={
+                <DetailAssetEmployee isOpen={false} handleClose={() => {}} />
+              }
             />
           </Route>
 
@@ -35,6 +46,8 @@ const App = () => {
               path="detail-aktivitas/:id"
               element={<DetailActivity isOpen={false} handleClose={() => {}} />}
             />
+            <Route path="peminjaman-aset" element={<Application />} />
+            <Route path="pengajuan-aset-baru" element={<Procurement />} />
           </Route>
         </Routes>
       </ThemeProvider>

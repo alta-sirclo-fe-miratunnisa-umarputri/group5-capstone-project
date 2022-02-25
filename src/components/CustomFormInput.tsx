@@ -1,6 +1,5 @@
 import { Box, FormLabel } from "@mui/material";
-
-import { SignForm } from "../../types/sign";
+import { SignForm } from "../types/sign";
 import { container, CustomTextField, formLabel } from "./CustomFormInput.style";
 
 const CustomFormInput = ({

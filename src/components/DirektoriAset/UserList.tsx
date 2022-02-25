@@ -20,7 +20,7 @@ import {
 import { primary } from "../../styles/color.styles";
 import UserTable from "./UserTable";
 
-const User = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
+const UserList = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -34,7 +34,7 @@ const User = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
       <DialogTitle>
         <Box>
           <Typography variant="h5" sx={title}>
-            Pengguna Aset
+            Pengguna Item
           </Typography>
         </Box>
       </DialogTitle>
@@ -95,4 +95,4 @@ const User = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
   );
 };
 
-export default User;
+export default UserList;

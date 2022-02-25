@@ -1,7 +1,7 @@
 import { SxProps, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import { primary, tertiary } from "../../styles/color.styles";
+import { primary, tertiary } from "../styles/color.styles";
 
 export const container: SxProps = {
   display: "flex",

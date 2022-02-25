@@ -19,14 +19,23 @@ import {
   title,
 } from "./DetailAndUser.style";
 
-const Detail = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
+const DetailItemAdmin = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
   const { id } = useParams();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   // dummy
   const isMaintenance = false;
-  console.log(id);
+
+  const maintenanceButton = isMaintenance ? (
+    <Button variant="contained" size="small" sx={buttonActions}>
+      Pemeliharaan Aset Selesai
+    </Button>
+  ) : (
+    <Button variant="contained" size="small" sx={buttonActions}>
+      Pemeliharaan Aset
+    </Button>
+  );
 
   return (
     <Dialog
@@ -38,7 +47,7 @@ const Detail = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
       <DialogTitle>
         <Box>
           <Typography variant="h5" sx={title}>
-            Detail Aset
+            Detail Item
           </Typography>
         </Box>
       </DialogTitle>
@@ -56,15 +65,7 @@ const Detail = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
         <CustomFormRead label="Kategori Aset" defaultValue="Laptop" />
 
         <Box sx={containerActionsDetail}>
-          {isMaintenance ? (
-            <Button variant="contained" size="small" sx={buttonActions}>
-              Pemeliharaan Aset Selesai
-            </Button>
-          ) : (
-            <Button variant="contained" size="small" sx={buttonActions}>
-              Pemeliharaan Aset
-            </Button>
-          )}
+          {maintenanceButton}
 
           <Button
             variant="contained"
@@ -80,4 +81,4 @@ const Detail = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
   );
 };
 
-export default Detail;
+export default DetailItemAdmin;

@@ -51,8 +51,14 @@ const Beranda = () => {
           <Grid item xs={12} md={4} lg={3} sx={buttonBerandaContainer}>
             {role === ROLE.EMPLOYEE && (
               <>
-                <RightButton label="Peminjaman Aset" path="#" />
-                <RightButton label="Pengajuan Aset Baru" path="#" />
+                <RightButton
+                  label="Peminjaman Aset"
+                  path="/beranda/peminjaman-aset"
+                />
+                <RightButton
+                  label="Pengajuan Aset Baru"
+                  path="/beranda/pengajuan-aset-baru"
+                />
               </>
             )}
 
