@@ -19,7 +19,7 @@ import {
 } from "../components/Beranda/Beranda.style";
 
 const Beranda = () => {
-  const role: string = "employee";
+  const role: string = "admin";
 
   return (
     <Layout>
@@ -64,7 +64,10 @@ const Beranda = () => {
 
             {role === ROLE.ADMIN && (
               <>
-                <RightButton label="Tambah Aset Baru" path="#" />
+                <RightButton
+                  label="Tambah Aset Baru"
+                  path="/beranda/tambah-aset-baru"
+                />
                 <RightButton label="Assign Aset" path="#" />
               </>
             )}
