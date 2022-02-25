@@ -20,9 +20,11 @@ import { backButton, cancellationButton } from "./DetailActivity.style";
 const Application = () => {
   // dummy
   const categories = ["kategori1", "kategori2", "kategori3"];
+  const assets = ["laptop lenovo", "laptop acer", "laptop asus"];
 
   const [isOpen, setIsOpen] = useState(true);
   const [category, setCategory] = useState(categories[0]);
+  const [asset, setAsset] = useState(assets[0]);
 
   const navigate = useNavigate();
 
@@ -36,6 +38,10 @@ const Application = () => {
 
   const handleChangeCategory = (e: any) => {
     setCategory(e.target.value);
+  };
+
+  const handleChangeAsset = (e: any) => {
+    setAsset(e.target.value);
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -56,7 +62,7 @@ const Application = () => {
       <DialogTitle>
         <Box>
           <Typography variant="h5" sx={generalFont}>
-            Peminjaman Aset {category}
+            Peminjaman Aset
           </Typography>
         </Box>
       </DialogTitle>
@@ -69,6 +75,13 @@ const Application = () => {
             selections={categories}
             value={category}
             handleChange={handleChangeCategory}
+          />
+          <CustomFormSelect
+            label="Nama Aset"
+            desc="nama-aset"
+            selections={assets}
+            value={asset}
+            handleChange={handleChangeAsset}
           />
           <CustomFormInput
             label="Spesifikasi Kebutuhan"
