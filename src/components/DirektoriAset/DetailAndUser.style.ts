@@ -19,6 +19,11 @@ export const containerActionsDetail: SxProps = {
   justifyContent: "space-between",
 };
 
+export const detailAsetButton: SxProps = {
+  display: "flex",
+  justifyContent: "end",
+};
+
 export const buttonActions: SxProps = {
   textTransform: "none",
   fontWeight: "medium",

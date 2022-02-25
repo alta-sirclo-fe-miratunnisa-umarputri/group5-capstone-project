@@ -15,6 +15,7 @@ import { DetailAndEmployeeModal } from "../../types/direktori-aset";
 import {
   buttonActions,
   containerActionsDetail,
+  detailAsetButton,
   detailImg,
   title,
 } from "./DetailAndUser.style";
@@ -54,7 +55,7 @@ const DetailItemEmployee = ({
         />
         <CustomFormRead label="Kategori Aset" defaultValue="Laptop" />
 
-        <Box sx={containerActionsDetail}>
+        <Box sx={detailAsetButton}>
           <Button
             variant="contained"
             size="small"
