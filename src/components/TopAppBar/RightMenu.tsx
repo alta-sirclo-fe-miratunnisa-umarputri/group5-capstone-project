@@ -34,12 +34,9 @@ const RightMenu = () => {
     setAnchorElUser(null);
   };
 
-  const handleClickSetting = (setting: string) => {
-    if (setting === "Sign Out") {
-      console.log("sign out desktop");
-      navigate("/");
-      return;
-    }
+  const handleSignOut = () => {
+    localStorage.clear();
+    navigate("/");
   };
 
   const mobile = (
@@ -63,13 +60,11 @@ const RightMenu = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {settings.map((setting) => (
-          <MenuItem key={setting} onClick={() => handleClickSetting(setting)}>
-            <Typography variant="subtitle2" sx={mobileMenu}>
-              {setting}
-            </Typography>
-          </MenuItem>
-        ))}
+        <MenuItem onClick={handleSignOut}>
+          <Typography variant="subtitle2" sx={mobileMenu}>
+            Sign Out
+          </Typography>
+        </MenuItem>
       </Menu>
     </Box>
   );
@@ -100,13 +95,11 @@ const RightMenu = () => {
           open={Boolean(anchorElUser)}
           onClose={handleCloseUserMenu}
         >
-          {settings.map((setting) => (
-            <MenuItem key={setting} onClick={() => handleClickSetting(setting)}>
-              <Typography variant="subtitle2" sx={mobileMenu}>
-                {setting}
-              </Typography>
-            </MenuItem>
-          ))}
+          <MenuItem onClick={handleSignOut}>
+            <Typography variant="subtitle2" sx={mobileMenu}>
+              Sign Out
+            </Typography>
+          </MenuItem>
         </Menu>
       </Stack>
     </Box>

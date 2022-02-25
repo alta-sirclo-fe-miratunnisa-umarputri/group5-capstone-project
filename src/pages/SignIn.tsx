@@ -8,6 +8,7 @@ import CustomFormInput from "../components/CustomFormInput";
 import SecondaryFullButton from "../components/Sign/SecondaryFullButton";
 import Help from "../components/Sign/Help";
 import { complimentContent, mainContent } from "../components/Sign/Sign.style";
+import { User } from "../types/user";
 
 const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,6 +22,20 @@ const SignIn = () => {
 
     setIsLoading(true);
 
+    // hit endpoint
+
+    // save data to localstorage
+    const dummyUser: User = {
+      id: 1,
+      name: "sirclo",
+      role: "admin",
+      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImF",
+    };
+
+    localStorage.setItem("id", String(dummyUser.id));
+    localStorage.setItem("name", dummyUser.name);
+    localStorage.setItem("role", dummyUser.role);
+    localStorage.setItem("token", dummyUser.token);
     setTimeout(() => {
       setIsLoading(false);
     }, 3000);
