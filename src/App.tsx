@@ -7,7 +7,7 @@ import Procurement from "./components/Beranda/Employee/Procurement";
 
 import Detail from "./components/DirektoriAset/Detail";
 import DetailAssetEmployee from "./components/DirektoriAset/DetailAssetEmployee";
-import User from "./components/DirektoriAset/User";
+import UserList from "./components/DirektoriAset/UserList";
 import Beranda from "./pages/Beranda";
 import DirektoriAset from "./pages/DirektoriAset";
 import SignIn from "./pages/SignIn";
@@ -29,7 +29,7 @@ const App = () => {
             />
             <Route
               path="pengguna"
-              element={<User isOpen={false} handleClose={() => {}} />}
+              element={<UserList isOpen={false} handleClose={() => {}} />}
             />
             <Route
               path="employee/:id"

@@ -29,9 +29,9 @@ import {
   title,
 } from "./CardAsset.style";
 import Detail from "./Detail";
-import User from "./User";
 import { ROLE } from "../../constants";
 import DetailAssetEmployee from "./DetailAssetEmployee";
+import UserList from "./UserList";
 
 const CardAsset = ({ assets, role }: any) => {
   const [isOpenDetailItem, setIsOpenDetailItem] = useState(false);
@@ -178,7 +178,7 @@ const CardAsset = ({ assets, role }: any) => {
         isOpen={isOpenDetailAsset}
         handleClose={handleCloseDetailAsset}
       />
-      <User isOpen={isOpenUser} handleClose={handleCloseUser} />
+      <UserList isOpen={isOpenUser} handleClose={handleCloseUser} />
     </>
   );
 };
