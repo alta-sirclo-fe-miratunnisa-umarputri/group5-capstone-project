@@ -11,9 +11,10 @@ import {
 } from "@mui/material";
 
 import { generalFont } from "../../../styles/font.style";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomFormInput from "../../CustomFormInput";
+import { backButton, cancellationButton } from "./DetailActivity.style";
 
 const Procurement = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -28,8 +29,12 @@ const Procurement = () => {
     navigate("/beranda");
   };
 
-  const handleApplication = () => {
-    console.log("ajukan aset baru");
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("tersubmit procurement");
+
+    setIsOpen(false);
+    navigate("/beranda");
   };
 
   return (
@@ -48,22 +53,28 @@ const Procurement = () => {
       </DialogTitle>
 
       <DialogContent>
-        <CustomFormInput
-          label="Spesifikasi Kebutuhan"
-          type="text"
-          desc="spesifikasi-kebutuhan"
-          placeholder="Deskripsikan barang yang dibutuhkan"
-        />
-        <CustomFormInput
-          label="Keterangan"
-          type="text"
-          desc="keterangan"
-          placeholder="Deskripsikan tujuan penggunaan barang yang akan dipinjam"
-        />
-        <DialogActions>
-          <Button onClick={handleClose}>Batal</Button>
-          <Button onClick={handleApplication}>Ajukan Aset Baru</Button>
-        </DialogActions>
+        <Box component="form" onSubmit={handleSubmit}>
+          <CustomFormInput
+            label="Spesifikasi Kebutuhan"
+            type="text"
+            desc="spesifikasi-kebutuhan"
+            placeholder="Deskripsikan barang yang dibutuhkan"
+          />
+          <CustomFormInput
+            label="Keterangan"
+            type="text"
+            desc="keterangan"
+            placeholder="Deskripsikan tujuan penggunaan barang yang akan dipinjam"
+          />
+          <DialogActions>
+            <Button sx={cancellationButton} onClick={handleClose}>
+              Batal
+            </Button>
+            <Button type="submit" variant="contained" sx={backButton}>
+              Ajukan Aset Baru
+            </Button>
+          </DialogActions>
+        </Box>
       </DialogContent>
     </Dialog>
   );
