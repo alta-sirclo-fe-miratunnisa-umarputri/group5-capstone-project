@@ -6,7 +6,7 @@ import DetailActivity from "./components/Beranda/Employee/DetailActivity";
 import Procurement from "./components/Beranda/Employee/Procurement";
 
 import Detail from "./components/DirektoriAset/Detail";
-import DetailItemsUser from "./components/DirektoriAset/DetailItemsUser";
+import DetailItemEmployee from "./components/DirektoriAset/DetailItemEmployee";
 import User from "./components/DirektoriAset/User";
 import Beranda from "./pages/Beranda";
 import DirektoriAset from "./pages/DirektoriAset";
@@ -34,7 +34,7 @@ const App = () => {
             <Route
               path="employee/:id"
               element={
-                <DetailItemsUser isOpen={false} handleClose={() => {}} />
+                <DetailItemEmployee isOpen={false} handleClose={() => {}} />
               }
             />
           </Route>
