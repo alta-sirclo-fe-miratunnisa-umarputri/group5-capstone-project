@@ -6,6 +6,7 @@ import DetailActivity from "./components/Beranda/Employee/DetailActivity";
 import Procurement from "./components/Beranda/Employee/Procurement";
 
 import Detail from "./components/DirektoriAset/Detail";
+import DetailItemsUser from "./components/DirektoriAset/DetailItemsUser";
 import User from "./components/DirektoriAset/User";
 import Beranda from "./pages/Beranda";
 import DirektoriAset from "./pages/DirektoriAset";
@@ -23,12 +24,18 @@ const App = () => {
 
           <Route path="direktori-aset" element={<DirektoriAset />}>
             <Route
-              path=":id"
+              path="admin/:id"
               element={<Detail isOpen={false} handleClose={() => {}} />}
             />
             <Route
               path="pengguna"
               element={<User isOpen={false} handleClose={() => {}} />}
+            />
+            <Route
+              path="employee/:id"
+              element={
+                <DetailItemsUser isOpen={false} handleClose={() => {}} />
+              }
             />
           </Route>
 

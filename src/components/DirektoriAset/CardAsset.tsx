@@ -30,19 +30,31 @@ import {
 } from "./CardAsset.style";
 import Detail from "./Detail";
 import User from "./User";
+import { ROLE } from "../../constants";
+import DetailItemsUser from "./DetailItemsUser";
 
-const CardAsset = ({ assets }: any) => {
-  const [isOpenDetail, setIsOpenDetail] = useState(false);
+const CardAsset = ({ assets, role }: any) => {
+  const [isOpenDetailItem, setIsOpenDetailItem] = useState(false);
+  const [isOpenDetailAsset, setIsOpenDetailAsset] = useState(false);
   const [isOpenUser, setIsOpenUser] = useState(false);
   const navigate = useNavigate();
 
-  const handleCloseDetail = () => {
-    setIsOpenDetail(false);
+  const handleCloseDetailItem = () => {
+    setIsOpenDetailItem(false);
     navigate("/direktori-aset");
   };
 
-  const handleOpenDetail = () => {
-    setIsOpenDetail(true);
+  const handleOpenDetailItem = () => {
+    setIsOpenDetailItem(true);
+  };
+
+  const handleCloseDetailAsset = () => {
+    setIsOpenDetailAsset(false);
+    navigate("/direktori-aset");
+  };
+
+  const handleOpenDetailAsset = () => {
+    setIsOpenDetailAsset(true);
   };
 
   const handleOpenUser = () => {
@@ -101,49 +113,71 @@ const CardAsset = ({ assets }: any) => {
               </CardContent>
 
               <CardActions sx={cardActions}>
-                <Grid container spacing={1}>
-                  <Grid item xs={12} lg={6}>
-                    <Link
-                      to={`/direktori-aset/pengguna`}
-                      style={{ textDecoration: "none", width: "100%" }}
-                    >
-                      <Button
-                        variant="contained"
-                        size="small"
-                        fullWidth
-                        sx={button}
-                        onClick={handleOpenUser}
+                {role === ROLE.ADMIN && (
+                  <Grid container spacing={1}>
+                    <Grid item xs={12} lg={6}>
+                      <Link
+                        to={`/direktori-aset/pengguna`}
+                        style={{ textDecoration: "none", width: "100%" }}
                       >
-                        Pengguna
-                      </Button>
-                    </Link>
-                  </Grid>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          fullWidth
+                          sx={button}
+                          onClick={handleOpenUser}
+                        >
+                          Pengguna
+                        </Button>
+                      </Link>
+                    </Grid>
 
-                  <Grid item xs={12} lg={6}>
-                    <Link
-                      to={`/direktori-aset/${asset.id}`}
-                      style={{ textDecoration: "none", width: "100%" }}
-                    >
-                      <Button
-                        variant="contained"
-                        size="small"
-                        fullWidth
-                        sx={button}
-                        onClick={handleOpenDetail}
+                    <Grid item xs={12} lg={6}>
+                      <Link
+                        to={`/direktori-aset/admin/${asset.id}`}
+                        style={{ textDecoration: "none", width: "100%" }}
                       >
-                        Detail
-                      </Button>
-                    </Link>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          fullWidth
+                          sx={button}
+                          onClick={handleOpenDetailItem}
+                        >
+                          Detail
+                        </Button>
+                      </Link>
+                    </Grid>
                   </Grid>
-                </Grid>
+                )}
+
+                {role === ROLE.EMPLOYEE && (
+                  <Link
+                    to={`/direktori-aset/employee/${asset.id}`}
+                    style={{ textDecoration: "none", width: "100%" }}
+                  >
+                    <Button
+                      variant="contained"
+                      size="small"
+                      fullWidth
+                      sx={button}
+                      onClick={handleOpenDetailAsset}
+                    >
+                      Detail
+                    </Button>
+                  </Link>
+                )}
               </CardActions>
             </Card>
           </Box>
         ))}
       </Masonry>
 
-      <Detail isOpen={isOpenDetail} handleClose={handleCloseDetail} />
-
+      <Detail isOpen={isOpenDetailItem} handleClose={handleCloseDetailItem} />
+      <DetailItemsUser
+        isOpen={isOpenDetailAsset}
+        handleClose={handleCloseDetailAsset}
+      />
       <User isOpen={isOpenUser} handleClose={handleCloseUser} />
     </>
   );
