@@ -31,7 +31,7 @@ import {
 import Detail from "./Detail";
 import User from "./User";
 import { ROLE } from "../../constants";
-import DetailItemEmployee from "./DetailItemEmployee";
+import DetailAssetEmployee from "./DetailAssetEmployee";
 
 const CardAsset = ({ assets, role }: any) => {
   const [isOpenDetailItem, setIsOpenDetailItem] = useState(false);
@@ -174,7 +174,7 @@ const CardAsset = ({ assets, role }: any) => {
       </Masonry>
 
       <Detail isOpen={isOpenDetailItem} handleClose={handleCloseDetailItem} />
-      <DetailItemEmployee
+      <DetailAssetEmployee
         isOpen={isOpenDetailAsset}
         handleClose={handleCloseDetailAsset}
       />

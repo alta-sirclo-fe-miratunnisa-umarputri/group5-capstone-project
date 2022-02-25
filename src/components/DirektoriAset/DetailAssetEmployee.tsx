@@ -14,13 +14,12 @@ import { CustomFormRead, CustomFormReadMulti } from "./CustomFormRead";
 import { DetailAndEmployeeModal } from "../../types/direktori-aset";
 import {
   buttonActions,
-  containerActionsDetail,
   detailAsetButton,
   detailImg,
   title,
 } from "./DetailAndUser.style";
 
-const DetailItemEmployee = ({
+const DetailAssetEmployee = ({
   isOpen,
   handleClose,
 }: DetailAndEmployeeModal) => {
@@ -70,4 +69,4 @@ const DetailItemEmployee = ({
   );
 };
 
-export default DetailItemEmployee;
+export default DetailAssetEmployee;
