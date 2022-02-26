@@ -19,6 +19,7 @@ import DetailModal from "./components/PenggunaAset/admin/DetailModal";
 import PermohonanPersetujuan from "./pages/PermohonanPersetujuan";
 import DetailModalManager from "./components/PermohonanPeminjaman/manager/DetailModalManager";
 import NotFound from "./pages/NotFound";
+import UnderMaintenance from "./pages/UnderMaintenance";
 
 const queryClient = new QueryClient();
 
@@ -69,6 +70,8 @@ const App = () => {
           >
             <Route path=":id" element={<DetailModalManager />} />
           </Route>
+
+          <Route path="/pemeliharaan" element={<UnderMaintenance />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
