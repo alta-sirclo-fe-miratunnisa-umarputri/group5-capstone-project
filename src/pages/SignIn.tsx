@@ -71,7 +71,7 @@ const SignIn = () => {
             <Help
               tag="Belum punya akun?"
               instruction="Daftar di sini"
-              path="#"
+              path="/pemeliharaan"
             />
           </Box>
         </Box>
