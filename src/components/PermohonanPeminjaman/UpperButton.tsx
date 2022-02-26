@@ -6,10 +6,10 @@ import { Button } from "@mui/material";
 export const UpButton = () => {
   const [filter, setFilter] = useState("");
   const buttonStatus = [
-    { id: 1, name: "Permohonan Baru" },
-    { id: 2, name: "Butuh Persetujuan" },
-    { id: 3, name: "Disetujui" },
-    { id: 4, name: "Ditolak" },
+    { id: 1, name: "Permohonan Baru", status: "toadmin" },
+    { id: 2, name: "Butuh Persetujuan", status: "tomanager" },
+    { id: 3, name: "Disetujui", status: "inuse" },
+    { id: 4, name: "Ditolak", status: "indecline" },
   ];
   const handleSubmit = async (search?: any) => {};
 
@@ -43,7 +43,7 @@ export const UpButton = () => {
           sx={filter === item.name ? button : buttonOutlined}
           onClick={() => {
             setFilter(item.name);
-            handleFilter(item.name);
+            handleFilter(item.status);
           }}
         >
           {item.name}
