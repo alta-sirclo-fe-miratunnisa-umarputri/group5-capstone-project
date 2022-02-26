@@ -14,6 +14,8 @@ import SignIn from "./pages/SignIn";
 import { responsiveFontSize } from "./styles/theme.styles";
 import AddNewAsset from "./components/Beranda/Admin/AddNewAsset";
 import AssignAsset from "./components/Beranda/Admin/AssignAsset";
+import PenggunaAset from "./pages/PenggunaAset";
+import DetailModal from "./components/PenggunaAset/admin/DetailModal";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +54,9 @@ const App = () => {
             <Route path="pengajuan-aset-baru" element={<Procurement />} />
             <Route path="tambah-aset-baru" element={<AddNewAsset />} />
             <Route path="assign-aset" element={<AssignAsset />} />
+          </Route>
+          <Route path="pengguna-aset" element={<PenggunaAset />}>
+            <Route path="admin-pengguna/:id" element={<DetailModal />} />
           </Route>
         </Routes>
       </ThemeProvider>
