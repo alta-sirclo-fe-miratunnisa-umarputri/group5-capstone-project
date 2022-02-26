@@ -20,6 +20,10 @@ import PermohonanPersetujuan from "./pages/PermohonanPersetujuan";
 import DetailModalManager from "./components/PermohonanPeminjaman/manager/DetailModalManager";
 import NotFound from "./pages/NotFound";
 import UnderMaintenance from "./pages/UnderMaintenance";
+import PengadaanAset from "./pages/PengadaanAset";
+import PengadaanModalManager from "./components/PengadaanAset/admin/PengadaanModalAdmin";
+import PermohonanPengadaan from "./pages/PermohonanPengadaan";
+import PengadaanModalAdmin from "./components/PengadaanAset/admin/PengadaanModalAdmin";
 
 const queryClient = new QueryClient();
 
@@ -69,6 +73,13 @@ const App = () => {
             element={<PermohonanPersetujuan />}
           >
             <Route path=":id" element={<DetailModalManager />} />
+          </Route>
+
+          <Route path="pengadaan-aset" element={<PengadaanAset />}>
+            <Route path=":id" element={<PengadaanModalAdmin />} />
+          </Route>
+          <Route path="permohonan-pengadaan" element={<PermohonanPengadaan />}>
+            <Route path=":id" element={<PengadaanModalManager />} />
           </Route>
 
           <Route path="/pemeliharaan" element={<UnderMaintenance />} />
