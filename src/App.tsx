@@ -16,6 +16,8 @@ import AddNewAsset from "./components/Beranda/Admin/AddNewAsset";
 import AssignAsset from "./components/Beranda/Admin/AssignAsset";
 import PenggunaAset from "./pages/PenggunaAset";
 import DetailModal from "./components/PenggunaAset/admin/DetailModal";
+import PermohonanPersetujuan from "./pages/PermohonanPersetujuan";
+import DetailModalManager from "./components/PermohonanPeminjaman/manager/DetailModalManager";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +59,12 @@ const App = () => {
           </Route>
           <Route path="pengguna-aset" element={<PenggunaAset />}>
             <Route path="admin-pengguna/:id" element={<DetailModal />} />
+          </Route>
+          <Route
+            path="permohonan-persetujuan"
+            element={<PermohonanPersetujuan />}
+          >
+            <Route path=":id" element={<DetailModalManager />} />
           </Route>
         </Routes>
       </ThemeProvider>
