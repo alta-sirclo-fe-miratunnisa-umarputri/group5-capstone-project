@@ -11,7 +11,6 @@ export const statisticsContainer: SxProps = {
 
 export const botCarousel: SxProps = {
   mt: 3,
-  display: { xs: "none", lg: "block" },
 };
 
 export const tableContainer: SxProps = { mt: 3 };

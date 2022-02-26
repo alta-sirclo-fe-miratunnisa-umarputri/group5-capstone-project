@@ -21,7 +21,7 @@ import BerandaTable from "../components/Beranda/BerandaTable";
 import { rowsTableBeranda } from "../dummy-data";
 
 const Beranda = () => {
-  const role: string = "manager";
+  const role: string = "employee";
 
   return (
     <Layout>
@@ -39,7 +39,7 @@ const Beranda = () => {
 
         {role === ROLE.EMPLOYEE && (
           <Grid container sx={botCarousel}>
-            <Grid item xs={12} md={8} lg={9}>
+            <Grid item xs={12} sm={12} md={12} lg={9}>
               <ActivityCarousel />
             </Grid>
           </Grid>
