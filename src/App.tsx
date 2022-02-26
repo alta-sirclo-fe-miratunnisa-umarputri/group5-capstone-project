@@ -18,6 +18,7 @@ import PenggunaAset from "./pages/PenggunaAset";
 import DetailModal from "./components/PenggunaAset/admin/DetailModal";
 import PermohonanPersetujuan from "./pages/PermohonanPersetujuan";
 import DetailModalManager from "./components/PermohonanPeminjaman/manager/DetailModalManager";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -57,15 +58,19 @@ const App = () => {
             <Route path="tambah-aset-baru" element={<AddNewAsset />} />
             <Route path="assign-aset" element={<AssignAsset />} />
           </Route>
+
           <Route path="pengguna-aset" element={<PenggunaAset />}>
             <Route path="admin-pengguna/:id" element={<DetailModal />} />
           </Route>
+
           <Route
             path="permohonan-persetujuan"
             element={<PermohonanPersetujuan />}
           >
             <Route path=":id" element={<DetailModalManager />} />
           </Route>
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </ThemeProvider>
     </QueryClientProvider>
