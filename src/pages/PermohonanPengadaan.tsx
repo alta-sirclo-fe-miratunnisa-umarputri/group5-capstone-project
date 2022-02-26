@@ -104,7 +104,7 @@ const PermohonanPengadaan = () => {
       field: "detailButton",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
-      headerName: "Detail",
+      headerName: "Aksi",
       width: 125,
       sortable: false,
       filterable: false,
