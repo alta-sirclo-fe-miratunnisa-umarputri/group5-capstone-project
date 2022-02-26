@@ -51,12 +51,21 @@ const Beranda = () => {
               <BerandaTable
                 data={rowsTableBeranda}
                 title="Permohonan Terbaru"
+                role="admin"
               />
             )}
             {role === ROLE.MANAGER && (
               <BerandaTable
                 data={rowsTableBeranda}
                 title="Permohonan Persetujuan"
+                role="manager"
+              />
+            )}
+            {role === ROLE.EMPLOYEE && (
+              <BerandaTable
+                data={rowsTableBeranda}
+                title="Riwayat Penggunaan Aset"
+                role="employee"
               />
             )}
           </Grid>

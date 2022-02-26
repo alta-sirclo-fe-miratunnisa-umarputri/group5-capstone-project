@@ -6,6 +6,7 @@ import { makeStyles } from "@mui/styles";
 
 import { bgwhite, primary, tertiary } from "../../styles/color.styles";
 import { dotMenu, titleCarousel } from "./Employee/ActivityCarousel.style";
+import { ROLE } from "../../constants";
 
 const useStyles = makeStyles({
   root: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-const BerandaTable = ({ title, data }: any) => {
+const BerandaTable = ({ title, data, role }: any) => {
   const classes = useStyles();
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [clickedMenuId, setClickedMenuId] = useState(0);
@@ -49,14 +50,14 @@ const BerandaTable = ({ title, data }: any) => {
       cellClassName: "super-app-theme--cell",
       headerName: "No",
       type: "number",
-      width: 70,
+      width: 60,
     },
     {
       field: "tanggal",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "Tanggal",
-      width: 180,
+      width: 190,
     },
     {
       field: "jenisAktivitas",
@@ -78,14 +79,14 @@ const BerandaTable = ({ title, data }: any) => {
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "Barang",
-      width: 200,
+      width: 215,
     },
     {
       field: "aksi",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "Aksi",
-      width: 113,
+      width: 100,
       sortable: false,
       filterable: false,
       renderCell: (params: any) => {
@@ -109,16 +110,43 @@ const BerandaTable = ({ title, data }: any) => {
               open={Boolean(anchorElUser)}
               onClose={() => setAnchorElUser(null)}
             >
-              <MenuItem onClick={handleAcceptRequest}>
-                <Typography variant="subtitle2" sx={dotMenu}>
-                  Terima Permohonan
-                </Typography>
-              </MenuItem>
-              <MenuItem onClick={handleRejectRequest}>
-                <Typography variant="subtitle2" sx={dotMenu}>
-                  Tolak Permohonan
-                </Typography>
-              </MenuItem>
+              {role === ROLE.ADMIN && (
+                <>
+                  <MenuItem onClick={handleAcceptRequest}>
+                    <Typography variant="subtitle2" sx={dotMenu}>
+                      Terima Permohonan
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleRejectRequest}>
+                    <Typography variant="subtitle2" sx={dotMenu}>
+                      Tolak Permohonan
+                    </Typography>
+                  </MenuItem>
+                </>
+              )}
+
+              {role === ROLE.MANAGER && (
+                <>
+                  <MenuItem onClick={handleAcceptRequest}>
+                    <Typography variant="subtitle2" sx={dotMenu}>
+                      Terima Permohonan
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleRejectRequest}>
+                    <Typography variant="subtitle2" sx={dotMenu}>
+                      Tolak Permohonan
+                    </Typography>
+                  </MenuItem>
+                </>
+              )}
+
+              {role === ROLE.EMPLOYEE && (
+                <MenuItem onClick={handleAcceptRequest}>
+                  <Typography variant="subtitle2" sx={dotMenu}>
+                    Ajukan Peminjaman Ulang
+                  </Typography>
+                </MenuItem>
+              )}
             </Menu>
           </>
         );
