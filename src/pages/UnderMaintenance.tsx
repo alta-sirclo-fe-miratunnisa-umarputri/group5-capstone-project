@@ -13,7 +13,7 @@ const UnderMaintenance = () => {
     navigate("/beranda");
   };
   return (
-    <Layout>
+    <>
       <Header
         title="Hi There!"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
@@ -46,7 +46,7 @@ const UnderMaintenance = () => {
           </Button>
         </Box>
       </ContentContainer>
-    </Layout>
+    </>
   );
 };
 

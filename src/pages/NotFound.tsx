@@ -2,7 +2,6 @@ import { Box, Button, Typography } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
 import ContentContainer from "../components/ContentContainer";
 import Header from "../components/Header";
-import Layout from "../components/Layout";
 import { secondary } from "../styles/color.styles";
 import { generalFont } from "../styles/font.style";
 
@@ -13,7 +12,7 @@ const NotFound = () => {
     navigate("/beranda");
   };
   return (
-    <Layout>
+    <>
       <Header
         title="Hi There!"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
@@ -46,7 +45,7 @@ const NotFound = () => {
           </Button>
         </Box>
       </ContentContainer>
-    </Layout>
+    </>
   );
 };
 
