@@ -11,26 +11,36 @@ type Item = {
   status: string;
 };
 
-const groupData = (data: any[], total: number) => {
-  const groups = [];
-  let tmp = [];
-  for (let i = 0; i < data.length; i++) {
-    if (tmp.length === total) {
-      groups.push(tmp);
-      tmp = [data[i]];
-    } else {
-      tmp.push(data[i]);
-    }
-  }
-
-  if (tmp.length) {
-    groups.push(tmp);
-  }
-
-  return groups;
-};
-
 const ActivityCarousel = () => {
+  const groupData = (data: any[]) => {
+    if (window.innerWidth <= 600) {
+      return data;
+    }
+
+    let total = 3;
+
+    if (600 < window.innerWidth && window.innerWidth <= 900) {
+      total = 2;
+    }
+
+    const groups = [];
+    let tmp = [];
+    for (let i = 0; i < data.length; i++) {
+      if (tmp.length === total) {
+        groups.push(tmp);
+        tmp = [data[i]];
+      } else {
+        tmp.push(data[i]);
+      }
+    }
+
+    if (tmp.length) {
+      groups.push(tmp);
+    }
+
+    return groups;
+  };
+
   return (
     <>
       <Typography variant="h6" sx={titleCarousel}>
@@ -46,7 +56,7 @@ const ActivityCarousel = () => {
         indicators={false}
         fullHeightHover={false}
       >
-        {groupData(dummyActivity as Item[], 3).map((activity, i) => (
+        {groupData(dummyActivity as Item[]).map((activity, i) => (
           <ActivityCarouselItem key={i} items={activity as unknown as Item[]} />
         ))}
       </CarouselMUI>

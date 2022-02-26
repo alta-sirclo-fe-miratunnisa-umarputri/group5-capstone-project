@@ -9,8 +9,6 @@ export const titleCarousel: SxProps = {
 export const activityCarousel: SxProps = {
   ...bgwhite,
   borderRadius: "5px",
-
-  display: { xs: "none", md: "block" },
 };
 
 export const outerContItem: SxProps = {
