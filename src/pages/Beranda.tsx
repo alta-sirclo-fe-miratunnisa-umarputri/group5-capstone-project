@@ -95,9 +95,7 @@ const Beranda = () => {
             )}
 
             {role === ROLE.MANAGER && (
-              <>
-                <RightButtonDisable label="Peminjaman Aset" path="#" />
-              </>
+              <RightButton label="Peminjaman Aset" path="/pemeliharaan" />
             )}
           </Grid>
         </Grid>
