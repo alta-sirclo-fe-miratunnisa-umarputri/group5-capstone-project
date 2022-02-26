@@ -4,8 +4,8 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
 import { makeStyles } from "@mui/styles";
 
-import { bgwhite, primary, tertiary } from "../../../styles/color.styles";
-import { dotMenu, titleCarousel } from "../Employee/ActivityCarousel.style";
+import { bgwhite, primary, tertiary } from "../../styles/color.styles";
+import { dotMenu, titleCarousel } from "./Employee/ActivityCarousel.style";
 
 const useStyles = makeStyles({
   root: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-const AdminTable = () => {
+const BerandaTable = ({ title, data }: any) => {
   const classes = useStyles();
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [clickedMenuId, setClickedMenuId] = useState(0);
@@ -126,41 +126,6 @@ const AdminTable = () => {
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      nomor: 1,
-      tanggal: new Date(),
-      jenisAktivitas: "Peminjaman Aset",
-      kategoriAset: "Headphone",
-      barang: "ini nama barang",
-    },
-    {
-      id: 2,
-      nomor: 2,
-      tanggal: new Date(),
-      jenisAktivitas: "Peminjaman Aset",
-      kategoriAset: "Headphone",
-      barang: "ini nama barang",
-    },
-    {
-      id: 3,
-      nomor: 3,
-      tanggal: new Date(),
-      jenisAktivitas: "Peminjaman Aset",
-      kategoriAset: "Headphone",
-      barang: "ini nama barang",
-    },
-    {
-      id: 4,
-      nomor: 4,
-      tanggal: new Date(),
-      jenisAktivitas: "Peminjaman Aset",
-      kategoriAset: "Headphone",
-      barang: "ini nama barang",
-    },
-  ];
-
   const formatInput = (rows: any) => {
     for (const row of rows) {
       row.tanggal = new Date().toLocaleString();
@@ -178,10 +143,10 @@ const AdminTable = () => {
       className={classes.root}
     >
       <Typography variant="h6" sx={titleCarousel} gutterBottom>
-        Permohonan Terbaru
+        {title}
       </Typography>
       <DataGrid
-        rows={formatInput(rows)}
+        rows={formatInput(data)}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
@@ -191,4 +156,4 @@ const AdminTable = () => {
   );
 };
 
-export default AdminTable;
+export default BerandaTable;
