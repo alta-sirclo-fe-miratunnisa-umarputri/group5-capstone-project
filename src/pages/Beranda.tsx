@@ -17,10 +17,11 @@ import {
   tableContainer,
   topCarousel,
 } from "../components/Beranda/Beranda.style";
-import AdminTable from "../components/Beranda/Admin/AdminTable";
+import BerandaTable from "../components/Beranda/BerandaTable";
+import { rowsTableBeranda } from "../dummy-data";
 
 const Beranda = () => {
-  const role: string = "admin";
+  const role: string = "manager";
 
   return (
     <Layout>
@@ -46,7 +47,18 @@ const Beranda = () => {
 
         <Grid container sx={tableContainer}>
           <Grid item xs={12} md={8} lg={9}>
-            {role === ROLE.ADMIN && <AdminTable />}
+            {role === ROLE.ADMIN && (
+              <BerandaTable
+                data={rowsTableBeranda}
+                title="Permohonan Terbaru"
+              />
+            )}
+            {role === ROLE.MANAGER && (
+              <BerandaTable
+                data={rowsTableBeranda}
+                title="Permohonan Persetujuan"
+              />
+            )}
           </Grid>
 
           <Grid item xs={12} md={4} lg={3} sx={buttonBerandaContainer}>

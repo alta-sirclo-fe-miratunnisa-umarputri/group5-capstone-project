@@ -158,3 +158,38 @@ export const dummyActivity = [
   { date: new Date(), item: "Abc", status: "Ditolak" },
   { date: new Date(), item: "Abc", status: "Ditolak" },
 ];
+
+export const rowsTableBeranda = [
+  {
+    id: 1,
+    nomor: 1,
+    tanggal: new Date(),
+    jenisAktivitas: "Peminjaman Aset",
+    kategoriAset: "Headphone",
+    barang: "ini nama barang",
+  },
+  {
+    id: 2,
+    nomor: 2,
+    tanggal: new Date(),
+    jenisAktivitas: "Peminjaman Aset",
+    kategoriAset: "Headphone",
+    barang: "ini nama barang",
+  },
+  {
+    id: 3,
+    nomor: 3,
+    tanggal: new Date(),
+    jenisAktivitas: "Peminjaman Aset",
+    kategoriAset: "Headphone",
+    barang: "ini nama barang",
+  },
+  {
+    id: 4,
+    nomor: 4,
+    tanggal: new Date(),
+    jenisAktivitas: "Peminjaman Aset",
+    kategoriAset: "Headphone",
+    barang: "ini nama barang",
+  },
+];
