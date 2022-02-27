@@ -1,33 +1,46 @@
-import { ThemeProvider } from "@mui/material";
+import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { Routes, Route } from "react-router-dom";
-import Application from "./components/Beranda/Employee/Application";
-import DetailActivity from "./components/Beranda/Employee/DetailActivity";
-import Procurement from "./components/Beranda/Employee/Procurement";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { ThemeProvider } from "@mui/material";
 
-import DetailItemAdmin from "./components/DirektoriAset/DetailItemAdmin";
-import DetailAssetEmployee from "./components/DirektoriAset/DetailAssetEmployee";
-import UserList from "./components/DirektoriAset/UserList";
 import Beranda from "./pages/Beranda";
 import DirektoriAset from "./pages/DirektoriAset";
 import SignIn from "./pages/SignIn";
-import { responsiveFontSize } from "./styles/theme.styles";
-import AddNewAsset from "./components/Beranda/Admin/AddNewAsset";
-import AssignAsset from "./components/Beranda/Admin/AssignAsset";
 import PenggunaAset from "./pages/PenggunaAset";
-import DetailModal from "./components/PenggunaAset/admin/DetailModal";
 import PermohonanPersetujuan from "./pages/PermohonanPersetujuan";
-import DetailModalManager from "./components/PermohonanPeminjaman/manager/DetailModalManager";
 import NotFound from "./pages/NotFound";
 import UnderMaintenance from "./pages/UnderMaintenance";
 import PengadaanAset from "./pages/PengadaanAset";
-import PengadaanModalManager from "./components/PengadaanAset/admin/PengadaanModalAdmin";
 import PermohonanPengadaan from "./pages/PermohonanPengadaan";
+
+import Application from "./components/Beranda/Employee/Application";
+import DetailActivity from "./components/Beranda/Employee/DetailActivity";
+import Procurement from "./components/Beranda/Employee/Procurement";
+import DetailItemAdmin from "./components/DirektoriAset/DetailItemAdmin";
+import DetailAssetEmployee from "./components/DirektoriAset/DetailAssetEmployee";
+import UserList from "./components/DirektoriAset/UserList";
+import AddNewAsset from "./components/Beranda/Admin/AddNewAsset";
+import AssignAsset from "./components/Beranda/Admin/AssignAsset";
+import DetailModal from "./components/PenggunaAset/admin/DetailModal";
+import DetailModalManager from "./components/PermohonanPeminjaman/manager/DetailModalManager";
+import PengadaanModalManager from "./components/PengadaanAset/admin/PengadaanModalAdmin";
 import PengadaanModalAdmin from "./components/PengadaanAset/admin/PengadaanModalAdmin";
+
+import { responsiveFontSize } from "./styles/theme.styles";
 
 const queryClient = new QueryClient();
 
 const App = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+      return;
+    }
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={responsiveFontSize}>
