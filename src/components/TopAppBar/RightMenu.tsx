@@ -20,8 +20,6 @@ import { bgwhite } from "../../styles/color.styles";
 import { useNavigate } from "react-router-dom";
 import SecondaryButton from "./SecondaryButton";
 
-const settings = ["Sign Out"];
-
 const RightMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();

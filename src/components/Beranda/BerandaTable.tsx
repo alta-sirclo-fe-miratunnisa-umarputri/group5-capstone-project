@@ -111,7 +111,7 @@ const BerandaTable = ({ title, data, role }: any) => {
               onClose={() => setAnchorElUser(null)}
             >
               {role === ROLE.ADMIN && (
-                <>
+                <Box>
                   <MenuItem onClick={handleAcceptRequest}>
                     <Typography variant="subtitle2" sx={dotMenu}>
                       Terima Permohonan
@@ -122,11 +122,11 @@ const BerandaTable = ({ title, data, role }: any) => {
                       Tolak Permohonan
                     </Typography>
                   </MenuItem>
-                </>
+                </Box>
               )}
 
               {role === ROLE.MANAGER && (
-                <>
+                <Box>
                   <MenuItem onClick={handleAcceptRequest}>
                     <Typography variant="subtitle2" sx={dotMenu}>
                       Terima Permohonan
@@ -137,7 +137,7 @@ const BerandaTable = ({ title, data, role }: any) => {
                       Tolak Permohonan
                     </Typography>
                   </MenuItem>
-                </>
+                </Box>
               )}
 
               {role === ROLE.EMPLOYEE && (

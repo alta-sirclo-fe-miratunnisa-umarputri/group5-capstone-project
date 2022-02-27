@@ -21,7 +21,7 @@ import BerandaTable from "../components/Beranda/BerandaTable";
 import { rowsTableBeranda } from "../dummy-data";
 
 const Beranda = () => {
-  const role: string = "employee";
+  const role = localStorage.getItem("role")!;
 
   return (
     <Layout>

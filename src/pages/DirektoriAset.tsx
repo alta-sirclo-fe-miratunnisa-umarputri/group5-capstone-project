@@ -3,16 +3,16 @@ import { Outlet } from "react-router-dom";
 
 import ContentContainer from "../components/ContentContainer";
 import CardAsset from "../components/DirektoriAset/CardAsset";
-import { containerDir } from "../components/DirektoriAset/DirektoriAset.style";
 import SearchBar from "../components/DirektoriAset/SearchBar";
 import Header from "../components/Header";
 import Layout from "../components/Layout";
+
 import { dummyAssets } from "../dummy-data";
+import { containerDir } from "../components/DirektoriAset/DirektoriAset.style";
 
 const DirektoriAset = () => {
-  // cek if employee or admin here
-  // if role === employee fetch data assets
-  // if role === admin fetch data items
+  const role = localStorage.getItem("role")!;
+
   return (
     <Layout>
       <Header
@@ -27,7 +27,7 @@ const DirektoriAset = () => {
       <ContentContainer>
         <Box sx={containerDir}>
           <SearchBar />
-          <CardAsset assets={dummyAssets} role="employee" />
+          <CardAsset assets={dummyAssets} role={role} />
         </Box>
       </ContentContainer>
     </Layout>
