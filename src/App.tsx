@@ -1,17 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
-
-import Beranda from "./pages/Beranda";
-import DirektoriAset from "./pages/DirektoriAset";
-import SignIn from "./pages/SignIn";
-import PenggunaAset from "./pages/PenggunaAset";
-import PermohonanPersetujuan from "./pages/PermohonanPersetujuan";
-import NotFound from "./pages/NotFound";
-import UnderMaintenance from "./pages/UnderMaintenance";
-import PengadaanAset from "./pages/PengadaanAset";
-import PermohonanPengadaan from "./pages/PermohonanPengadaan";
 
 import Application from "./components/Beranda/Employee/Application";
 import DetailActivity from "./components/Beranda/Employee/DetailActivity";
@@ -27,6 +17,18 @@ import PengadaanModalManager from "./components/PengadaanAset/admin/PengadaanMod
 import PengadaanModalAdmin from "./components/PengadaanAset/admin/PengadaanModalAdmin";
 
 import { responsiveFontSize } from "./styles/theme.styles";
+
+const Beranda = lazy(() => import("./pages/Beranda"));
+const DirektoriAset = lazy(() => import("./pages/DirektoriAset"));
+const SignIn = lazy(() => import("./pages/SignIn"));
+const PenggunaAset = lazy(() => import("./pages/PenggunaAset"));
+const PermohonanPersetujuan = lazy(
+  () => import("./pages/PermohonanPersetujuan")
+);
+const NotFound = lazy(() => import("./pages/NotFound"));
+const UnderMaintenance = lazy(() => import("./pages/UnderMaintenance"));
+const PengadaanAset = lazy(() => import("./pages/PengadaanAset"));
+const PermohonanPengadaan = lazy(() => import("./pages/PermohonanPengadaan"));
 
 const queryClient = new QueryClient();
 
@@ -45,9 +47,23 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={responsiveFontSize}>
         <Routes>
-          <Route path="/" element={<SignIn />} />
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<>...</>}>
+                <SignIn />
+              </Suspense>
+            }
+          />
 
-          <Route path="direktori-aset" element={<DirektoriAset />}>
+          <Route
+            path="direktori-aset"
+            element={
+              <Suspense fallback={<>...</>}>
+                <DirektoriAset />
+              </Suspense>
+            }
+          >
             <Route
               path="admin/:id"
               element={
@@ -66,7 +82,14 @@ const App = () => {
             />
           </Route>
 
-          <Route path="beranda" element={<Beranda />}>
+          <Route
+            path="beranda"
+            element={
+              <Suspense fallback={<>...</>}>
+                <Beranda />
+              </Suspense>
+            }
+          >
             <Route
               path="detail-aktivitas/:id"
               element={<DetailActivity isOpen={false} handleClose={() => {}} />}
@@ -77,27 +100,67 @@ const App = () => {
             <Route path="assign-aset" element={<AssignAsset />} />
           </Route>
 
-          <Route path="pengguna-aset" element={<PenggunaAset />}>
+          <Route
+            path="pengguna-aset"
+            element={
+              <Suspense fallback={<>...</>}>
+                <PenggunaAset />
+              </Suspense>
+            }
+          >
             <Route path="admin-pengguna/:id" element={<DetailModal />} />
           </Route>
 
           <Route
             path="permohonan-persetujuan"
-            element={<PermohonanPersetujuan />}
+            element={
+              <Suspense fallback={<>...</>}>
+                <PermohonanPersetujuan />
+              </Suspense>
+            }
           >
             <Route path=":id" element={<DetailModalManager />} />
           </Route>
 
-          <Route path="pengadaan-aset" element={<PengadaanAset />}>
+          <Route
+            path="pengadaan-aset"
+            element={
+              <Suspense fallback={<>...</>}>
+                <PengadaanAset />
+              </Suspense>
+            }
+          >
             <Route path=":id" element={<PengadaanModalAdmin />} />
           </Route>
-          <Route path="permohonan-pengadaan" element={<PermohonanPengadaan />}>
+
+          <Route
+            path="permohonan-pengadaan"
+            element={
+              <Suspense fallback={<>...</>}>
+                <PermohonanPengadaan />
+              </Suspense>
+            }
+          >
             <Route path=":id" element={<PengadaanModalManager />} />
           </Route>
 
-          <Route path="/pemeliharaan" element={<UnderMaintenance />} />
+          <Route
+            path="/pemeliharaan"
+            element={
+              <Suspense fallback={<>...</>}>
+                <UnderMaintenance />
+              </Suspense>
+            }
+          />
 
-          <Route path="*" element={<NotFound />} />
+          <Route
+            path="*"
+            element={
+              <Suspense fallback={<>...</>}>
+                <NotFound />
+              </Suspense>
+            }
+          />
         </Routes>
       </ThemeProvider>
     </QueryClientProvider>
