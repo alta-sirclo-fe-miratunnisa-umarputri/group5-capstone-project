@@ -70,29 +70,31 @@ const DetailAssetEmployee = ({
       {isLoading ? (
         <Loading />
       ) : (
-        <DialogContent>
-          <img src={data.picture} alt="Aset" style={detailImg} />
-          <CustomFormRead label="Nama Aset" defaultValue={data.name} />
-          <CustomFormReadMulti
-            label="Deskripsi Aset"
-            defaultValue={data.description}
-          />
-          <CustomFormRead
-            label="Kategori Aset"
-            defaultValue={data.categoryname}
-          />
+        data && (
+          <DialogContent>
+            <img src={data.picture} alt="Aset" style={detailImg} />
+            <CustomFormRead label="Nama Aset" defaultValue={data.name} />
+            <CustomFormReadMulti
+              label="Deskripsi Aset"
+              defaultValue={data.description}
+            />
+            <CustomFormRead
+              label="Kategori Aset"
+              defaultValue={data.categoryname}
+            />
 
-          <Box sx={detailAsetButton}>
-            <Button
-              variant="contained"
-              size="small"
-              sx={buttonActions}
-              onClick={() => handleClose(true)}
-            >
-              Kembali
-            </Button>
-          </Box>
-        </DialogContent>
+            <Box sx={detailAsetButton}>
+              <Button
+                variant="contained"
+                size="small"
+                sx={buttonActions}
+                onClick={() => handleClose(true)}
+              >
+                Kembali
+              </Button>
+            </Box>
+          </DialogContent>
+        )
       )}
     </Dialog>
   );
