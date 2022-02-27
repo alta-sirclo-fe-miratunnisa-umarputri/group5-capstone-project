@@ -1,3 +1,7 @@
+import { FormEvent, useState } from "react";
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
 import {
   Dialog,
   DialogContent,
@@ -9,24 +13,41 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+
+import CustomFormInput from "../../CustomFormInput";
+import CustomFormSelect from "../../CustomFormSelect";
+import Error from "../../Alert/Error";
 
 import { generalFont } from "../../../styles/font.style";
-import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import CustomFormInput from "../../CustomFormInput";
 import { leftButton, rightButton } from "./AddNewAsset.style";
-import CustomFormSelect from "../../CustomFormSelect";
+import { ASSET_CATEGORIES } from "../../../constants";
+import { capstoneAxios } from "../../../axios-instance";
+import Success from "../../Alert/Success";
 
 const AddNewAsset = () => {
-  // dummy
-  const categories = ["kategori1", "kategori2", "kategori3"];
-  const [category, setCategory] = useState(categories[0]);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const [category, setCategory] = useState(ASSET_CATEGORIES[0]);
   const [isOpen, setIsOpen] = useState(true);
 
   const navigate = useNavigate();
 
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const { isLoading, isError, error, mutateAsync, isSuccess } = useMutation(
+    async (newAsset: any) => {
+      const { data } = await capstoneAxios({
+        method: "POST",
+        data: newAsset,
+        url: "/assets",
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      return data;
+    }
+  );
 
   const handleClose = () => {
     setIsOpen(false);
@@ -37,9 +58,16 @@ const AddNewAsset = () => {
     setCategory(e.target.value);
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("tambahkan aset baru");
+
+    const categoryId = ASSET_CATEGORIES.indexOf(category) + 1;
+    const data = new FormData(e.currentTarget);
+
+    data.delete("kategori");
+    data.append("categoryid", String(categoryId));
+
+    await mutateAsync(data);
 
     setIsOpen(false);
     navigate("/beranda");
@@ -52,6 +80,12 @@ const AddNewAsset = () => {
       fullScreen={fullScreen}
       fullWidth
     >
+      {isError && (
+        <Error message={(error as AxiosError).response!.data!.message!} />
+      )}
+
+      {isSuccess && <Success message="Berhasil menambahkan aset baru" />}
+
       <DialogTitle>
         <Box>
           <Typography variant="h5" sx={generalFont}>
@@ -62,39 +96,46 @@ const AddNewAsset = () => {
 
       <DialogContent>
         <Box component="form" onSubmit={handleSubmit}>
-          <CustomFormInput label="Gambar " type="file" desc="gambar" />
+          <CustomFormInput label="Gambar " type="file" desc="picture" />
           <CustomFormSelect
             label="Kategori"
             desc="kategori"
-            selections={categories}
+            selections={ASSET_CATEGORIES}
             value={category}
             handleChange={handleChangeCategory}
           />
           <CustomFormInput
             label="Nama"
             type="text"
-            desc="nama"
+            desc="name"
             placeholder="Laptop Asus"
           />
           <CustomFormInput
             label="Deskripsi"
             type="text"
-            desc="deskripsi"
+            desc="description"
             placeholder="Deskripsikan barang yang akan ditambahkan"
           />
           <CustomFormInput
             label="Total"
             type="number"
-            desc="total"
+            desc="quantity"
             placeholder="4"
           />
           <DialogActions>
             <Button sx={leftButton} onClick={handleClose}>
               Kembali
             </Button>
-            <Button type="submit" variant="contained" sx={rightButton}>
+            <LoadingButton
+              loading={isLoading}
+              loadingIndicator="Loading..."
+              variant="contained"
+              type="submit"
+              size="medium"
+              sx={rightButton}
+            >
               Tambahkan Aset
-            </Button>
+            </LoadingButton>
           </DialogActions>
         </Box>
       </DialogContent>

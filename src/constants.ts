@@ -9,3 +9,10 @@ export const EMPLOYEE_STATUS = {
   APPROVED: "Disetujui",
   REJECTED: "Ditolak",
 };
+
+export const ASSET_CATEGORIES = [
+  "Alat Tulis",
+  "Kendaraan",
+  "Laptop",
+  "Lainnya",
+];
