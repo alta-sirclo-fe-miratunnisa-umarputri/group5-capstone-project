@@ -13,7 +13,6 @@ import {
   DialogActions,
 } from "@mui/material";
 
-import { DetailAndEmployeeModal } from "../../../types/direktori-aset";
 import DetailModalInfo from "./DetailModalInfo";
 import {
   availabilityFont,
@@ -38,7 +37,7 @@ const PengadaanModalManager = () => {
   const [isOpen, setIsOpen] = useState(true);
   const handleClose = () => {
     setIsOpen(false);
-    navigate("/permohonan/pengadaan");
+    navigate("/permohonan-pengadaan");
   };
   const [status, setStatus] = useState("toadmin");
 
