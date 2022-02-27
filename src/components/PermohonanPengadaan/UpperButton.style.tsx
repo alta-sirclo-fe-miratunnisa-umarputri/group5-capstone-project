@@ -3,7 +3,8 @@ import { primary, tertiary, bgwhite } from "../../styles/color.styles";
 
 export const button: SxProps = {
   fontWeight: "medium",
-  width: "13%",
+  outlineColor: tertiary.color,
+  width: "20%",
   fontFamily: "Poppins",
   color: bgwhite.backgroundColor,
   textTransform: "none",
@@ -15,7 +16,7 @@ export const button: SxProps = {
 
 export const buttonOutlined: SxProps = {
   fontWeight: "medium",
-  width: "13%",
+  width: "20%",
   fontFamily: "Poppins",
   color: primary.color,
   textTransform: "none",
@@ -31,3 +32,15 @@ export const buttonStatus = [
   { id: 2, name: "Disetujui", status: "tomanager" },
   { id: 3, name: "Ditolak", status: "indecline" },
 ];
+
+export const buttonSelect: SxProps = {
+  fontWeight: "medium",
+  outlineColor: tertiary.color,
+  fontFamily: "Poppins",
+  color: bgwhite.backgroundColor,
+  textTransform: "none",
+  backgroundColor: tertiary.color,
+  "&:hover": {
+    backgroundColor: tertiary.color,
+  },
+};
