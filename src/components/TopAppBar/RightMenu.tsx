@@ -21,6 +21,8 @@ import { useNavigate } from "react-router-dom";
 import SecondaryButton from "./SecondaryButton";
 
 const RightMenu = () => {
+  const name = localStorage.getItem("name")!;
+
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
 
@@ -70,7 +72,7 @@ const RightMenu = () => {
   const desktop = (
     <Box sx={desktopRight}>
       <Stack spacing={1} direction="row">
-        <SecondaryButton label="Hi, User!" />
+        <SecondaryButton label={`Hi, ${name}!`} />
 
         <IconButton onClick={handleOpenUserMenu}>
           <AccountCircleRoundedIcon
