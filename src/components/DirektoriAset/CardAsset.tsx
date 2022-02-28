@@ -68,120 +68,107 @@ const CardAsset = ({ assets, role }: any) => {
 
   return (
     <>
-      <Masonry columns={{ xs: 1, sm: 3, md: 5 }} spacing={2} sx={masonry}>
-        {assets.map((asset: any) => (
-          <Box key={asset.id}>
-            <Card sx={card}>
-              <CardMedia component="img" image={asset.gambar} alt="random" />
-
-              <CardContent sx={cardContent}>
-                <Typography variant="caption" sx={category}>
-                  {asset.kategori}
-                </Typography>
-                <Typography variant="h6" sx={title}>
-                  {asset.judul}
-                </Typography>
-                <Typography variant="body2" sx={description}>
-                  {asset.deskripsi}
-                </Typography>
-
-                <Grid container mt={2} mb={0} sx={aboveButton}>
-                  <Grid item xs={6} sx={groupAvatar}>
-                    <Avatar
-                      alt="A"
-                      src="https://source.unsplash.com/random"
-                      sx={avatar}
+      {!assets && <Typography variant="subtitle1">Tidak ditemukan</Typography>}
+      {assets && (
+        <>
+          <Masonry columns={{ xs: 1, sm: 3, md: 5 }} spacing={2} sx={masonry}>
+            {assets &&
+              assets.map((asset: any) => (
+                <Box key={asset.id}>
+                  <Card sx={card}>
+                    <CardMedia
+                      component="img"
+                      image={asset.picture}
+                      alt="random"
                     />
-                    <Avatar
-                      alt="A"
-                      src="https://source.unsplash.com/random"
-                      sx={avatar}
-                    />
-                    <Avatar alt="A" sx={avatar}>
-                      <Typography variant="caption" sx={avatarText}>
-                        {asset.pengguna.length - 2}+
+
+                    <CardContent sx={cardContent}>
+                      <Typography variant="caption" sx={category}>
+                        {asset.category}
                       </Typography>
-                    </Avatar>
-                  </Grid>
+                      <Typography variant="h6" sx={title}>
+                        {asset.name}
+                      </Typography>
+                      {/* <Typography variant="body2" sx={description}>
+                  {asset.deskripsi}
+                </Typography> */}
+                      <Typography sx={availability} textAlign="end">
+                        {asset.availableStatus}
+                      </Typography>
+                    </CardContent>
 
-                  <Grid item xs={6} textAlign="end">
-                    <Typography sx={availability}>
-                      {asset.tersedia} tersedia
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </CardContent>
+                    <CardActions sx={cardActions}>
+                      {role === ROLE.ADMIN && (
+                        <Grid container spacing={1}>
+                          <Grid item xs={12} lg={6}>
+                            <Link
+                              to={`/direktori-aset/pengguna`}
+                              style={{ textDecoration: "none", width: "100%" }}
+                            >
+                              <Button
+                                variant="contained"
+                                size="small"
+                                fullWidth
+                                sx={button}
+                                onClick={handleOpenUser}
+                              >
+                                Pengguna
+                              </Button>
+                            </Link>
+                          </Grid>
 
-              <CardActions sx={cardActions}>
-                {role === ROLE.ADMIN && (
-                  <Grid container spacing={1}>
-                    <Grid item xs={12} lg={6}>
-                      <Link
-                        to={`/direktori-aset/pengguna`}
-                        style={{ textDecoration: "none", width: "100%" }}
-                      >
-                        <Button
-                          variant="contained"
-                          size="small"
-                          fullWidth
-                          sx={button}
-                          onClick={handleOpenUser}
+                          <Grid item xs={12} lg={6}>
+                            <Link
+                              to={`/direktori-aset/admin/${asset.id}`}
+                              style={{ textDecoration: "none", width: "100%" }}
+                            >
+                              <Button
+                                variant="contained"
+                                size="small"
+                                fullWidth
+                                sx={button}
+                                onClick={handleOpenDetailItem}
+                              >
+                                Detail
+                              </Button>
+                            </Link>
+                          </Grid>
+                        </Grid>
+                      )}
+
+                      {role === ROLE.EMPLOYEE && (
+                        <Link
+                          to={`/direktori-aset/employee/${asset.id}`}
+                          style={{ textDecoration: "none", width: "100%" }}
                         >
-                          Pengguna
-                        </Button>
-                      </Link>
-                    </Grid>
+                          <Button
+                            variant="contained"
+                            size="small"
+                            fullWidth
+                            sx={button}
+                            onClick={handleOpenDetailAsset}
+                          >
+                            Detail
+                          </Button>
+                        </Link>
+                      )}
+                    </CardActions>
+                  </Card>
+                </Box>
+              ))}
+          </Masonry>
 
-                    <Grid item xs={12} lg={6}>
-                      <Link
-                        to={`/direktori-aset/admin/${asset.id}`}
-                        style={{ textDecoration: "none", width: "100%" }}
-                      >
-                        <Button
-                          variant="contained"
-                          size="small"
-                          fullWidth
-                          sx={button}
-                          onClick={handleOpenDetailItem}
-                        >
-                          Detail
-                        </Button>
-                      </Link>
-                    </Grid>
-                  </Grid>
-                )}
-
-                {role === ROLE.EMPLOYEE && (
-                  <Link
-                    to={`/direktori-aset/employee/${asset.id}`}
-                    style={{ textDecoration: "none", width: "100%" }}
-                  >
-                    <Button
-                      variant="contained"
-                      size="small"
-                      fullWidth
-                      sx={button}
-                      onClick={handleOpenDetailAsset}
-                    >
-                      Detail
-                    </Button>
-                  </Link>
-                )}
-              </CardActions>
-            </Card>
-          </Box>
-        ))}
-      </Masonry>
-
-      <DetailItemAdmin
-        isOpen={isOpenDetailItem}
-        handleClose={handleCloseDetailItem}
-      />
-      <DetailAssetEmployee
-        isOpen={isOpenDetailAsset}
-        handleClose={handleCloseDetailAsset}
-      />
-      <UserList isOpen={isOpenUser} handleClose={handleCloseUser} />
+          <DetailItemAdmin
+            isOpen={isOpenDetailItem}
+            handleClose={handleCloseDetailItem}
+          />
+          <DetailAssetEmployee
+            isOpen={isOpenDetailAsset}
+            handleClose={handleCloseDetailAsset}
+          />
+          <UserList isOpen={isOpenUser} handleClose={handleCloseUser} />
+        </>
+      )}
     </>
   );
 };
