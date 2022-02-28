@@ -23,6 +23,7 @@ const DirektoriAset = () => {
   const [totalPage, setTotalPage] = useState(1);
   const [filterId, setFilterId] = useState(0);
   const [availStatus, setAvailStatus] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
   let { isLoading, error, isError } = useQuery(
     ["directoryAssetAdmin", page],
@@ -84,11 +85,15 @@ const DirektoriAset = () => {
 
   const handleClickFilter = (id: number) => {
     setAvailStatus("");
+    setSearchValue("");
+
     setFilterId(id);
   };
 
   const handleClickAvail = (status: string) => {
     setFilterId(0);
+    setSearchValue("");
+
     setAvailStatus(status);
   };
 
@@ -114,6 +119,8 @@ const DirektoriAset = () => {
             setFilterId={setFilterId}
             availStatus={availStatus}
             setAvailStatus={setAvailStatus}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
           />
           <Box
             sx={{

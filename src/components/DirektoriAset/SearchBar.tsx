@@ -55,6 +55,8 @@ type SearchBarProps = {
   setFilterId: Dispatch<SetStateAction<number>>;
   availStatus: string;
   setAvailStatus: Dispatch<SetStateAction<string>>;
+  searchValue: string;
+  setSearchValue: Dispatch<SetStateAction<string>>;
 };
 
 const SearchBar = ({
@@ -65,9 +67,9 @@ const SearchBar = ({
   setFilterId,
   availStatus,
   setAvailStatus,
+  searchValue,
+  setSearchValue,
 }: SearchBarProps) => {
-  const [searchValue, setSearchValue] = useState("");
-
   const { isLoading, isError, error } = useQuery(
     ["fetchSearch", searchValue],
     async () => {
