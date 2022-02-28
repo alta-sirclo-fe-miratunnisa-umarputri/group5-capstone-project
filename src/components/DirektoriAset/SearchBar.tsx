@@ -1,8 +1,12 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { InputBase } from "@mui/material";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import { styled, alpha } from "@mui/material/styles";
 import { primary } from "../../styles/color.styles";
+import { useQuery } from "react-query";
+import { capstoneAxios } from "../../axios-instance";
+import Error from "../Alert/Error";
+import { AxiosError } from "axios";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -43,28 +47,50 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   fontSize: "14px",
 }));
 
-const SearchBar = () => {
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    // const input = e.target.value;
-    // const searchedBooks = books.filter((book: Book) =>
-    //   book.title.toLowerCase().includes(input.toLowerCase())
-    // );
-    // setShowBooks(searchedBooks);
+type SearchBarProps = {
+  setItems: Dispatch<SetStateAction<any[]>>;
+  setTotalPage: Dispatch<SetStateAction<number>>;
+  page: number;
+};
 
-    console.log(e.target.value);
+const SearchBar = ({ setItems, setTotalPage, page }: SearchBarProps) => {
+  const [searchValue, setSearchValue] = useState("");
+
+  const { isLoading, isError, error } = useQuery(
+    ["fetchSearch", searchValue],
+    async () => {
+      const { data } = await capstoneAxios({
+        method: "GET",
+        url: "/items",
+        params: { keyword: searchValue, page },
+      });
+
+      setItems(data.data.items);
+      setTotalPage(data.data.totalPage);
+      return data;
+    }
+  );
+
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
   };
 
   return (
-    <Search>
-      <SearchIconWrapper>
-        <SearchRoundedIcon />
-      </SearchIconWrapper>
-      <StyledInputBase
-        placeholder="Pencarian…"
-        inputProps={{ "aria-label": "search" }}
-        onChange={handleSearch}
-      />
-    </Search>
+    <>
+      <Search>
+        <SearchIconWrapper>
+          <SearchRoundedIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder={isLoading ? "Loading..." : "Pencarian…"}
+          inputProps={{ "aria-label": "search" }}
+          onChange={handleSearch}
+        />
+      </Search>
+      {isError && (
+        <Error message={(error as AxiosError).response!.data!.message!} />
+      )}
+    </>
   );
 };
 

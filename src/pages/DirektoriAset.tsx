@@ -20,8 +20,10 @@ const DirektoriAset = () => {
   const role = localStorage.getItem("role")!;
 
   const [page, setPage] = useState(1);
+  const [items, setItems] = useState<any[]>([]);
+  const [totalPage, setTotalPage] = useState(1);
 
-  const { isLoading, error, isError, data } = useQuery(
+  const { isLoading, error, isError } = useQuery(
     ["directoryAssetAdmin", page],
     async () => {
       const { data } = await capstoneAxios({
@@ -32,6 +34,8 @@ const DirektoriAset = () => {
         },
       });
 
+      setItems(data.data.items);
+      setTotalPage(data.data.totalPage);
       return data;
     }
   );
@@ -69,14 +73,18 @@ const DirektoriAset = () => {
 
       <ContentContainer>
         <Box sx={containerDir}>
-          <SearchBar />
+          <SearchBar
+            setItems={setItems}
+            setTotalPage={setTotalPage}
+            page={page}
+          />
           <Pagination
-            count={data.data.totalPage}
+            count={totalPage}
             sx={{ marginTop: 3, marginBottom: 1 }}
             onChange={handleChangePage}
             page={page}
           />
-          <CardAsset assets={data.data.items} role={role} />
+          <CardAsset assets={items} role={role} />
         </Box>
       </ContentContainer>
     </Layout>
