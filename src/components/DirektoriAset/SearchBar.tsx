@@ -51,9 +51,21 @@ type SearchBarProps = {
   setItems: Dispatch<SetStateAction<any[]>>;
   setTotalPage: Dispatch<SetStateAction<number>>;
   page: number;
+  filterId: number;
+  setFilterId: Dispatch<SetStateAction<number>>;
+  availStatus: string;
+  setAvailStatus: Dispatch<SetStateAction<string>>;
 };
 
-const SearchBar = ({ setItems, setTotalPage, page }: SearchBarProps) => {
+const SearchBar = ({
+  setItems,
+  setTotalPage,
+  page,
+  filterId,
+  setFilterId,
+  availStatus,
+  setAvailStatus,
+}: SearchBarProps) => {
   const [searchValue, setSearchValue] = useState("");
 
   const { isLoading, isError, error } = useQuery(
@@ -68,10 +80,14 @@ const SearchBar = ({ setItems, setTotalPage, page }: SearchBarProps) => {
       setItems(data.data.items);
       setTotalPage(data.data.totalPage);
       return data;
-    }
+    },
+    { enabled: filterId === 0 && availStatus === "" ? true : false }
   );
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setFilterId(0);
+    setAvailStatus("");
+
     setSearchValue(e.target.value);
   };
 
