@@ -83,7 +83,7 @@ const SearchBar = ({
       setTotalPage(data.data.totalPage);
       return data;
     },
-    { enabled: filterId === 0 && availStatus === "" ? true : false }
+    { enabled: searchValue !== "" ? true : false }
   );
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -103,6 +103,7 @@ const SearchBar = ({
           placeholder={isLoading ? "Loading..." : "Pencarian…"}
           inputProps={{ "aria-label": "search" }}
           onChange={handleSearch}
+          value={searchValue}
         />
       </Search>
       {isError && (

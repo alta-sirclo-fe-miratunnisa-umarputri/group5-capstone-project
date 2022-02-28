@@ -57,11 +57,30 @@ const DirektoriAset = () => {
 
       setItems(data.data.items);
       setTotalPage(data.data.totalPage);
-      console.log(data);
 
       return data;
     },
     { enabled: filterId !== 0 ? true : false }
+  ));
+
+  ({ isLoading, error, isError } = useQuery(
+    ["filterByAvail", availStatus],
+    async () => {
+      const { data } = await capstoneAxios({
+        method: "GET",
+        url: "/items",
+        params: {
+          availableStatus: availStatus.toLowerCase(),
+          page,
+        },
+      });
+
+      setItems(data.data.items);
+      setTotalPage(data.data.totalPage);
+
+      return data;
+    },
+    { enabled: availStatus !== "" ? true : false }
   ));
 
   if (isLoading) {
@@ -86,6 +105,7 @@ const DirektoriAset = () => {
   const handleClickFilter = (id: number) => {
     setAvailStatus("");
     setSearchValue("");
+    setPage(1);
 
     setFilterId(id);
   };
@@ -93,6 +113,7 @@ const DirektoriAset = () => {
   const handleClickAvail = (status: string) => {
     setFilterId(0);
     setSearchValue("");
+    setPage(1);
 
     setAvailStatus(status);
   };
