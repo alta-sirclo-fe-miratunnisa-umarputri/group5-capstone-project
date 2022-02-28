@@ -37,6 +37,7 @@ const CardAsset = ({ assets, role }: any) => {
   const [isOpenDetailItem, setIsOpenDetailItem] = useState(false);
   const [isOpenDetailAsset, setIsOpenDetailAsset] = useState(false);
   const [isOpenUser, setIsOpenUser] = useState(false);
+  const [itemId, setItemId] = useState(0);
   const navigate = useNavigate();
 
   const handleCloseDetailItem = () => {
@@ -57,7 +58,8 @@ const CardAsset = ({ assets, role }: any) => {
     setIsOpenDetailAsset(true);
   };
 
-  const handleOpenUser = () => {
+  const handleOpenUser = (id: number) => {
+    setItemId(id);
     setIsOpenUser(true);
   };
 
@@ -110,7 +112,7 @@ const CardAsset = ({ assets, role }: any) => {
                                 size="small"
                                 fullWidth
                                 sx={button}
-                                onClick={handleOpenUser}
+                                onClick={() => handleOpenUser(asset.id)}
                               >
                                 Pengguna
                               </Button>
@@ -166,7 +168,11 @@ const CardAsset = ({ assets, role }: any) => {
             isOpen={isOpenDetailAsset}
             handleClose={handleCloseDetailAsset}
           />
-          <UserList isOpen={isOpenUser} handleClose={handleCloseUser} />
+          <UserList
+            isOpen={isOpenUser}
+            handleClose={handleCloseUser}
+            id={itemId}
+          />
         </>
       )}
     </>

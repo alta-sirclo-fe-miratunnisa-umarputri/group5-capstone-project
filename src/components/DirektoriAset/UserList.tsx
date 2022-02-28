@@ -19,10 +19,33 @@ import {
 } from "./DetailAndUser.style";
 import { primary } from "../../styles/color.styles";
 import UserTable from "./UserTable";
+import { capstoneAxios } from "../../axios-instance";
+import { useQuery } from "react-query";
+import Error from "../Alert/Error";
+import { AxiosError } from "axios";
+import Loading from "../Loading";
 
-const UserList = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
+const UserList = ({ isOpen, handleClose, id }: DetailAndEmployeeModal) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const { isLoading, isError, error, data } = useQuery(
+    ["getUsage", id],
+    async () => {
+      const { data } = await capstoneAxios({
+        method: "GET",
+        url: `/items/${id}/usage`,
+      });
+
+      console.log(data);
+      return data;
+    },
+    { enabled: id && id !== 0 ? true : false, retry: 0 }
+  );
+
+  if (isError) {
+    return <Error message={(error as AxiosError).response!.data!.message!} />;
+  }
 
   return (
     <Dialog
@@ -38,59 +61,61 @@ const UserList = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
           </Typography>
         </Box>
       </DialogTitle>
-      <DialogContent>
-        <Grid
-          container
-          spacing={2}
-          sx={{ display: "flex", flexDirection: "row" }}
-        >
-          <Grid item xs={12} md={6}>
-            <img
-              src="https://source.unsplash.com/random"
-              alt="Aset"
-              style={userImg}
-            />
-          </Grid>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        data && (
+          <DialogContent>
+            <Grid
+              container
+              spacing={2}
+              sx={{ display: "flex", flexDirection: "row" }}
+            >
+              <Grid item xs={12} md={6}>
+                <img src={data.data.picture} alt="Aset" style={userImg} />
+              </Grid>
 
-          <Grid item xs={12} md={6}>
-            <Box>
-              <Typography
-                variant="subtitle2"
-                sx={{
-                  ...primary,
-                  fontWeight: "regular",
-                  fontFamily: "Poppins",
-                }}
+              <Grid item xs={12} md={6}>
+                <Box>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      ...primary,
+                      fontWeight: "regular",
+                      fontFamily: "Poppins",
+                    }}
+                  >
+                    {data.data.name}
+                  </Typography>
+                  {/* <Typography
+                    variant="h5"
+                    sx={{
+                      ...primary,
+                      fontWeight: "medium",
+                      fontFamily: "Poppins",
+                    }}
+                  >
+                    {data.data.description}
+                  </Typography> */}
+                </Box>
+              </Grid>
+            </Grid>
+
+            <UserTable data={data.data.users || []} />
+
+            <Box sx={containerActionsUser}>
+              <Button
+                variant="contained"
+                size="small"
+                sx={buttonActions}
+                onClick={() => handleClose(true)}
               >
-                Laptop
-              </Typography>
-              <Typography
-                variant="h5"
-                sx={{
-                  ...primary,
-                  fontWeight: "medium",
-                  fontFamily: "Poppins",
-                }}
-              >
-                Lenovo Think Pad Yoga
-              </Typography>
+                Kembali
+              </Button>
             </Box>
-          </Grid>
-        </Grid>
-
-        <UserTable />
-
-        <Box sx={containerActionsUser}>
-          <Button
-            variant="contained"
-            size="small"
-            sx={buttonActions}
-            onClick={() => handleClose(true)}
-          >
-            Kembali
-          </Button>
-        </Box>
-      </DialogContent>
+          </DialogContent>
+        )
+      )}
     </Dialog>
   );
 };

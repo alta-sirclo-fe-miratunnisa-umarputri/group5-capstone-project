@@ -126,7 +126,7 @@ const useStyles = makeStyles({
   },
 });
 
-const UserTable = () => {
+const UserTable = ({ data }: any) => {
   const classes = useStyles();
 
   return (
@@ -140,7 +140,7 @@ const UserTable = () => {
       className={classes.root}
     >
       <DataGrid
-        rows={rows}
+        rows={data}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}

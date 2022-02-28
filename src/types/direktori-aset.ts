@@ -8,4 +8,5 @@ export type FormRead = {
 export type DetailAndEmployeeModal = {
   isOpen: boolean;
   handleClose: Dispatch<SetStateAction<boolean>>;
+  id?: number;
 };
