@@ -44,7 +44,7 @@ const DirektoriAset = () => {
   );
 
   ({ isLoading, error, isError } = useQuery(
-    ["filterByCategory", filterId],
+    ["filterByCategory", filterId, page],
     async () => {
       const { data } = await capstoneAxios({
         method: "GET",
@@ -64,7 +64,7 @@ const DirektoriAset = () => {
   ));
 
   ({ isLoading, error, isError } = useQuery(
-    ["filterByAvail", availStatus],
+    ["filterByAvail", availStatus, page],
     async () => {
       const { data } = await capstoneAxios({
         method: "GET",
@@ -99,6 +99,8 @@ const DirektoriAset = () => {
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
+    console.log(value);
+
     setPage(value);
   };
 
