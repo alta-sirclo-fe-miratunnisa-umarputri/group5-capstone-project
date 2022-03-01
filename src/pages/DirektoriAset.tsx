@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { Outlet } from "react-router-dom";
 import { AxiosError } from "axios";
-import { Box, Chip, Pagination, Stack, Typography } from "@mui/material";
+import { Box, Chip, Grid, Pagination, Stack, Typography } from "@mui/material";
 
 import ContentContainer from "../components/ContentContainer";
 import CardAsset from "../components/DirektoriAset/CardAsset";
@@ -14,6 +14,7 @@ import Error from "../components/Alert/Error";
 
 import { containerDir } from "../components/DirektoriAset/DirektoriAset.style";
 import { capstoneAxios } from "../axios-instance";
+import { primary } from "../styles/color.styles";
 
 const DirektoriAset = () => {
   const role = localStorage.getItem("role")!;
@@ -44,7 +45,7 @@ const DirektoriAset = () => {
   );
 
   ({ isLoading, error, isError } = useQuery(
-    ["filterByCategory", filterId, page],
+    ["filterItemsByCategory", filterId, page],
     async () => {
       const { data } = await capstoneAxios({
         method: "GET",
@@ -64,7 +65,7 @@ const DirektoriAset = () => {
   ));
 
   ({ isLoading, error, isError } = useQuery(
-    ["filterByAvail", availStatus, page],
+    ["filterItemsByAvail", availStatus, page],
     async () => {
       const { data } = await capstoneAxios({
         method: "GET",
@@ -151,51 +152,91 @@ const DirektoriAset = () => {
               flexDirection: "row",
               justifyContent: "flex-start",
               alignItems: "center",
-              marginTop: 2,
+              marginTop: 1,
               width: "40%",
             }}
           >
-            <Typography variant="caption" align="left" mr={1}>
-              Filter by Category:
-            </Typography>
-            <Stack direction="row" spacing={2}>
-              {["Laptop", "Alat Tulis", "Kendaraan", "Lainnya"].map(
-                (el, idx) => (
-                  <Chip
-                    key={idx}
-                    label={el}
-                    onClick={() => handleClickFilter(idx + 1)}
-                    variant={filterId === idx + 1 ? "filled" : "outlined"}
-                    size="small"
-                  />
-                )
-              )}
-            </Stack>
+            <Grid
+              container
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "start",
+              }}
+            >
+              <Grid
+                item
+                xs={12}
+                lg={3}
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                <Typography variant="body2" align="left" mx={1} my={1}>
+                  Kategori:
+                </Typography>
+              </Grid>
+              <Grid item xs={12} lg={9}>
+                <Stack sx={{ flexDirection: { xs: "column", md: "row" } }}>
+                  {["Laptop", "Alat Tulis", "Kendaraan", "Lainnya"].map(
+                    (el, idx) => (
+                      <Chip
+                        key={idx}
+                        label={el}
+                        onClick={() => handleClickFilter(idx + 1)}
+                        variant={filterId === idx + 1 ? "filled" : "outlined"}
+                        size="small"
+                        sx={{ ...primary, mx: 1, my: 1 }}
+                      />
+                    )
+                  )}
+                </Stack>
+              </Grid>
+            </Grid>
           </Box>
+
           <Box
             sx={{
               display: "flex",
               flexDirection: "row",
               justifyContent: "flex-start",
               alignItems: "center",
-              marginTop: 2,
               width: "40%",
             }}
           >
-            <Typography align="left" mr={1} variant="caption">
-              Filter by Availibility:
-            </Typography>
-            <Stack direction="row" spacing={2}>
-              {["Tersedia", "Tidak Tersedia", "Pemeliharaan"].map((el, idx) => (
-                <Chip
-                  key={idx}
-                  label={el}
-                  onClick={() => handleClickAvail(el)}
-                  variant={availStatus === el ? "filled" : "outlined"}
-                  size="small"
-                />
-              ))}
-            </Stack>
+            <Grid
+              container
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "start",
+              }}
+            >
+              <Grid
+                item
+                xs={12}
+                lg={3}
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                <Typography variant="body2" align="left" mx={1} my={1}>
+                  Ketersediaan:
+                </Typography>
+              </Grid>
+              <Grid item xs={12} lg={9}>
+                <Stack sx={{ flexDirection: { xs: "column", md: "row" } }}>
+                  {["Tersedia", "Tidak Tersedia", "Pemeliharaan"].map(
+                    (el, idx) => (
+                      <Chip
+                        key={idx}
+                        label={el}
+                        onClick={() => handleClickAvail(el)}
+                        variant={availStatus === el ? "filled" : "outlined"}
+                        size="small"
+                        sx={{ ...primary, mx: 1, my: 1 }}
+                      />
+                    )
+                  )}
+                </Stack>
+              </Grid>
+            </Grid>
           </Box>
 
           <Pagination
