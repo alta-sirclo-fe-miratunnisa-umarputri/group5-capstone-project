@@ -88,12 +88,12 @@ const CardAsset = ({ assets, role }: any) => {
                       <Typography variant="caption" sx={category}>
                         {asset.category}
                       </Typography>
-                      <Typography variant="h6" sx={title}>
+                      <Typography variant="h6" sx={title} gutterBottom>
                         {asset.name}
                       </Typography>
-                      {/* <Typography variant="body2" sx={description}>
-                  {asset.deskripsi}
-                </Typography> */}
+                      <Typography variant="body2" sx={description} gutterBottom>
+                        {asset.description}
+                      </Typography>
                       <Typography sx={availability} textAlign="end">
                         {asset.availableStatus}
                       </Typography>
