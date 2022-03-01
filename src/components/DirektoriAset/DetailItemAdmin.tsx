@@ -16,7 +16,6 @@ import { LoadingButton } from "@mui/lab";
 import { CustomFormRead, CustomFormReadMulti } from "./CustomFormRead";
 import Error from "../Alert/Error";
 import Loading from "../Loading";
-import Success from "../Alert/Success";
 
 import { DetailAndEmployeeModal } from "../../types/direktori-aset";
 import {
@@ -58,17 +57,22 @@ const DetailItemAdmin = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
     isLoading: isLoadingMutation,
     isError: isErrorMutation,
     error: errorMutation,
-    isSuccess,
     mutateAsync,
   } = useMutation(
     async (newStatus: string) => {
-      const { data } = await capstoneAxios({
+      await capstoneAxios({
         method: "PUT",
         url: `/items/${id}`,
         data: { availableStatus: newStatus },
       });
     },
-    { onSuccess: () => queryClient.invalidateQueries("directoryAssetAdmin") }
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("directoryAssetAdmin");
+        queryClient.invalidateQueries("filterItemsByCategory");
+        queryClient.invalidateQueries("filterItemsByAvail");
+      },
+    }
   );
 
   if (isError) {
@@ -81,12 +85,9 @@ const DetailItemAdmin = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
     );
   }
 
-  if (isSuccess) {
-    return <Success message="Berhasil mengubah status item" />;
-  }
-
   const handleMaintenance = async (status: string) => {
     await mutateAsync(status);
+    handleClose(true);
     navigate("/direktori-aset");
   };
 
