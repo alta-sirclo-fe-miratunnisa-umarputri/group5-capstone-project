@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
-  Avatar,
   Button,
   Card,
   CardActions,
@@ -14,17 +13,13 @@ import {
 import { Masonry } from "@mui/lab";
 
 import {
-  aboveButton,
   availability,
-  avatar,
-  avatarText,
   button,
   card,
   cardActions,
   cardContent,
   category,
   description,
-  groupAvatar,
   masonry,
   title,
 } from "./CardAsset.style";
