@@ -24,10 +24,12 @@ import { useQuery } from "react-query";
 import Error from "../Alert/Error";
 import { AxiosError } from "axios";
 import Loading from "../Loading";
+import { ROLE } from "../../constants";
 
 const UserList = ({ isOpen, handleClose, id }: DetailAndEmployeeModal) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const role = localStorage.getItem("role")!;
 
   const { isLoading, isError, error, data } = useQuery(
     ["getUsage", id],
@@ -37,10 +39,9 @@ const UserList = ({ isOpen, handleClose, id }: DetailAndEmployeeModal) => {
         url: `/items/${id}/usage`,
       });
 
-      console.log(data);
       return data;
     },
-    { enabled: id && id !== 0 ? true : false, retry: 0 }
+    { enabled: id && id !== 0 && role === ROLE.ADMIN ? true : false, retry: 0 }
   );
 
   if (isError) {
@@ -85,9 +86,9 @@ const UserList = ({ isOpen, handleClose, id }: DetailAndEmployeeModal) => {
                       fontFamily: "Poppins",
                     }}
                   >
-                    {data.data.name}
+                    {data.data.category}
                   </Typography>
-                  {/* <Typography
+                  <Typography
                     variant="h5"
                     sx={{
                       ...primary,
@@ -95,13 +96,15 @@ const UserList = ({ isOpen, handleClose, id }: DetailAndEmployeeModal) => {
                       fontFamily: "Poppins",
                     }}
                   >
-                    {data.data.description}
-                  </Typography> */}
+                    {data.data.name}
+                  </Typography>
                 </Box>
               </Grid>
             </Grid>
 
-            <UserTable data={data.data.users || []} />
+            <UserTable
+              data={data.data.users || [] /* userList ? userList : [] */}
+            />
 
             <Box sx={containerActionsUser}>
               <Button

@@ -36,79 +36,6 @@ const columns: GridColDef[] = [
   },
 ];
 
-const rows = [
-  {
-    id: 1,
-    nomor: 1,
-    penggunaAset: "Ratu",
-    tanggalPeminjaman: new Date(),
-    status: "Digunakan",
-  },
-  {
-    id: 2,
-    nomor: 2,
-    penggunaAset: "Jemi",
-    tanggalPeminjaman: new Date(),
-    status: "Dikembalikan",
-  },
-  {
-    id: 3,
-    nomor: 3,
-    penggunaAset: "Najib",
-    tanggalPeminjaman: new Date(),
-    status: "Dikembalikan",
-  },
-  {
-    id: 4,
-    nomor: 4,
-    penggunaAset: "Eldy",
-    tanggalPeminjaman: new Date(),
-    status: "Dikembalikan",
-  },
-  {
-    id: 5,
-    nomor: 5,
-    penggunaAset: "Yoga",
-    tanggalPeminjaman: new Date(),
-    status: "Dikembalikan",
-  },
-  {
-    id: 6,
-    nomor: 6,
-    penggunaAset: "Fakhri",
-    tanggalPeminjaman: new Date(),
-    status: "Dikembalikan",
-  },
-  {
-    id: 7,
-    nomor: 7,
-    penggunaAset: "Ratu2",
-    tanggalPeminjaman: new Date(),
-    status: "Dikembalikan",
-  },
-  {
-    id: 8,
-    nomor: 8,
-    penggunaAset: "Jemi2",
-    tanggalPeminjaman: new Date(),
-    status: "Dikembalikan",
-  },
-  {
-    id: 9,
-    nomor: 9,
-    penggunaAset: "Najib2",
-    tanggalPeminjaman: new Date(),
-    status: "Dikembalikan",
-  },
-  {
-    id: 10,
-    nomor: 10,
-    penggunaAset: "Eldy2",
-    tanggalPeminjaman: new Date(),
-    status: "Dikembalikan",
-  },
-];
-
 const useStyles = makeStyles({
   root: {
     "& .super-app-theme--header": {
@@ -129,6 +56,17 @@ const useStyles = makeStyles({
 const UserTable = ({ data }: any) => {
   const classes = useStyles();
 
+  const newArr: any = [];
+  data.map((data: any, idx: number) => {
+    const user: any = {};
+    user.id = idx;
+    user.nomor = idx + 1;
+    user.penggunaAset = data.assetUser;
+    user.tanggalPeminjaman = data.lendingDate.toLocaleString();
+    user.status = data.usageStatus;
+    return newArr.push(user);
+  });
+
   return (
     <Box
       sx={{
@@ -140,7 +78,7 @@ const UserTable = ({ data }: any) => {
       className={classes.root}
     >
       <DataGrid
-        rows={data}
+        rows={newArr}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}

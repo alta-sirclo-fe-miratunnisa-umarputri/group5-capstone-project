@@ -101,7 +101,7 @@ const CardAsset = ({ assets, role }: any) => {
                         <Grid container spacing={1}>
                           <Grid item xs={12} lg={6}>
                             <Link
-                              to={`/direktori-aset/pengguna`}
+                              to={`/direktori-aset/pengguna/${asset.id}`}
                               style={{ textDecoration: "none", width: "100%" }}
                             >
                               <Button

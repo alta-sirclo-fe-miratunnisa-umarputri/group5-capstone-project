@@ -24,6 +24,7 @@ import {
   title,
 } from "./DetailAndUser.style";
 import { capstoneAxios } from "../../axios-instance";
+import { ROLE } from "../../constants";
 
 const DetailAssetEmployee = ({
   isOpen,
@@ -32,6 +33,7 @@ const DetailAssetEmployee = ({
   const { id } = useParams();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const role = localStorage.getItem("role")!;
 
   const { isLoading, isError, error, data } = useQuery(
     ["getByAssetById", id],
@@ -45,7 +47,7 @@ const DetailAssetEmployee = ({
     },
     {
       retry: 0,
-      enabled: id ? true : false,
+      enabled: id && role === ROLE.EMPLOYEE ? true : false,
     }
   );
 
