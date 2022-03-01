@@ -150,7 +150,7 @@ const DirektoriAset = () => {
         method: "GET",
         url: "/assets",
         params: {
-          status: availStatus.toLowerCase(),
+          status: availStatus.toLowerCase().split(" ").join(""),
           page,
         },
       });
@@ -301,8 +301,13 @@ const DirektoriAset = () => {
               </Grid>
               <Grid item xs={12} lg={9}>
                 <Stack sx={{ flexDirection: { xs: "column", md: "row" } }}>
-                  {["Tersedia", "Tidak Tersedia", "Pemeliharaan"].map(
-                    (el, idx) => (
+                  {["Tersedia", "Tidak Tersedia", "Pemeliharaan"]
+                    .filter((el) =>
+                      role === ROLE.EMPLOYEE && el === "Pemeliharaan"
+                        ? false
+                        : true
+                    )
+                    .map((el, idx) => (
                       <Chip
                         key={idx}
                         label={el}
@@ -311,8 +316,7 @@ const DirektoriAset = () => {
                         size="small"
                         sx={{ ...primary, mx: 1, my: 1 }}
                       />
-                    )
-                  )}
+                    ))}
                 </Stack>
               </Grid>
             </Grid>
