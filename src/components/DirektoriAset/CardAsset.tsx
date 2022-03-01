@@ -81,7 +81,7 @@ const CardAsset = ({ assets, role }: any) => {
 
                     <CardContent sx={cardContent}>
                       <Typography variant="caption" sx={category}>
-                        {asset.category}
+                        {asset.category ? asset.category : asset.categoryname}
                       </Typography>
                       <Typography variant="h6" sx={title} gutterBottom>
                         {asset.name}
@@ -90,7 +90,9 @@ const CardAsset = ({ assets, role }: any) => {
                         {asset.description}
                       </Typography>
                       <Typography sx={availability} textAlign="end">
-                        {asset.availableStatus}
+                        {asset.availableStatus
+                          ? asset.availableStatus
+                          : `${asset.quantity} ${asset.availability}`}
                       </Typography>
                     </CardContent>
 

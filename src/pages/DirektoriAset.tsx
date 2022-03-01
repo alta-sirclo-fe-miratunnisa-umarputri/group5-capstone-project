@@ -97,6 +97,31 @@ const DirektoriAset = () => {
     { enabled: availStatus !== "" && role === ROLE.ADMIN ? true : false }
   ));
 
+  ({ isLoading, error, isError } = useQuery(
+    ["directoryAssetEmployee", page],
+    async () => {
+      const { data } = await capstoneAxios({
+        method: "GET",
+        url: "/assets",
+        params: {
+          page,
+        },
+      });
+
+      console.log(data.data.assets);
+
+      setAssets(data.data.assets);
+      setTotalPageEmp(data.data.totalpage);
+      return data;
+    },
+    {
+      enabled:
+        filterId === 0 && availStatus === "" && role === ROLE.EMPLOYEE
+          ? true
+          : false,
+    }
+  ));
+
   if (isLoading) {
     return (
       <Box sx={{ marginTop: 25 }}>
@@ -258,7 +283,10 @@ const DirektoriAset = () => {
             onChange={handleChangePage}
             page={page}
           />
-          <CardAsset assets={items} role={role} />
+          <CardAsset
+            assets={role === ROLE.ADMIN ? items : assets}
+            role={role}
+          />
         </Box>
       </ContentContainer>
     </Layout>
