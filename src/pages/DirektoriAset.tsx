@@ -27,12 +27,12 @@ const DirektoriAset = () => {
   const [availStatus, setAvailStatus] = useState("");
   const [searchValue, setSearchValue] = useState("");
 
-  const [pageEmp, setPageEmp] = useState(1);
   const [assets, setAssets] = useState<any[]>([]);
-  const [totalPageEmp, setTotalPageEmp] = useState(1);
-  const [filterIdEmp, setFilterIdEmp] = useState(0);
-  const [availStatusEmp, setAvailStatusEmp] = useState("");
-  const [searchValueEmp, setSearchValueEmp] = useState("");
+  // const [pageEmp, setPageEmp] = useState(1);
+  // const [totalPageEmp, setTotalPageEmp] = useState(1);
+  // const [filterIdEmp, setFilterIdEmp] = useState(0);
+  // const [availStatusEmp, setAvailStatusEmp] = useState("");
+  // const [searchValueEmp, setSearchValueEmp] = useState("");
 
   let { isLoading, error, isError } = useQuery(
     ["directoryAssetAdmin", page],
@@ -97,6 +97,7 @@ const DirektoriAset = () => {
     { enabled: availStatus !== "" && role === ROLE.ADMIN ? true : false }
   ));
 
+  // EMPLOYEE
   ({ isLoading, error, isError } = useQuery(
     ["directoryAssetEmployee", page],
     async () => {
@@ -111,7 +112,7 @@ const DirektoriAset = () => {
       console.log(data.data.assets);
 
       setAssets(data.data.assets);
-      setTotalPageEmp(data.data.totalpage);
+      setTotalPage(data.data.totalpage);
       return data;
     },
     {
@@ -120,6 +121,46 @@ const DirektoriAset = () => {
           ? true
           : false,
     }
+  ));
+
+  ({ isLoading, error, isError } = useQuery(
+    ["filterAssetsByCategory", filterId, page],
+    async () => {
+      const { data } = await capstoneAxios({
+        method: "GET",
+        url: "/assets",
+        params: {
+          category: filterId,
+          page,
+        },
+      });
+
+      setAssets(data.data.assets);
+      setTotalPage(data.data.totalPage);
+
+      return data;
+    },
+    { enabled: filterId !== 0 && role === ROLE.EMPLOYEE ? true : false }
+  ));
+
+  ({ isLoading, error, isError } = useQuery(
+    ["filterAssetsByAvail", availStatus, page],
+    async () => {
+      const { data } = await capstoneAxios({
+        method: "GET",
+        url: "/assets",
+        params: {
+          status: availStatus.toLowerCase(),
+          page,
+        },
+      });
+
+      setAssets(data.data.assets);
+      setTotalPage(data.data.totalPage);
+
+      return data;
+    },
+    { enabled: availStatus !== "" && role === ROLE.EMPLOYEE ? true : false }
   ));
 
   if (isLoading) {
