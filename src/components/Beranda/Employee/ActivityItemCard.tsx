@@ -82,20 +82,16 @@ const ActivityItemCard = ({ item }: any) => {
       <Card sx={card}>
         <Grid container>
           <Grid item xs={3} sx={avatarGrid}>
-            <Avatar
-              src="https://source.unsplash.com/random"
-              alt="Item"
-              sx={avatar}
-            />
+            <Avatar src={item.photo} alt="Item" sx={avatar} />
           </Grid>
 
           <Grid item xs={9}>
             <CardContent>
               <Typography variant="body2" sx={dateFont}>
-                {item.date.toLocaleString()}
+                {new Date(item.requestdate).toLocaleString()}
               </Typography>
               <Typography variant="h6" sx={itemFont}>
-                {displayWord(item.item)}
+                {displayWord(item.itemname)}
               </Typography>
             </CardContent>
           </Grid>

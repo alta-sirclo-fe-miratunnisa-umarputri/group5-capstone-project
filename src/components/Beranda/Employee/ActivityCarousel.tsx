@@ -1,7 +1,10 @@
 import { Typography } from "@mui/material";
 import CarouselMUI from "react-material-ui-carousel";
+import { useQuery } from "react-query";
+import { capstoneAxios } from "../../../axios-instance";
 
 import { dummyActivity } from "../../../dummy-data";
+import Loading from "../../Loading";
 import { activityCarousel, titleCarousel } from "./ActivityCarousel.style";
 import ActivityCarouselItem from "./ActivityCarouselItem";
 
@@ -12,7 +15,20 @@ type Item = {
 };
 
 const ActivityCarousel = () => {
+  const { isLoading, data } = useQuery("getActivity", async () => {
+    const { data } = await capstoneAxios({
+      method: "GET",
+      url: `/users/${localStorage.getItem("id")!}/applications/activity`,
+    });
+
+    return data;
+  });
+
   const groupData = (data: any[]) => {
+    if (!Array.isArray(data)) {
+      data = [data];
+    }
+
     if (window.innerWidth <= 600) {
       return data;
     }
@@ -46,20 +62,27 @@ const ActivityCarousel = () => {
       <Typography variant="h6" sx={titleCarousel}>
         Aktivitasmu
       </Typography>
-      <CarouselMUI
-        autoPlay={false}
-        interval={3e3}
-        navButtonsAlwaysVisible
-        animation="slide"
-        duration={1e3}
-        sx={activityCarousel}
-        indicators={false}
-        fullHeightHover={false}
-      >
-        {groupData(dummyActivity as Item[]).map((activity, i) => (
-          <ActivityCarouselItem key={i} items={activity as unknown as Item[]} />
-        ))}
-      </CarouselMUI>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <CarouselMUI
+          autoPlay={false}
+          interval={3e3}
+          navButtonsAlwaysVisible
+          animation="slide"
+          duration={1e3}
+          sx={activityCarousel}
+          indicators={false}
+          fullHeightHover={false}
+        >
+          {groupData(data.data as Item[]).map((activity, i) => (
+            <ActivityCarouselItem
+              key={i}
+              items={activity as unknown as Item[]}
+            />
+          ))}
+        </CarouselMUI>
+      )}
     </>
   );
 };
