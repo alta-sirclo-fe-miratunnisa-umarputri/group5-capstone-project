@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
-  Avatar,
   Button,
   Card,
   CardActions,
@@ -14,17 +13,13 @@ import {
 import { Masonry } from "@mui/lab";
 
 import {
-  aboveButton,
   availability,
-  avatar,
-  avatarText,
   button,
   card,
   cardActions,
   cardContent,
   category,
   description,
-  groupAvatar,
   masonry,
   title,
 } from "./CardAsset.style";
@@ -37,6 +32,7 @@ const CardAsset = ({ assets, role }: any) => {
   const [isOpenDetailItem, setIsOpenDetailItem] = useState(false);
   const [isOpenDetailAsset, setIsOpenDetailAsset] = useState(false);
   const [isOpenUser, setIsOpenUser] = useState(false);
+  const [itemId, setItemId] = useState(0);
   const navigate = useNavigate();
 
   const handleCloseDetailItem = () => {
@@ -57,7 +53,8 @@ const CardAsset = ({ assets, role }: any) => {
     setIsOpenDetailAsset(true);
   };
 
-  const handleOpenUser = () => {
+  const handleOpenUser = (id: number) => {
+    setItemId(id);
     setIsOpenUser(true);
   };
 
@@ -84,16 +81,18 @@ const CardAsset = ({ assets, role }: any) => {
 
                     <CardContent sx={cardContent}>
                       <Typography variant="caption" sx={category}>
-                        {asset.category}
+                        {asset.category ? asset.category : asset.categoryname}
                       </Typography>
-                      <Typography variant="h6" sx={title}>
+                      <Typography variant="h6" sx={title} gutterBottom>
                         {asset.name}
                       </Typography>
-                      {/* <Typography variant="body2" sx={description}>
-                  {asset.deskripsi}
-                </Typography> */}
+                      <Typography variant="body2" sx={description} gutterBottom>
+                        {asset.description}
+                      </Typography>
                       <Typography sx={availability} textAlign="end">
-                        {asset.availableStatus}
+                        {asset.availableStatus
+                          ? asset.availableStatus
+                          : `${asset.quantity} ${asset.availability}`}
                       </Typography>
                     </CardContent>
 
@@ -102,7 +101,7 @@ const CardAsset = ({ assets, role }: any) => {
                         <Grid container spacing={1}>
                           <Grid item xs={12} lg={6}>
                             <Link
-                              to={`/direktori-aset/pengguna`}
+                              to={`/direktori-aset/pengguna/${asset.id}`}
                               style={{ textDecoration: "none", width: "100%" }}
                             >
                               <Button
@@ -110,7 +109,7 @@ const CardAsset = ({ assets, role }: any) => {
                                 size="small"
                                 fullWidth
                                 sx={button}
-                                onClick={handleOpenUser}
+                                onClick={() => handleOpenUser(asset.id)}
                               >
                                 Pengguna
                               </Button>
@@ -166,7 +165,11 @@ const CardAsset = ({ assets, role }: any) => {
             isOpen={isOpenDetailAsset}
             handleClose={handleCloseDetailAsset}
           />
-          <UserList isOpen={isOpenUser} handleClose={handleCloseUser} />
+          <UserList
+            isOpen={isOpenUser}
+            handleClose={handleCloseUser}
+            id={itemId}
+          />
         </>
       )}
     </>

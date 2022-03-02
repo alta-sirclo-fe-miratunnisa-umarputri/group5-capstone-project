@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { Outlet } from "react-router-dom";
 import { AxiosError } from "axios";
-import { Box, Chip, Pagination, Stack, Typography } from "@mui/material";
+import { Box, Chip, Grid, Pagination, Stack, Typography } from "@mui/material";
 
 import ContentContainer from "../components/ContentContainer";
 import CardAsset from "../components/DirektoriAset/CardAsset";
@@ -14,6 +14,8 @@ import Error from "../components/Alert/Error";
 
 import { containerDir } from "../components/DirektoriAset/DirektoriAset.style";
 import { capstoneAxios } from "../axios-instance";
+import { primary } from "../styles/color.styles";
+import { ROLE } from "../constants";
 
 const DirektoriAset = () => {
   const role = localStorage.getItem("role")!;
@@ -24,6 +26,13 @@ const DirektoriAset = () => {
   const [filterId, setFilterId] = useState(0);
   const [availStatus, setAvailStatus] = useState("");
   const [searchValue, setSearchValue] = useState("");
+
+  const [pageEmp, setPageEmp] = useState(1);
+  const [assets, setAssets] = useState<any[]>([]);
+  const [totalPageEmp, setTotalPageEmp] = useState(1);
+  const [filterIdEmp, setFilterIdEmp] = useState(0);
+  const [availStatusEmp, setAvailStatusEmp] = useState("");
+  const [searchValueEmp, setSearchValueEmp] = useState("");
 
   let { isLoading, error, isError } = useQuery(
     ["directoryAssetAdmin", page],
@@ -40,11 +49,16 @@ const DirektoriAset = () => {
       setTotalPage(data.data.totalPage);
       return data;
     },
-    { enabled: filterId === 0 && availStatus === "" ? true : false }
+    {
+      enabled:
+        filterId === 0 && availStatus === "" && role === ROLE.ADMIN
+          ? true
+          : false,
+    }
   );
 
   ({ isLoading, error, isError } = useQuery(
-    ["filterByCategory", filterId, page],
+    ["filterItemsByCategory", filterId, page],
     async () => {
       const { data } = await capstoneAxios({
         method: "GET",
@@ -60,11 +74,11 @@ const DirektoriAset = () => {
 
       return data;
     },
-    { enabled: filterId !== 0 ? true : false }
+    { enabled: filterId !== 0 && role === ROLE.ADMIN ? true : false }
   ));
 
   ({ isLoading, error, isError } = useQuery(
-    ["filterByAvail", availStatus, page],
+    ["filterItemsByAvail", availStatus, page],
     async () => {
       const { data } = await capstoneAxios({
         method: "GET",
@@ -80,7 +94,32 @@ const DirektoriAset = () => {
 
       return data;
     },
-    { enabled: availStatus !== "" ? true : false }
+    { enabled: availStatus !== "" && role === ROLE.ADMIN ? true : false }
+  ));
+
+  ({ isLoading, error, isError } = useQuery(
+    ["directoryAssetEmployee", page],
+    async () => {
+      const { data } = await capstoneAxios({
+        method: "GET",
+        url: "/assets",
+        params: {
+          page,
+        },
+      });
+
+      console.log(data.data.assets);
+
+      setAssets(data.data.assets);
+      setTotalPageEmp(data.data.totalpage);
+      return data;
+    },
+    {
+      enabled:
+        filterId === 0 && availStatus === "" && role === ROLE.EMPLOYEE
+          ? true
+          : false,
+    }
   ));
 
   if (isLoading) {
@@ -151,51 +190,91 @@ const DirektoriAset = () => {
               flexDirection: "row",
               justifyContent: "flex-start",
               alignItems: "center",
-              marginTop: 2,
+              marginTop: 1,
               width: "40%",
             }}
           >
-            <Typography variant="caption" align="left" mr={1}>
-              Filter by Category:
-            </Typography>
-            <Stack direction="row" spacing={2}>
-              {["Laptop", "Alat Tulis", "Kendaraan", "Lainnya"].map(
-                (el, idx) => (
-                  <Chip
-                    key={idx}
-                    label={el}
-                    onClick={() => handleClickFilter(idx + 1)}
-                    variant={filterId === idx + 1 ? "filled" : "outlined"}
-                    size="small"
-                  />
-                )
-              )}
-            </Stack>
+            <Grid
+              container
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "start",
+              }}
+            >
+              <Grid
+                item
+                xs={12}
+                lg={3}
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                <Typography variant="body2" align="left" mx={1} my={1}>
+                  Kategori:
+                </Typography>
+              </Grid>
+              <Grid item xs={12} lg={9}>
+                <Stack sx={{ flexDirection: { xs: "column", md: "row" } }}>
+                  {["Laptop", "Alat Tulis", "Kendaraan", "Lainnya"].map(
+                    (el, idx) => (
+                      <Chip
+                        key={idx}
+                        label={el}
+                        onClick={() => handleClickFilter(idx + 1)}
+                        variant={filterId === idx + 1 ? "filled" : "outlined"}
+                        size="small"
+                        sx={{ ...primary, mx: 1, my: 1 }}
+                      />
+                    )
+                  )}
+                </Stack>
+              </Grid>
+            </Grid>
           </Box>
+
           <Box
             sx={{
               display: "flex",
               flexDirection: "row",
               justifyContent: "flex-start",
               alignItems: "center",
-              marginTop: 2,
               width: "40%",
             }}
           >
-            <Typography align="left" mr={1} variant="caption">
-              Filter by Availibility:
-            </Typography>
-            <Stack direction="row" spacing={2}>
-              {["Tersedia", "Tidak Tersedia", "Pemeliharaan"].map((el, idx) => (
-                <Chip
-                  key={idx}
-                  label={el}
-                  onClick={() => handleClickAvail(el)}
-                  variant={availStatus === el ? "filled" : "outlined"}
-                  size="small"
-                />
-              ))}
-            </Stack>
+            <Grid
+              container
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "start",
+              }}
+            >
+              <Grid
+                item
+                xs={12}
+                lg={3}
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                <Typography variant="body2" align="left" mx={1} my={1}>
+                  Ketersediaan:
+                </Typography>
+              </Grid>
+              <Grid item xs={12} lg={9}>
+                <Stack sx={{ flexDirection: { xs: "column", md: "row" } }}>
+                  {["Tersedia", "Tidak Tersedia", "Pemeliharaan"].map(
+                    (el, idx) => (
+                      <Chip
+                        key={idx}
+                        label={el}
+                        onClick={() => handleClickAvail(el)}
+                        variant={availStatus === el ? "filled" : "outlined"}
+                        size="small"
+                        sx={{ ...primary, mx: 1, my: 1 }}
+                      />
+                    )
+                  )}
+                </Stack>
+              </Grid>
+            </Grid>
           </Box>
 
           <Pagination
@@ -204,7 +283,10 @@ const DirektoriAset = () => {
             onChange={handleChangePage}
             page={page}
           />
-          <CardAsset assets={items} role={role} />
+          <CardAsset
+            assets={role === ROLE.ADMIN ? items : assets}
+            role={role}
+          />
         </Box>
       </ContentContainer>
     </Layout>

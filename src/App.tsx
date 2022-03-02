@@ -71,7 +71,7 @@ const App = () => {
               }
             />
             <Route
-              path="pengguna"
+              path="pengguna/:id"
               element={<UserList isOpen={false} handleClose={() => {}} />}
             />
             <Route
