@@ -1,14 +1,18 @@
+import { AxiosError } from "axios";
+import { useQuery } from "react-query";
 import { Outlet } from "react-router-dom";
 import { Grid } from "@mui/material";
 
 import Layout from "../components/Layout";
 import ContentContainer from "../components/ContentContainer";
 import Carousel from "../components/Beranda/Carousel";
-import RightButton, {
-  RightButtonDisable,
-} from "../components/Beranda/RightButton";
+import RightButton from "../components/Beranda/RightButton";
 import Statistics from "../components/Beranda/Statistics";
 import ActivityCarousel from "../components/Beranda/Employee/ActivityCarousel";
+import BerandaTable from "../components/Beranda/BerandaTable";
+import Loading from "../components/Loading";
+import Error from "../components/Alert/Error";
+
 import { ROLE } from "../constants";
 import {
   botCarousel,
@@ -17,11 +21,43 @@ import {
   tableContainer,
   topCarousel,
 } from "../components/Beranda/Beranda.style";
-import BerandaTable from "../components/Beranda/BerandaTable";
 import { rowsTableBeranda } from "../dummy-data";
+import { capstoneAxios } from "../axios-instance";
 
 const Beranda = () => {
   const role = localStorage.getItem("role")!;
+
+  const { isLoading, isError, error, data } = useQuery(
+    "tableBeranda",
+    async () => {
+      let status = "tomanager";
+      if (role === ROLE.ADMIN) {
+        status = "toadmin";
+      }
+
+      if (role === ROLE.EMPLOYEE) {
+        status = "donereturn";
+      }
+
+      const { data } = await capstoneAxios({
+        method: "GET",
+        url: "/applications",
+        params: {
+          status,
+        },
+      });
+
+      return data;
+    }
+  );
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error message={(error as AxiosError).response!.data!.message!} />;
+  }
 
   return (
     <Layout>
@@ -47,23 +83,23 @@ const Beranda = () => {
 
         <Grid container sx={tableContainer}>
           <Grid item xs={12} md={8} lg={9}>
-            {role === ROLE.ADMIN && (
+            {role === ROLE.ADMIN && data && (
               <BerandaTable
-                data={rowsTableBeranda}
-                title="Permohonan Terbaru"
+                data={data.data.applications}
+                title="Permohonan Peminjaman Aset"
                 role="admin"
               />
             )}
-            {role === ROLE.MANAGER && (
+            {role === ROLE.MANAGER && data && (
               <BerandaTable
-                data={rowsTableBeranda}
-                title="Permohonan Persetujuan"
+                data={data.data.applications}
+                title="Permohonan Persetujuan Peminjaman Aset"
                 role="manager"
               />
             )}
-            {role === ROLE.EMPLOYEE && (
+            {role === ROLE.EMPLOYEE && data && (
               <BerandaTable
-                data={rowsTableBeranda}
+                data={data.data.applications}
                 title="Riwayat Penggunaan Aset"
                 role="employee"
               />
