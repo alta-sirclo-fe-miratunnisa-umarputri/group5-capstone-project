@@ -38,10 +38,44 @@ const Beranda = () => {
         },
       });
 
+      console.log("data mgr =>", data);
+
       return data;
     },
     { enabled: role === ROLE.MANAGER }
   );
+
+  ({ isLoading, isError, error, data } = useQuery(
+    "tableAdmin",
+    async () => {
+      const { data } = await capstoneAxios({
+        method: "GET",
+        url: "/applications",
+        params: {
+          status: "toadmin",
+        },
+      });
+
+      return data;
+    },
+    { enabled: role === ROLE.ADMIN }
+  ));
+
+  ({ isLoading, isError, error, data } = useQuery(
+    "tableEmployee",
+    async () => {
+      const { data } = await capstoneAxios({
+        method: "GET",
+        url: "/applications",
+        params: {
+          status: "donereturn",
+        },
+      });
+
+      return data;
+    },
+    { enabled: role === ROLE.EMPLOYEE }
+  ));
 
   if (isLoading) {
     return <Loading />;
@@ -78,14 +112,14 @@ const Beranda = () => {
             {role === ROLE.ADMIN && (
               <BerandaTable
                 data={rowsTableBeranda}
-                title="Permohonan Terbaru"
+                title="Permohonan Peminjaman Aset"
                 role="admin"
               />
             )}
             {role === ROLE.MANAGER && (
               <BerandaTable
-                data={data.data}
-                title="Permohonan Persetujuan"
+                data={data.data.applications}
+                title="Permohonan Persetujuan Peminjaman Aset"
                 role="manager"
               />
             )}
