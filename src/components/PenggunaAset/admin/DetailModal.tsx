@@ -29,9 +29,17 @@ import { generalFont } from "../../../styles/font.style";
 import { EMPLOYEE_STATUS } from "../../../constants";
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "react-query";
+import { capstoneAxios } from "../../../axios-instance";
+import { useParams } from "react-router-dom";
+import Loading from "../../Loading";
+import Error from "../../Alert/Error";
+import { AxiosError } from "axios";
 
 const DetailModal = () => {
-  // const { id } = useParams();
+  const role = localStorage.getItem("role");
+  const [application, setApplication] = useState<any[]>([]);
+  const { id } = useParams();
   const navigate = useNavigate();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -40,7 +48,33 @@ const DetailModal = () => {
     setIsOpen(false);
     navigate("/pengguna-aset");
   };
-  const [status, setStatus] = useState("toadmin");
+  const [status, setStatus] = useState("");
+
+  let { isLoading, error, isError, refetch, data } = useQuery(
+    ["ApplicationsById"],
+    async () => {
+      const { data } = await capstoneAxios({
+        method: "GET",
+        url: `/applications/` + id,
+      });
+      // console.log(data.data.id);
+      setApplication(data.data);
+      console.log(data.data);
+      return data;
+    }
+  );
+
+  if (isLoading) {
+    return (
+      <Box sx={{ marginTop: 25 }}>
+        <Loading />
+      </Box>
+    );
+  }
+
+  if (isError) {
+    return <Error message={(error as AxiosError).response!.data!.message!} />;
+  }
 
   const handleCancellation = () => {
     navigate("/pengguna-aset");
@@ -71,66 +105,95 @@ const DetailModal = () => {
       </DialogTitle>
 
       <DialogContent>
-        <Grid container>
-          <Grid item xs={5} sx={avatarContainer}>
-            <Avatar
-              src="https://source.unsplash.com/random"
-              alt="Item"
-              sx={avatar}
-            />
-          </Grid>
+        {data && (
+          <Grid container>
+            <Grid item xs={5} sx={avatarContainer}>
+              <Avatar src={data.data.photo} alt="Item" sx={avatar} />
+            </Grid>
 
-          <Grid item xs={7} pl={3}>
-            <Typography variant="body2" gutterBottom sx={categoryFont}>
-              Kipas Angin
-            </Typography>
-            <Typography variant="h5" gutterBottom sx={itemFont}>
-              Kipas Angin Maspion Shgasdasdhj Ssvjavadsjak
-            </Typography>
-            <Typography variant="caption" sx={availabilityFont}>
-              16 tersedia
-            </Typography>
+            <Grid item xs={7} pl={3}>
+              <Typography variant="body2" gutterBottom sx={categoryFont}>
+                {data.data.categoryname}
+              </Typography>
+              <Typography variant="h5" gutterBottom sx={itemFont}>
+                {data.data.assetname}
+              </Typography>
+            </Grid>
           </Grid>
-        </Grid>
+        )}
+        {data && (
+          <Grid container mt={2}>
+            <Grid item xs={5}>
+              <DetailModalInfo
+                label="Pemohon"
+                description={data.data.employeename}
+              />
+              <DetailModalInfo
+                label="Manager"
+                description={
+                  data.data.managerid !== 0
+                    ? data.data.managerid
+                    : "belum ditentukan"
+                }
+              />
+              <DetailModalInfo label="Divisi" description="Tech" />
 
-        <Grid container mt={2}>
-          <Grid item xs={5}>
-            <DetailModalInfo label="Pemohon" description="Ratu" />
-            <DetailModalInfo label="Manager" description="Handri Pengestiaji" />
-            <DetailModalInfo label="Divisi" description="Tech" />
-            <DetailModalInfo
-              label="Status Pengajuan"
-              description="Menunggu Persetujuan"
-            />
-          </Grid>
+              <DetailModalInfo
+                label="Status Pengajuan"
+                description={
+                  data.data.status === "toAdmin" ||
+                  data.data.status === "tomanager"
+                    ? "Menunggu Persetujuan"
+                    : "Disetujui"
+                }
+              />
+            </Grid>
 
-          <Grid item xs={7}>
-            <DetailModalInfo
-              label="Waktu Pengajuan"
-              description={new Date().toLocaleString()}
-            />
-            <DetailModalInfo
-              label="Waktu Pengembalian"
-              description={new Date().toLocaleString()}
-            />
-            <DetailModalInfo label="Sisa Waktu" description="3 hari" />
-            <DetailModalInfo
-              label="Keterangan"
-              description=" Curabitur venenatis enim quis tellus feugiat blandit. Vivamus
-                libero libero, fringilla vel elementum at, viverra nec ante."
-            />
+            <Grid item xs={7}>
+              <DetailModalInfo
+                label="Waktu Pengajuan"
+                description={data.data.requestdate.toLocaleString()}
+              />
+              <DetailModalInfo
+                label="Waktu Pengembalian"
+                description={
+                  data.data.status !== "toAdmin" ||
+                  data.data.status !== "tomanager"
+                    ? data.data.returndate
+                    : "belum ditentukan"
+                }
+              />
+              <DetailModalInfo label="Sisa Waktu" description="3 hari" />
+              <DetailModalInfo
+                label="Keterangan"
+                description={data.data.description}
+              />
+            </Grid>
           </Grid>
-        </Grid>
-        {status === "toadmin" && (
+        )}
+
+        {data && data.data.status !== "toAdmin" && (
           <Grid container mt={2} sx={{ backroundColor: "#000000 " }}>
             <Grid item xs={5}>
               <DetailModalInfo
                 label="Manager"
-                description="Handri Pengestiaji"
+                description={data.data.manager}
               />
             </Grid>
             <Grid item xs={7}>
-              <Button onClick={askApproval}>Minta Persetujuan</Button>
+              <Button
+                sx={{
+                  textTransform: "none",
+                  fontFamily: "Poppins",
+                  fontWeight: "medium",
+                }}
+                disabled={data.data.status === "toAdmin" ? false : true}
+                onClick={askApproval}
+              >
+                {data.data.status === "tomanager"
+                  ? "Minta Persetujuan"
+                  : "Menunggu Persetujuan"}
+              </Button>
             </Grid>
           </Grid>
         )}
@@ -139,7 +202,7 @@ const DetailModal = () => {
           <Grid container mt={2}>
             <Grid item xs={4}></Grid>
             <Grid item xs={8} sx={buttonContainer}>
-              {status === "toapproval" && (
+              {data && data.data.status === "toAdmin" && (
                 <>
                   <Button sx={cancellationButton} onClick={handleCancellation}>
                     Tolak
@@ -150,7 +213,29 @@ const DetailModal = () => {
                 </>
               )}
 
-              {status === "toreturn" && (
+              {data && data.data.status === "toReturn" && (
+                <>
+                  <Button sx={cancellationButton} onClick={handleCancellation}>
+                    Tolak
+                  </Button>
+                  <Button variant="contained" sx={backButton}>
+                    Terima Permohonan
+                  </Button>
+                </>
+              )}
+
+              {data && data.data.status === "toAccept" && (
+                <>
+                  <Button sx={cancellationButton} onClick={handleCancellation}>
+                    Tolak
+                  </Button>
+                  <Button variant="contained" sx={backButton}>
+                    Terima Permohonan
+                  </Button>
+                </>
+              )}
+
+              {data && data.data.status === "inuse" && (
                 <>
                   <Button sx={cancellationButton}>Kembali</Button>
                   <Button
@@ -163,6 +248,13 @@ const DetailModal = () => {
                 </>
               )}
             </Grid>
+            <Button
+              variant="contained"
+              sx={backButton}
+              onClick={handleCancellation}
+            >
+              Kembali
+            </Button>
             <Grid item></Grid>
           </Grid>
         </DialogActions>
