@@ -44,3 +44,13 @@ export const buttonSelect: SxProps = {
     backgroundColor: tertiary.color,
   },
 };
+
+export const buttonStatusPenggunaAset = [
+  { id: 1, name: "Semua Pengguna", status: "all" },
+  { id: 2, name: "Permohonan Baru", status: "toadmin" },
+  { id: 3, name: "Disetujui", status: "tomanager" },
+  { id: 4, name: "Digunakan", status: "inuse" },
+  { id: 5, name: "Ditolak", status: "indecline" },
+  { id: 6, name: "Dikembalikan", status: "toreturn" },
+  { id: 7, name: "Sudah Kembali", status: "donereturn" },
+];
