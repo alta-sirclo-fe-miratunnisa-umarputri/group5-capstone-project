@@ -21,6 +21,7 @@ import {
   avatarContainer,
   backButton,
   buttonContainer,
+  buttonContainerStart,
   cancellationButton,
   categoryFont,
   itemFont,
@@ -200,7 +201,16 @@ const DetailModal = () => {
 
         <DialogActions>
           <Grid container mt={2}>
-            <Grid item xs={4}></Grid>
+            <Grid item xs={4} sx={buttonContainerStart}>
+              {" "}
+              <Button
+                variant="contained"
+                sx={backButton}
+                onClick={handleCancellation}
+              >
+                Kembali
+              </Button>
+            </Grid>
             <Grid item xs={8} sx={buttonContainer}>
               {data && data.data.status === "toAdmin" && (
                 <>
@@ -248,13 +258,7 @@ const DetailModal = () => {
                 </>
               )}
             </Grid>
-            <Button
-              variant="contained"
-              sx={backButton}
-              onClick={handleCancellation}
-            >
-              Kembali
-            </Button>
+
             <Grid item></Grid>
           </Grid>
         </DialogActions>
