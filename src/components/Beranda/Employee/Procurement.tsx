@@ -15,6 +15,8 @@ import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomFormInput from "../../CustomFormInput";
 import { backButton, cancellationButton } from "./DetailActivity.style";
+import { useMutation } from "react-query";
+import { capstoneAxios } from "../../../axios-instance";
 
 const Procurement = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -24,14 +26,32 @@ const Procurement = () => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const { mutateAsync } = useMutation(async (newData: any) => {
+    await capstoneAxios({
+      method: "POST",
+      url: "/procurements",
+      data: newData,
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")!}` },
+    });
+  });
+
   const handleClose = () => {
     setIsOpen(false);
     navigate("/beranda");
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("tersubmit procurement");
+
+    const data = new FormData(e.currentTarget);
+    const employeeId = localStorage.getItem("id")!;
+
+    await mutateAsync({
+      employeeid: parseInt(employeeId),
+      spesification: data.get("spec"),
+      description: data.get("description"),
+      assetName: data.get("name"),
+    });
 
     setIsOpen(false);
     navigate("/beranda");
@@ -57,19 +77,19 @@ const Procurement = () => {
           <CustomFormInput
             label="Nama Aset"
             type="text"
-            desc="nama-aset"
+            desc="name"
             placeholder="Laptop Asus"
           />
           <CustomFormInput
             label="Spesifikasi Kebutuhan"
             type="text"
-            desc="spesifikasi-kebutuhan"
+            desc="spec"
             placeholder="Deskripsikan barang yang dibutuhkan"
           />
           <CustomFormInput
-            label="Keterangan"
+            label="Deskripsi"
             type="text"
-            desc="keterangan"
+            desc="description"
             placeholder="Deskripsikan tujuan penggunaan barang yang akan dipinjam"
           />
           <DialogActions>
