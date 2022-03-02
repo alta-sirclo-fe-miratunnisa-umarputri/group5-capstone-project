@@ -408,7 +408,7 @@ const PermohonanPengadaan = () => {
         <Box
           sx={{
             height: rows.length * 100,
-            width: "80%",
+            width: { xs: "100%", sm: "100%", md: "75%" },
             marginTop: 3,
             marginBottom: 1,
             // marginLeft: { sx: 0, sm: 0, md: "10%" },

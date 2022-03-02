@@ -37,7 +37,8 @@ const App = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) {
+    const role = localStorage.getItem("role");
+    if (!token || !role) {
       navigate("/");
       return;
     }
@@ -108,7 +109,7 @@ const App = () => {
               </Suspense>
             }
           >
-            <Route path="admin-pengguna/:id" element={<DetailModal />} />
+            <Route path=":id" element={<DetailModal />} />
           </Route>
 
           <Route
