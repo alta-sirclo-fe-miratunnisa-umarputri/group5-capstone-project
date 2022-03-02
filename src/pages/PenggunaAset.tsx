@@ -59,7 +59,7 @@ const PenggunaAset = () => {
   const [mbDdown, setMbDdown] = useState("5%");
 
   let { isLoading, error, isError, refetch } = useQuery(
-    ["ApplicationsByStatus"],
+    ["ApplicationsByStatus", status],
     async () => {
       const { data } = await capstoneAxios({
         method: "GET",
@@ -68,8 +68,11 @@ const PenggunaAset = () => {
           status: status,
         },
       });
-      // console.log(data.data.applications);
-      setData(data.data.applications);
+      if (data.data.applications) {
+        setData(data.data.applications);
+      } else {
+        setData([]);
+      }
       return data;
     },
     { enabled: status !== "all" ? true : false }
@@ -84,7 +87,11 @@ const PenggunaAset = () => {
       },
     });
 
-    setItems(data.data.applications);
+    if (data.data.applications) {
+      setItems(data.data.applications);
+    } else {
+      setItems([]);
+    }
 
     return data;
   }));
@@ -142,6 +149,7 @@ const PenggunaAset = () => {
   };
 
   const handleModal = () => {
+    setAnchorElUser(null);
     navigate(`/pengguna-aset/` + clickedMenuId);
   };
 
