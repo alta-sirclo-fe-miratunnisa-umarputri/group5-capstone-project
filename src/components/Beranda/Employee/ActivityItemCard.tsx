@@ -125,6 +125,11 @@ const ActivityItemCard = ({ item }: any) => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseActivityMenu}
               >
+                {/* TODO: SEHARUSNYA BEGINI */}
+                {/* <Link
+                  to={`/beranda/detail-aktivitas/${item.applicationid}`}
+                  style={{ textDecoration: "none" }}
+                ></Link> */}
                 <Link
                   to={`/beranda/detail-aktivitas/2`}
                   style={{ textDecoration: "none" }}
