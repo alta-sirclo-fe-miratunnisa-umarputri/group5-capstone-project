@@ -83,9 +83,9 @@ const Beranda = () => {
 
         <Grid container sx={tableContainer}>
           <Grid item xs={12} md={8} lg={9}>
-            {role === ROLE.ADMIN && (
+            {role === ROLE.ADMIN && data && (
               <BerandaTable
-                data={rowsTableBeranda}
+                data={data.data.applications}
                 title="Permohonan Peminjaman Aset"
                 role="admin"
               />
@@ -97,9 +97,9 @@ const Beranda = () => {
                 role="manager"
               />
             )}
-            {role === ROLE.EMPLOYEE && (
+            {role === ROLE.EMPLOYEE && data && (
               <BerandaTable
-                data={rowsTableBeranda}
+                data={data.data.applications}
                 title="Riwayat Penggunaan Aset"
                 role="employee"
               />

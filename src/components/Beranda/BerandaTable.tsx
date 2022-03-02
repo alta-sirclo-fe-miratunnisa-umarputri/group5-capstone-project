@@ -1,4 +1,5 @@
 import { useState, MouseEvent } from "react";
+import { useMutation, useQueryClient } from "react-query";
 import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
@@ -7,6 +8,7 @@ import { makeStyles } from "@mui/styles";
 import { bgwhite, primary, tertiary } from "../../styles/color.styles";
 import { dotMenu, titleCarousel } from "./Employee/ActivityCarousel.style";
 import { ROLE } from "../../constants";
+import { capstoneAxios } from "../../axios-instance";
 
 const useStyles = makeStyles({
   root: {
@@ -30,17 +32,28 @@ const BerandaTable = ({ title, data, role }: any) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [clickedMenuId, setClickedMenuId] = useState(0);
 
+  const queryClient = useQueryClient();
+
+  const { mutateAsync } = useMutation(
+    async (newStatus: any) => {
+      await capstoneAxios({
+        method: "PUT",
+        data: { status: newStatus },
+        url: `/applications/${clickedMenuId}`,
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")!}` },
+      });
+    },
+    { onSuccess: () => queryClient.invalidateQueries("tableBeranda") }
+  );
+
   const handleClickAction = (e: MouseEvent<HTMLElement>, id: number) => {
     setAnchorElUser(e.currentTarget);
     setClickedMenuId(id);
   };
 
-  const handleAcceptRequest = () => {
-    console.log(clickedMenuId);
-  };
-
-  const handleRejectRequest = () => {
-    console.log(clickedMenuId);
+  const handleUpdateStatus = async (status: string) => {
+    await mutateAsync(status);
+    setAnchorElUser(null);
   };
 
   const columns: GridColDef[] = [
@@ -112,12 +125,12 @@ const BerandaTable = ({ title, data, role }: any) => {
             >
               {role === ROLE.ADMIN && (
                 <Box>
-                  <MenuItem onClick={handleAcceptRequest}>
+                  <MenuItem onClick={() => handleUpdateStatus("tomanager")}>
                     <Typography variant="subtitle2" sx={dotMenu}>
                       Terima Permohonan
                     </Typography>
                   </MenuItem>
-                  <MenuItem onClick={handleRejectRequest}>
+                  <MenuItem onClick={() => handleUpdateStatus("decline")}>
                     <Typography variant="subtitle2" sx={dotMenu}>
                       Tolak Permohonan
                     </Typography>
@@ -127,12 +140,12 @@ const BerandaTable = ({ title, data, role }: any) => {
 
               {role === ROLE.MANAGER && (
                 <Box>
-                  <MenuItem onClick={handleAcceptRequest}>
+                  <MenuItem onClick={() => handleUpdateStatus("toaccept")}>
                     <Typography variant="subtitle2" sx={dotMenu}>
                       Terima Permohonan
                     </Typography>
                   </MenuItem>
-                  <MenuItem onClick={handleRejectRequest}>
+                  <MenuItem onClick={() => handleUpdateStatus("decline")}>
                     <Typography variant="subtitle2" sx={dotMenu}>
                       Tolak Permohonan
                     </Typography>
@@ -141,7 +154,7 @@ const BerandaTable = ({ title, data, role }: any) => {
               )}
 
               {role === ROLE.EMPLOYEE && (
-                <MenuItem onClick={handleAcceptRequest}>
+                <MenuItem>
                   <Typography variant="subtitle2" sx={dotMenu}>
                     Ajukan Peminjaman Ulang
                   </Typography>
@@ -155,18 +168,14 @@ const BerandaTable = ({ title, data, role }: any) => {
   ];
 
   const formatInput = (rows: any) => {
-    console.log("data", rows);
+    if (!rows) {
+      return [];
+    }
 
     for (let i = 0; i < rows.length; i++) {
       rows[i].number = i + 1;
       rows[i].requestdate = new Date(rows[i].requestdate).toLocaleString();
       rows[i].activity = "Peminjaman Aset";
-
-      if (role === ROLE.EMPLOYEE || role === ROLE.ADMIN) {
-        rows[i].activity = rows[i].jenisAktivitas;
-        rows[i].categoryname = rows[i].kategoriAset;
-        rows[i].assetname = rows[i].barang;
-      }
     }
 
     return rows;
