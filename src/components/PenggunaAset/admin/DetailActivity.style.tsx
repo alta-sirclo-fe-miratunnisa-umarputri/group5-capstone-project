@@ -37,6 +37,12 @@ export const buttonContainer: SxProps = {
   justifyContent: "end",
 };
 
+export const buttonContainerStart: SxProps = {
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "start",
+};
+
 const button = {
   textTransform: "none",
   fontFamily: "Poppins",
@@ -50,7 +56,7 @@ export const cancellationButton: SxProps = {
 };
 
 export const backButton: SxProps = {
-  ml: 1,
+  // ml: 1,
   textTransform: "none",
   fontFamily: "Poppins",
   fontWeight: "medium",
