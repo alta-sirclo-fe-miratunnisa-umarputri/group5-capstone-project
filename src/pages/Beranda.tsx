@@ -1,14 +1,18 @@
+import { AxiosError } from "axios";
+import { useQuery } from "react-query";
 import { Outlet } from "react-router-dom";
 import { Grid } from "@mui/material";
 
 import Layout from "../components/Layout";
 import ContentContainer from "../components/ContentContainer";
 import Carousel from "../components/Beranda/Carousel";
-import RightButton, {
-  RightButtonDisable,
-} from "../components/Beranda/RightButton";
+import RightButton from "../components/Beranda/RightButton";
 import Statistics from "../components/Beranda/Statistics";
 import ActivityCarousel from "../components/Beranda/Employee/ActivityCarousel";
+import BerandaTable from "../components/Beranda/BerandaTable";
+import Loading from "../components/Loading";
+import Error from "../components/Alert/Error";
+
 import { ROLE } from "../constants";
 import {
   botCarousel,
@@ -17,11 +21,35 @@ import {
   tableContainer,
   topCarousel,
 } from "../components/Beranda/Beranda.style";
-import BerandaTable from "../components/Beranda/BerandaTable";
 import { rowsTableBeranda } from "../dummy-data";
+import { capstoneAxios } from "../axios-instance";
 
 const Beranda = () => {
   const role = localStorage.getItem("role")!;
+
+  let { isLoading, isError, error, data } = useQuery(
+    "tableManager",
+    async () => {
+      const { data } = await capstoneAxios({
+        method: "GET",
+        url: "/applications",
+        params: {
+          status: "tomanager",
+        },
+      });
+
+      return data;
+    },
+    { enabled: role === ROLE.MANAGER }
+  );
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error message={(error as AxiosError).response!.data!.message!} />;
+  }
 
   return (
     <Layout>
@@ -56,7 +84,7 @@ const Beranda = () => {
             )}
             {role === ROLE.MANAGER && (
               <BerandaTable
-                data={rowsTableBeranda}
+                data={data.data}
                 title="Permohonan Persetujuan"
                 role="manager"
               />
