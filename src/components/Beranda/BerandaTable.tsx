@@ -45,7 +45,7 @@ const BerandaTable = ({ title, data, role }: any) => {
 
   const columns: GridColDef[] = [
     {
-      field: "nomor",
+      field: "number",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "No",
@@ -53,14 +53,14 @@ const BerandaTable = ({ title, data, role }: any) => {
       width: 60,
     },
     {
-      field: "tanggal",
+      field: "requestdate",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "Tanggal",
       width: 190,
     },
     {
-      field: "jenisAktivitas",
+      field: "activity",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "Jenis Aktivitas",
@@ -68,14 +68,14 @@ const BerandaTable = ({ title, data, role }: any) => {
       width: 200,
     },
     {
-      field: "kategoriAset",
+      field: "categoryname",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "Kategori Aset",
       width: 150,
     },
     {
-      field: "barang",
+      field: "assetname",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "Barang",
@@ -155,9 +155,20 @@ const BerandaTable = ({ title, data, role }: any) => {
   ];
 
   const formatInput = (rows: any) => {
-    for (const row of rows) {
-      row.tanggal = new Date().toLocaleString();
+    console.log("data", rows);
+
+    for (let i = 0; i < rows.length; i++) {
+      rows[i].number = i + 1;
+      rows[i].requestdate = new Date(rows[i].requestdate).toLocaleString();
+      rows[i].activity = "Peminjaman Aset";
+
+      if (role === ROLE.EMPLOYEE || role === ROLE.ADMIN) {
+        rows[i].activity = rows[i].jenisAktivitas;
+        rows[i].categoryname = rows[i].kategoriAset;
+        rows[i].assetname = rows[i].barang;
+      }
     }
+
     return rows;
   };
 

@@ -27,55 +27,29 @@ import { capstoneAxios } from "../axios-instance";
 const Beranda = () => {
   const role = localStorage.getItem("role")!;
 
-  let { isLoading, isError, error, data } = useQuery(
-    "tableManager",
+  const { isLoading, isError, error, data } = useQuery(
+    "tableBeranda",
     async () => {
+      let status = "tomanager";
+      if (role === ROLE.ADMIN) {
+        status = "toadmin";
+      }
+
+      if (role === ROLE.EMPLOYEE) {
+        status = "donereturn";
+      }
+
       const { data } = await capstoneAxios({
         method: "GET",
         url: "/applications",
         params: {
-          status: "tomanager",
+          status,
         },
       });
 
-      console.log("data mgr =>", data);
-
       return data;
-    },
-    { enabled: role === ROLE.MANAGER }
+    }
   );
-
-  ({ isLoading, isError, error, data } = useQuery(
-    "tableAdmin",
-    async () => {
-      const { data } = await capstoneAxios({
-        method: "GET",
-        url: "/applications",
-        params: {
-          status: "toadmin",
-        },
-      });
-
-      return data;
-    },
-    { enabled: role === ROLE.ADMIN }
-  ));
-
-  ({ isLoading, isError, error, data } = useQuery(
-    "tableEmployee",
-    async () => {
-      const { data } = await capstoneAxios({
-        method: "GET",
-        url: "/applications",
-        params: {
-          status: "donereturn",
-        },
-      });
-
-      return data;
-    },
-    { enabled: role === ROLE.EMPLOYEE }
-  ));
 
   if (isLoading) {
     return <Loading />;
@@ -116,7 +90,7 @@ const Beranda = () => {
                 role="admin"
               />
             )}
-            {role === ROLE.MANAGER && (
+            {role === ROLE.MANAGER && data && (
               <BerandaTable
                 data={data.data.applications}
                 title="Permohonan Persetujuan Peminjaman Aset"
