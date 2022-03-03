@@ -21,6 +21,8 @@ const ActivityCarousel = () => {
       url: `/users/${localStorage.getItem("id")!}/applications/activity`,
     });
 
+    console.log("activities =>", data);
+
     return data;
   });
 

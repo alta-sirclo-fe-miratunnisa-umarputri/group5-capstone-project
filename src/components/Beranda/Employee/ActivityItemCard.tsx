@@ -32,6 +32,10 @@ import DetailActivity from "./DetailActivity";
 import { EMPLOYEE_STATUS } from "../../../constants";
 
 const displayWord = (word: string) => {
+  if (!word.length) {
+    return "";
+  }
+
   if (word.length > 13) {
     const theWord = word.slice(0, 12);
     return `${theWord}...`;
@@ -41,9 +45,11 @@ const displayWord = (word: string) => {
 };
 
 const ActivityItemCard = ({ item }: any) => {
-  const navigate = useNavigate();
+  console.log("this is =>", item);
+
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [isOpenDetailActivity, setIsOpenDetailActivity] = useState(false);
+  const navigate = useNavigate();
 
   const handleCloseDetailActivity = () => {
     setIsOpenDetailActivity(false);
@@ -91,7 +97,7 @@ const ActivityItemCard = ({ item }: any) => {
                 {new Date(item.requestdate).toLocaleString()}
               </Typography>
               <Typography variant="h6" sx={itemFont}>
-                {displayWord(item.itemname)}
+                {displayWord(item.assetname)}
               </Typography>
             </CardContent>
           </Grid>
