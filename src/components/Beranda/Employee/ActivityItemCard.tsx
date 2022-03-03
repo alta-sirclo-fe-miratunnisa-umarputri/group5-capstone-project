@@ -29,6 +29,8 @@ import {
   statusGrid,
 } from "./ActivityCarousel.style";
 import DetailActivity from "./DetailActivity";
+import { useMutation, useQueryClient } from "react-query";
+import { capstoneAxios } from "../../../axios-instance";
 
 const displayWord = (word: string) => {
   if (word.length > 13) {
@@ -40,9 +42,27 @@ const displayWord = (word: string) => {
 };
 
 const ActivityItemCard = ({ item }: any) => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [isOpenDetailActivity, setIsOpenDetailActivity] = useState(false);
-  const navigate = useNavigate();
+
+  const { mutateAsync } = useMutation(
+    async (newData: any) => {
+      await capstoneAxios({
+        method: "PUT",
+        url: `/applications/${item.id}`,
+        data: newData,
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")!}` },
+      });
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("getActivity");
+      },
+    }
+  );
 
   const handleCloseDetailActivity = () => {
     setIsOpenDetailActivity(false);
@@ -62,8 +82,10 @@ const ActivityItemCard = ({ item }: any) => {
     setAnchorElUser(null);
   };
 
-  const handleReturn = () => {
-    console.log("ajukan pengembalian");
+  const handleReturn = async () => {
+    await mutateAsync({
+      status: "toreturn",
+    });
   };
 
   const handleReapply = () => {
