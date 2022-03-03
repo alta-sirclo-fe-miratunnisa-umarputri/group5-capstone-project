@@ -2,9 +2,11 @@ import {
   button,
   buttonOutlined,
   buttonSelect,
-  buttonStatus,
+  buttonStatusPermohonanPengadaan,
 } from "../components/PermohonanPengadaan/UpperButton.style";
 import React from "react";
+import { useQuery, useQueryClient } from "react-query";
+import { AxiosError } from "axios";
 import { useState, MouseEvent } from "react";
 import Layout from "../components/Layout";
 import Header from "../components/Header";
@@ -29,23 +31,105 @@ import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import MenuList from "@mui/material/MenuList";
+import { capstoneAxios } from "../axios-instance";
+import Loading from "../components/Loading";
+import Error from "../components/Alert/Error";
+import { useEffect } from "react";
+import { useRef } from "react";
+import { idText } from "typescript";
+import { useMutation } from "react-query";
 
 const PermohonanPengadaan = () => {
-  const [filter, setFilter] = useState("");
+  const role = localStorage.getItem("role");
+  const [items, setItems] = useState<any[]>([]);
+  const [data, setData] = useState<any[]>([]);
+  const anchorRef = useRef<HTMLDivElement>(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const [filter, setFilter] = useState("Semua Pengguna");
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [clickedMenuId, setClickedMenuId] = useState(0);
   const classes = useStyles();
   const [isOpenDetail, setIsOpenDetail] = useState(false);
   const [isOpenUser, setIsOpenUser] = useState(false);
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("all");
+  const [statusItem, setStatusItem] = useState("");
+  const [newStatusItem, setNewStatusItem] = useState("");
+
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const [mbDdown, setMbDdown] = useState("5%");
 
-  const handleClickAction = (e: MouseEvent<HTMLElement>, id: number) => {
-    setStatus("toadmin");
+  const queryClient = useQueryClient();
+
+  let { isLoading, error, isError, refetch } = useQuery(
+    ["ProcurementsByStatus", status],
+    async () => {
+      const { data } = await capstoneAxios({
+        method: "GET",
+        url: "/procurements",
+        params: {
+          status: status,
+        },
+      });
+      if (data.data) {
+        setData(data.data);
+      } else {
+        setData([]);
+      }
+      return data;
+    },
+    { enabled: status !== "all" ? true : false }
+  );
+
+  const { mutateAsync } = useMutation(
+    async (newStatus: any) => {
+      await capstoneAxios({
+        method: "PUT",
+        data: { status: newStatus },
+        url: `/procurements/` + clickedMenuId,
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")!}` },
+      });
+    },
+    { onSuccess: () => queryClient.invalidateQueries("ProcurementsByStatus") }
+  );
+
+  ({ isLoading, error, isError } = useQuery(["allProcurements"], async () => {
+    const { data } = await capstoneAxios({
+      method: "GET",
+      url: "/procurements",
+    });
+
+    if (data.data) {
+      setItems(data.data);
+    } else {
+      setItems([]);
+    }
+    console.log(data.data);
+
+    return data;
+  }));
+
+  if (isLoading) {
+    return (
+      <Box sx={{ marginTop: 25 }}>
+        <Loading />
+      </Box>
+    );
+  }
+
+  if (isError) {
+    return <Error message={(error as AxiosError).response!.data!.message!} />;
+  }
+
+  const handleClickAction = (
+    e: MouseEvent<HTMLElement>,
+    id: number,
+    params: any
+  ) => {
     setAnchorElUser(e.currentTarget);
     setClickedMenuId(id);
+    console.log(params.row.status);
   };
 
   const handleCloseDetail = () => {
@@ -66,21 +150,25 @@ const PermohonanPengadaan = () => {
     navigate("/permohonan-pengadaan");
   };
 
-  const handleAcceptRequest = () => {
-    console.log(clickedMenuId);
+  const handleAcceptRequest = async () => {
+    await mutateAsync("toaccept");
+    setAnchorElUser(null);
+    navigate("/permohonan-pengadaan");
   };
 
-  const handleRejectRequest = () => {
-    console.log(clickedMenuId);
+  const handleRejectRequest = async () => {
+    await mutateAsync("decline");
+    setAnchorElUser(null);
   };
 
   const handleModal = () => {
+    setAnchorElUser(null);
     navigate(`/permohonan-pengadaan/` + clickedMenuId);
   };
 
   const columns: GridColDef[] = [
     {
-      field: "nomor",
+      field: "id",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "No",
@@ -88,49 +176,56 @@ const PermohonanPengadaan = () => {
       width: 50,
     },
     {
-      field: "tanggalPeminjaman",
+      field: "requestDate",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "Tanggal",
       width: 190,
     },
     {
-      field: "pemohonPeminjaman",
+      field: "employeeName",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "Pemohon",
       type: "date",
       width: 200,
     },
+
     {
-      field: "kategori",
-      headerClassName: "super-app-theme--header",
-      cellClassName: "super-app-theme--cell",
-      headerName: "Kategori Aset",
-      width: 180,
-    },
-    {
-      field: "namaAset",
+      field: "assetName",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "Barang",
       width: 250,
     },
     {
+      field: "spesification",
+      headerClassName: "super-app-theme--header",
+      cellClassName: "super-app-theme--cell",
+      headerName: "Spesifikasi",
+      width: 250,
+    },
+
+    {
       field: "detailButton",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
-      headerName: "Aksi",
+      headerName: "Detail",
       width: 125,
       sortable: false,
       filterable: false,
       renderCell: (params: any) => {
         return (
           <>
-            <IconButton onClick={e => handleClickAction(e, params.id)}>
+            <IconButton
+              onClick={e => {
+                setStatusItem(params.row.status);
+                handleClickAction(e, params.id, params);
+              }}
+            >
               <MoreHorizRoundedIcon fontSize="medium" />
             </IconButton>
-            {status === "toadmin" && (
+            {statusItem === "tomanager" ? (
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorElUser}
@@ -188,6 +283,36 @@ const PermohonanPengadaan = () => {
                   </Typography>
                 </MenuItem>
               </Menu>
+            ) : (
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={() => setAnchorElUser(null)}
+              >
+                <MenuItem onClick={handleModal}>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      ...primary,
+                      textAlign: "center",
+                      fontFamily: "Poppins",
+                      fontWeight: "medium",
+                    }}
+                  >
+                    Lihat Detail
+                  </Typography>
+                </MenuItem>
+              </Menu>
             )}
           </>
         );
@@ -195,59 +320,20 @@ const PermohonanPengadaan = () => {
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      nomor: 1,
-      tanggalPeminjaman: new Date(),
-      pemohonPeminjaman: "Jemi",
-      kategori: "Laptop",
-      namaAset: "Lenovo Think Pad Yoga",
-      status: "Digunakan",
-    },
-    {
-      id: 2,
-      nomor: 2,
-      tanggalPeminjaman: new Date(),
-      pemohonPeminjaman: "Ratu",
-      kategori: "Laptop",
-      namaAset: "Lenovo Think Pad Yoga",
-      status: "Digunakan",
-    },
-    {
-      id: 3,
-      nomor: 2,
-      tanggalPeminjaman: new Date(),
-      pemohonPeminjaman: "Ratu",
-      kategori: "Laptop",
-      namaAset: "Lenovo Think Pad Yoga",
-      status: "Digunakan",
-    },
-  ];
-  const fetchNav = async (data: any) => {
-    console.log(data);
-  };
-  const fetchData = async () => {
-    console.log("all");
-  };
-
   const handleFilter = (item: string) => {
-    fetchNav(item);
+    console.log(status);
   };
 
   const handleClick = () => {};
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
-    setMbDdown("25%");
+    setMbDdown("30%");
   };
-
-  const anchorRef = React.useRef<HTMLDivElement>(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleMenuItemClick = (item: any) => {
     setSelectedIndex(item.id - 1);
     setOpen(false);
-    console.log(item.id);
+    // console.log(item.id);
     setMbDdown("5%");
   };
 
@@ -270,7 +356,7 @@ const PermohonanPengadaan = () => {
   return (
     <Layout>
       <Header
-        title="Pengadaan Aset"
+        title="Permohonan Pengadaan"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
           dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
           consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
@@ -296,16 +382,7 @@ const PermohonanPengadaan = () => {
             boxShadow: 0,
           }}
         >
-          <Button
-            sx={filter === "" ? button : buttonOutlined}
-            onClick={data => {
-              setFilter("");
-              fetchData();
-            }}
-          >
-            Semua Pengguna
-          </Button>
-          {buttonStatus.map(item => (
+          {buttonStatusPermohonanPengadaan.map(item => (
             <Button
               key={item.id}
               variant="contained"
@@ -313,6 +390,7 @@ const PermohonanPengadaan = () => {
               sx={filter === item.name ? button : buttonOutlined}
               onClick={() => {
                 setFilter(item.name);
+                setStatus(item.status);
                 handleFilter(item.status);
               }}
             >
@@ -336,7 +414,7 @@ const PermohonanPengadaan = () => {
         >
           <Button sx={buttonSelect} onClick={handleClick}>
             {selectedIndex <= 10
-              ? buttonStatus[selectedIndex].name
+              ? buttonStatusPermohonanPengadaan[selectedIndex].name
               : "Semua Pengguna"}
           </Button>
           <Button
@@ -377,11 +455,12 @@ const PermohonanPengadaan = () => {
                     >
                       Semua Pengguna
                     </MenuItem>
-                    {buttonStatus.map(item => (
+                    {buttonStatusPermohonanPengadaan.map(item => (
                       <MenuItem
                         key={item.id}
                         selected={item.id === selectedIndex}
                         onClick={() => {
+                          setStatus(item.status);
                           handleMenuItemClick(item);
                         }}
                       >
@@ -407,8 +486,8 @@ const PermohonanPengadaan = () => {
       >
         <Box
           sx={{
-            height: rows.length * 100,
-            width: { xs: "100%", sm: "100%", md: "75%" },
+            height: 10 * 60 + 70,
+            width: { xs: "100%", sm: "100%", md: "85%" },
             marginTop: 3,
             marginBottom: 1,
             // marginLeft: { sx: 0, sm: 0, md: "10%" },
@@ -419,7 +498,7 @@ const PermohonanPengadaan = () => {
           className={classes.root}
         >
           <DataGrid
-            rows={rows}
+            rows={status === "all" ? items : data}
             columns={columns}
             pageSize={10}
             rowsPerPageOptions={[10]}
