@@ -3,7 +3,6 @@ import CarouselMUI from "react-material-ui-carousel";
 import { useQuery } from "react-query";
 import { capstoneAxios } from "../../../axios-instance";
 
-import { dummyActivity } from "../../../dummy-data";
 import Loading from "../../Loading";
 import { activityCarousel, titleCarousel } from "./ActivityCarousel.style";
 import ActivityCarouselItem from "./ActivityCarouselItem";
@@ -20,8 +19,6 @@ const ActivityCarousel = () => {
       method: "GET",
       url: `/users/${localStorage.getItem("id")!}/applications/activity`,
     });
-
-    console.log("activities =>", data);
 
     return data;
   });

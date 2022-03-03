@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   Button,
   Dialog,
@@ -37,6 +37,8 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const queryClient = useQueryClient();
+
   const { data, isLoading } = useQuery(
     "getDetailActivity",
     async () => {
@@ -52,8 +54,26 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
     { retry: 0, enabled: id ? true : false }
   );
 
-  const handleReturn = () => {
-    console.log("ajukan pengembalian");
+  const { mutateAsync } = useMutation(
+    async (newData: any) => {
+      await capstoneAxios({
+        method: "PUT",
+        url: `/applications/${id}`,
+        data: newData,
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")!}` },
+      });
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("getActivity");
+      },
+    }
+  );
+
+  const handleReturn = async () => {
+    await mutateAsync({
+      status: "toreturn",
+    });
   };
 
   const handleReapply = () => {
