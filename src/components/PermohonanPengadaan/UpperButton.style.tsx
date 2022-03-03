@@ -48,9 +48,33 @@ export const buttonSelect: SxProps = {
 export const buttonStatusPenggunaAset = [
   { id: 1, name: "Semua Pengguna", status: "all" },
   { id: 2, name: "Permohonan Baru", status: "toadmin" },
-  { id: 3, name: "Disetujui", status: "tomanager" },
-  { id: 4, name: "Digunakan", status: "inuse" },
-  { id: 5, name: "Ditolak", status: "indecline" },
-  { id: 6, name: "Dikembalikan", status: "toreturn" },
-  { id: 7, name: "Sudah Kembali", status: "donereturn" },
+  { id: 3, name: "Memadai", status: "tomanager" },
+  { id: 4, name: "Disetujui", status: "toaccept" },
+  { id: 5, name: "Digunakan", status: "inuse" },
+  { id: 6, name: "Ditolak", status: "decline" },
+  { id: 7, name: "Dikembalikan", status: "toreturn" },
+  { id: 8, name: "Sudah Kembali", status: "donereturn" },
+];
+
+export const buttonStatusPermohonanPersetujuan = [
+  { id: 1, name: "Semua Pengguna", status: "all" },
+  { id: 2, name: "Permohonan Baru", status: "tomanager" },
+  { id: 3, name: "Disetujui", status: "toaccept" },
+  { id: 4, name: "Ditolak", status: "decline" },
+];
+
+export const buttonStatusPermohonanPengadaan = [
+  { id: 1, name: "Semua Pengguna", status: "all" },
+  { id: 2, name: "Permohonan Baru", status: "toManager" },
+  { id: 3, name: "Disetujui", status: "toAccept" },
+  { id: 4, name: "Ditolak", status: "decline" },
+];
+
+export const buttonStatusPengadaanAset = [
+  { id: 1, name: "Semua Pengguna", status: "all" },
+  { id: 2, name: "Permohonan Baru", status: "toAdmin" },
+  { id: 3, name: "Memadai", status: "toManager" },
+  { id: 4, name: "Disetujui", status: "toAccept" },
+
+  { id: 5, name: "Ditolak", status: "decline" },
 ];
