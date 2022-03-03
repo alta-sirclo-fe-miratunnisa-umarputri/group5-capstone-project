@@ -9,6 +9,7 @@ import { bgwhite, primary, tertiary } from "../../styles/color.styles";
 import { dotMenu, titleCarousel } from "./Employee/ActivityCarousel.style";
 import { ROLE } from "../../constants";
 import { capstoneAxios } from "../../axios-instance";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -29,6 +30,8 @@ const useStyles = makeStyles({
 
 const BerandaTable = ({ title, data, role }: any) => {
   const classes = useStyles();
+  const navigate = useNavigate();
+
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [clickedMenuId, setClickedMenuId] = useState(0);
 
@@ -54,6 +57,10 @@ const BerandaTable = ({ title, data, role }: any) => {
   const handleUpdateStatus = async (status: string) => {
     await mutateAsync(status);
     setAnchorElUser(null);
+  };
+
+  const handleReapply = () => {
+    navigate("/pemeliharaan");
   };
 
   const columns: GridColDef[] = [
@@ -154,7 +161,7 @@ const BerandaTable = ({ title, data, role }: any) => {
               )}
 
               {role === ROLE.EMPLOYEE && (
-                <MenuItem>
+                <MenuItem onClick={handleReapply}>
                   <Typography variant="subtitle2" sx={dotMenu}>
                     Ajukan Peminjaman Ulang
                   </Typography>

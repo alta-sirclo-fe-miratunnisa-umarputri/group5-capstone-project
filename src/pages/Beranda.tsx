@@ -21,11 +21,25 @@ import {
   tableContainer,
   topCarousel,
 } from "../components/Beranda/Beranda.style";
-import { rowsTableBeranda } from "../dummy-data";
 import { capstoneAxios } from "../axios-instance";
 
 const Beranda = () => {
   const role = localStorage.getItem("role")!;
+  const employeeId = parseInt(localStorage.getItem("id")!);
+  const higherRoles = [ROLE.ADMIN, ROLE.MANAGER];
+
+  const { data: dataEmployee } = useQuery(
+    "tableBerandaEmployee",
+    async () => {
+      const { data } = await capstoneAxios({
+        method: "GET",
+        url: `/users/${employeeId}/applications/history`,
+      });
+
+      return data;
+    },
+    { enabled: role === ROLE.EMPLOYEE ? true : false }
+  );
 
   const { isLoading, isError, error, data } = useQuery(
     "tableBeranda",
@@ -33,10 +47,6 @@ const Beranda = () => {
       let status = "tomanager";
       if (role === ROLE.ADMIN) {
         status = "toadmin";
-      }
-
-      if (role === ROLE.EMPLOYEE) {
-        status = "donereturn";
       }
 
       const { data } = await capstoneAxios({
@@ -48,7 +58,8 @@ const Beranda = () => {
       });
 
       return data;
-    }
+    },
+    { enabled: higherRoles.includes(role) ? true : false }
   );
 
   if (isLoading) {
@@ -97,9 +108,9 @@ const Beranda = () => {
                 role="manager"
               />
             )}
-            {role === ROLE.EMPLOYEE && data && (
+            {role === ROLE.EMPLOYEE && dataEmployee && (
               <BerandaTable
-                data={data.data.applications}
+                data={dataEmployee.data}
                 title="Riwayat Penggunaan Aset"
                 role="employee"
               />
