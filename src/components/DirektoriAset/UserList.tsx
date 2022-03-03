@@ -1,3 +1,5 @@
+import { AxiosError } from "axios";
+import { useQuery } from "react-query";
 import {
   Button,
   Dialog,
@@ -10,6 +12,12 @@ import {
   Grid,
 } from "@mui/material";
 
+import UserTable from "./UserTable";
+import Error from "../Alert/Error";
+import Loading from "../Loading";
+
+import { capstoneAxios } from "../../axios-instance";
+import { ROLE } from "../../constants";
 import { DetailAndEmployeeModal } from "../../types/direktori-aset";
 import {
   buttonActions,
@@ -18,13 +26,6 @@ import {
   userImg,
 } from "./DetailAndUser.style";
 import { primary } from "../../styles/color.styles";
-import UserTable from "./UserTable";
-import { capstoneAxios } from "../../axios-instance";
-import { useQuery } from "react-query";
-import Error from "../Alert/Error";
-import { AxiosError } from "axios";
-import Loading from "../Loading";
-import { ROLE } from "../../constants";
 
 const UserList = ({ isOpen, handleClose, id }: DetailAndEmployeeModal) => {
   const theme = useTheme();
@@ -102,9 +103,7 @@ const UserList = ({ isOpen, handleClose, id }: DetailAndEmployeeModal) => {
               </Grid>
             </Grid>
 
-            <UserTable
-              data={data.data.users || [] /* userList ? userList : [] */}
-            />
+            <UserTable data={data.data.users || []} />
 
             <Box sx={containerActionsUser}>
               <Button
