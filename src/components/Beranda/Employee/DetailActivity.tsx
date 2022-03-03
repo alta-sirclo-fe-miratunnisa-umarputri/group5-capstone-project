@@ -1,4 +1,5 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useQuery } from "react-query";
 import {
   Button,
   Dialog,
@@ -13,10 +14,12 @@ import {
   DialogActions,
 } from "@mui/material";
 
-import { DetailAndEmployeeModal } from "../../../types/direktori-aset";
+import Loading from "../../Loading";
 import DetailActivityInfo from "./DetailActivityInfo";
+
+import { DetailAndEmployeeModal } from "../../../types/direktori-aset";
+import { capstoneAxios } from "../../../axios-instance";
 import {
-  availabilityFont,
   avatar,
   avatarContainer,
   backButton,
@@ -26,39 +29,35 @@ import {
   itemFont,
 } from "./DetailActivity.style";
 import { generalFont } from "../../../styles/font.style";
-import { EMPLOYEE_STATUS } from "../../../constants";
-import { capstoneAxios } from "../../../axios-instance";
-import { useQuery } from "react-query";
-import Loading from "../../Loading";
 
 const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const { data, isLoading } = useQuery(
-    "getDetailApplication",
+    "getDetailActivity",
     async () => {
       const { data } = await capstoneAxios({
         method: "GET",
         url: `/applications/${id}`,
       });
 
+      console.log("data detail =>", data);
+
       return data;
     },
     { retry: 0, enabled: id ? true : false }
   );
-
-  const handleCancellation = () => {
-    console.log("batalkan pengajuan");
-  };
 
   const handleReturn = () => {
     console.log("ajukan pengembalian");
   };
 
   const handleReapply = () => {
-    console.log("ajukan peminjaman ulang");
+    navigate("/pemeliharaan");
   };
 
   return (
@@ -71,7 +70,7 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
       <DialogTitle>
         <Box>
           <Typography variant="h5" sx={generalFont}>
-            Detail Permohonan
+            Detail Aktivitas
           </Typography>
         </Box>
       </DialogTitle>
@@ -123,14 +122,8 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
               <Grid container mt={2}>
                 <Grid item xs={4}></Grid>
                 <Grid item xs={8} sx={buttonContainer}>
-                  {data.data.status === EMPLOYEE_STATUS.WAITING_APROVAL && (
-                    <>
-                      <Button
-                        sx={cancellationButton}
-                        onClick={handleCancellation}
-                      >
-                        Batalkan Pengajuan
-                      </Button>
+                  {data.data.status !== "inuse" &&
+                    data.data.status !== "decline" && (
                       <Button
                         variant="contained"
                         sx={backButton}
@@ -138,10 +131,9 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
                       >
                         Kembali
                       </Button>
-                    </>
-                  )}
+                    )}
 
-                  {data.data.status === EMPLOYEE_STATUS.APPROVED && (
+                  {data.data.status === "inuse" && (
                     <>
                       <Button
                         sx={cancellationButton}
@@ -159,7 +151,7 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
                     </>
                   )}
 
-                  {data.data.status === EMPLOYEE_STATUS.REJECTED && (
+                  {data.data.status === "decline" && (
                     <>
                       <Button
                         sx={cancellationButton}
