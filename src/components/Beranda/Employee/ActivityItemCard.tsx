@@ -1,3 +1,5 @@
+import { MouseEvent, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Card,
   CardActions,
@@ -26,16 +28,9 @@ import {
   statusFont,
   statusGrid,
 } from "./ActivityCarousel.style";
-import { MouseEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import DetailActivity from "./DetailActivity";
-import { EMPLOYEE_STATUS } from "../../../constants";
 
 const displayWord = (word: string) => {
-  if (!word.length) {
-    return "";
-  }
-
   if (word.length > 13) {
     const theWord = word.slice(0, 12);
     return `${theWord}...`;
@@ -45,8 +40,6 @@ const displayWord = (word: string) => {
 };
 
 const ActivityItemCard = ({ item }: any) => {
-  console.log("this is =>", item);
-
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [isOpenDetailActivity, setIsOpenDetailActivity] = useState(false);
   const navigate = useNavigate();
@@ -69,19 +62,13 @@ const ActivityItemCard = ({ item }: any) => {
     setAnchorElUser(null);
   };
 
-  const handleCancellation = () => {
-    console.log("ajukan pembatalan");
-  };
-
   const handleReturn = () => {
     console.log("ajukan pengembalian");
   };
 
   const handleReapply = () => {
-    console.log("ajukan peminjaman ulang");
+    navigate("/pemeliharaan");
   };
-
-  const status = "Ditolak";
 
   return (
     <>
@@ -147,15 +134,7 @@ const ActivityItemCard = ({ item }: any) => {
                   </MenuItem>
                 </Link>
 
-                {status === EMPLOYEE_STATUS.WAITING_APROVAL && (
-                  <MenuItem onClick={handleCancellation}>
-                    <Typography variant="subtitle2" sx={dotMenu}>
-                      Batalkan Pengajuan
-                    </Typography>
-                  </MenuItem>
-                )}
-
-                {status === EMPLOYEE_STATUS.APPROVED && (
+                {item.status === "inuse" && (
                   <MenuItem onClick={handleReturn}>
                     <Typography variant="subtitle2" sx={dotMenu}>
                       Ajukan Pengembalian
@@ -163,7 +142,7 @@ const ActivityItemCard = ({ item }: any) => {
                   </MenuItem>
                 )}
 
-                {status === EMPLOYEE_STATUS.REJECTED && (
+                {item.status === "decline" && (
                   <MenuItem onClick={handleReapply}>
                     <Typography variant="subtitle2" sx={dotMenu}>
                       Ajukan Peminjaman Ulang
