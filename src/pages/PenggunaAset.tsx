@@ -247,7 +247,9 @@ const PenggunaAset = () => {
                     Terima Permohonan
                   </Typography>
                 </MenuItem>
-              ) : statusItem === "toaccept" ? (
+              ) : statusItem === "toadmin" ||
+                statusItem === "toreturn" ||
+                statusItem === "toaccept" ? (
                 <MenuItem onClick={handleRejectRequest}>
                   <Typography
                     variant="subtitle2"
