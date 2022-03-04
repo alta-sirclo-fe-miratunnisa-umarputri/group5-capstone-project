@@ -1,61 +1,75 @@
-
 # Avengers
 
 Group Capstone Project by Group 5 Sirclo Tech Academy 2022
-{(FE : Jemi Damanik and Miratunnisa Umarputri) && 
+{(FE : Jemi Damanik and Miratunnisa Umarputri) &&
 (BE : Eldy Hidayat && M Najib)
 
 ## Deploy Link
+
 https://group5-capstone-project-35gulwa5v-ratuuaw.vercel.app/
 
 ## Prototype and WireFrame
+
 https://www.figma.com/file/RIUf4ssTfGccwwN3zRpANU/Capstone
 
 ## Features
 
 #### Sign In and Sign Out
+
 #### Direktori Aset
+
 #### Search and Filter Asets
+
 #### Aset's last users list
+
 #### Update Maintanance status
+
 #### List of total aset
+
 #### Employee Activities
+
 #### Request to use available aset
+
 #### Request for a new aset
+
 #### Approve the request
+
 #### Decline the request
+
 #### Detail of every request
 
-| Role            | Login | Directori Aset | Beranda | Pengguna Aset | Permohonan Persetujuan | Pengadaan Aset | Permohonan Pengadaan |
-| ----------------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
-| Employee |  Yes | Yes | Yes | No | No | No | No |
-| Admin | Yes | Yes | Yes | Yes | No | Yes | No |
-| Manager | Yes | Yes | Yes | No | Yes | No | Yes |
+| Role     | Login | Directori Aset | Beranda | Pengguna Aset | Permohonan Persetujuan | Pengadaan Aset | Permohonan Pengadaan |
+| -------- | ----- | -------------- | ------- | ------------- | ---------------------- | -------------- | -------------------- |
+| Employee | Yes   | Yes            | Yes     | No            | No                     | No             | No                   |
+| Admin    | Yes   | Yes            | Yes     | Yes           | No                     | Yes            | No                   |
+| Manager  | Yes   | Yes            | Yes     | No            | Yes                    | No             | Yes                  |
 
+## Acknowledgements
 
- ## Acknowledgements
-
- - [React Js](https://reactjs.org/)
- - [TypeScript](https://www.typescriptlang.org/)
- - [Material Icon](https://mui.com/components/material-icons/)
- - [Material UI](https://www.npmjs.com/package/@mui/material)
- - [Axios](https://axios-http.com/docs/intro)
-- [Font : Poppins](https://fonts.google.com/specimen/Poppins)
+- [React Js](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Material Icon](https://mui.com/components/material-icons/)
+- [Material UI](https://www.npmjs.com/package/@mui/material)
+- [React Material UI Carousel](https://learus.github.io/react-material-ui-carousel/)
+- [Axios](https://axios-http.com/docs/intro)
+- [React Query](https://react-query.tanstack.com/)
+- [React Router DOM](https://reactrouter.com/docs/en/v6)
+- [React Lazy](https://reactjs.org/docs/code-splitting.html#reactlazy)
 
 ## API Source
-https://beeldy.site/ 
 
+https://beeldy.site/
 
 ## Color Reference
 
-| Color             | Hex                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| Primary Color | [#3D4251]|
-| Secondary Color | [#D35E35]
-| Tertiary Font Color | [#666F88]
-| Quaternary Font Color | [#CACBD5]
-| White Color | [#FFFFFF]
-    
+| Color                 | Hex       |
+| --------------------- | --------- |
+| Primary Color         | [#3D4251] |
+| Secondary Color       | [#D35E35] |
+| Tertiary Font Color   | [#666F88] |
+| Quaternary Font Color | [#CACBD5] |
+| White Color           | [#FFFFFF] |
+
 ## Running Tests
 
 Clone this repo
@@ -82,8 +96,7 @@ Runs the app in the development mode.
 ```
 
 ## Contributors
+
 👨‍💻 [Jemi Yantika Damanik](https://github.com/jemidamanik23)
 
 👩‍💻 [Miratunnisa Umarputri](https://github.com/ratuuaw)
-
-
