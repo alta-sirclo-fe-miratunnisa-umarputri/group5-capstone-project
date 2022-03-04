@@ -89,7 +89,7 @@ const AssignAsset = () => {
     await mutateAsync({
       employeeid: (employee[0] as any).id,
       assetid: (asset[0] as any).id,
-      specification: data.get("spec"),
+      spesification: data.get("spec"),
       description: data.get("description"),
       returndate: data.get("date"),
     });

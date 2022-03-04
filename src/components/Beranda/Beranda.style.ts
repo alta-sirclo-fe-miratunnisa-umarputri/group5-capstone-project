@@ -20,4 +20,5 @@ export const buttonBerandaContainer: SxProps = {
   flexDirection: "column",
   alignItems: { xs: "center", lg: "end" },
   justifyContent: "start",
+  mt: { xs: 3, md: 0 },
 };

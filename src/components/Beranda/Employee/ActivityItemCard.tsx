@@ -1,3 +1,5 @@
+import { MouseEvent, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Card,
   CardActions,
@@ -26,10 +28,9 @@ import {
   statusFont,
   statusGrid,
 } from "./ActivityCarousel.style";
-import { MouseEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import DetailActivity from "./DetailActivity";
-import { EMPLOYEE_STATUS } from "../../../constants";
+import { useMutation, useQueryClient } from "react-query";
+import { capstoneAxios } from "../../../axios-instance";
 
 const displayWord = (word: string) => {
   if (word.length > 13) {
@@ -42,8 +43,26 @@ const displayWord = (word: string) => {
 
 const ActivityItemCard = ({ item }: any) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [isOpenDetailActivity, setIsOpenDetailActivity] = useState(false);
+
+  const { mutateAsync } = useMutation(
+    async (newData: any) => {
+      await capstoneAxios({
+        method: "PUT",
+        url: `/applications/${item.id}`,
+        data: newData,
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")!}` },
+      });
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("getActivity");
+      },
+    }
+  );
 
   const handleCloseDetailActivity = () => {
     setIsOpenDetailActivity(false);
@@ -63,39 +82,31 @@ const ActivityItemCard = ({ item }: any) => {
     setAnchorElUser(null);
   };
 
-  const handleCancellation = () => {
-    console.log("ajukan pembatalan");
-  };
-
-  const handleReturn = () => {
-    console.log("ajukan pengembalian");
+  const handleReturn = async () => {
+    await mutateAsync({
+      status: "toreturn",
+    });
   };
 
   const handleReapply = () => {
-    console.log("ajukan peminjaman ulang");
+    navigate("/pemeliharaan");
   };
-
-  const status = "Ditolak";
 
   return (
     <>
       <Card sx={card}>
         <Grid container>
           <Grid item xs={3} sx={avatarGrid}>
-            <Avatar
-              src="https://source.unsplash.com/random"
-              alt="Item"
-              sx={avatar}
-            />
+            <Avatar src={item.photo} alt="Item" sx={avatar} />
           </Grid>
 
           <Grid item xs={9}>
             <CardContent>
               <Typography variant="body2" sx={dateFont}>
-                {item.date.toLocaleString()}
+                {new Date(item.requestdate).toLocaleString()}
               </Typography>
               <Typography variant="h6" sx={itemFont}>
-                {displayWord(item.item)}
+                {displayWord(item.assetname)}
               </Typography>
             </CardContent>
           </Grid>
@@ -130,7 +141,7 @@ const ActivityItemCard = ({ item }: any) => {
                 onClose={handleCloseActivityMenu}
               >
                 <Link
-                  to={`/beranda/detail-aktivitas/2`}
+                  to={`/beranda/detail-aktivitas/${item.id}`}
                   style={{ textDecoration: "none" }}
                 >
                   <MenuItem onClick={handleOpenDetailActivity}>
@@ -140,15 +151,7 @@ const ActivityItemCard = ({ item }: any) => {
                   </MenuItem>
                 </Link>
 
-                {status === EMPLOYEE_STATUS.WAITING_APROVAL && (
-                  <MenuItem onClick={handleCancellation}>
-                    <Typography variant="subtitle2" sx={dotMenu}>
-                      Batalkan Pengajuan
-                    </Typography>
-                  </MenuItem>
-                )}
-
-                {status === EMPLOYEE_STATUS.APPROVED && (
+                {item.status === "inuse" && (
                   <MenuItem onClick={handleReturn}>
                     <Typography variant="subtitle2" sx={dotMenu}>
                       Ajukan Pengembalian
@@ -156,7 +159,7 @@ const ActivityItemCard = ({ item }: any) => {
                   </MenuItem>
                 )}
 
-                {status === EMPLOYEE_STATUS.REJECTED && (
+                {item.status === "decline" && (
                   <MenuItem onClick={handleReapply}>
                     <Typography variant="subtitle2" sx={dotMenu}>
                       Ajukan Peminjaman Ulang
