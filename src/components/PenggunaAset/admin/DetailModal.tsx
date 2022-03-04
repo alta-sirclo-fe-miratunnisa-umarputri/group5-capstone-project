@@ -67,7 +67,12 @@ const DetailModal = () => {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")!}` },
       });
     },
-    { onSuccess: () => queryClient.invalidateQueries("allApplications") }
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("allApplications");
+        queryClient.invalidateQueries("ApplicationsByStatus");
+      },
+    }
   );
 
   if (isLoading) {
@@ -88,18 +93,22 @@ const DetailModal = () => {
 
   const handleReturn = async () => {
     await mutateAsync("donereturn");
+    navigate("/pengguna-aset");
   };
 
   const askApproval = async () => {
     await mutateAsync("tomanager");
+    navigate("/pengguna-aset");
   };
 
   const handleDecline = async () => {
     await mutateAsync("decline");
+    navigate("/pengguna-aset");
   };
 
   const handleAccept = async () => {
     await mutateAsync("inuse");
+    navigate("/pengguna-aset");
   };
 
   return (
@@ -224,18 +233,22 @@ const DetailModal = () => {
               </Button>
             </Grid>
             <Grid item xs={8} sx={buttonContainer}>
-              {data && data.data.status === "toAdmin" && (
+              {data && data.data.status === "toadmin" && (
                 <>
                   <Button sx={cancellationButton} onClick={handleDecline}>
                     Tolak
                   </Button>
-                  <Button variant="contained" sx={backButton} disabled={true}>
+                  <Button
+                    variant="contained"
+                    sx={backButton}
+                    onClick={handleAccept}
+                  >
                     Terima Permohonan
                   </Button>
                 </>
               )}
 
-              {data && data.data.status === "toReturn" && (
+              {data && data.data.status === "toreturn" && (
                 <>
                   <Button sx={cancellationButton} onClick={handleDecline}>
                     Tolak
@@ -248,7 +261,7 @@ const DetailModal = () => {
                 </>
               )}
 
-              {data && data.data.status === "toAccept" && (
+              {data && data.data.status === "toaccept" && (
                 <>
                   <Button sx={cancellationButton} onClick={handleDecline}>
                     Tolak
