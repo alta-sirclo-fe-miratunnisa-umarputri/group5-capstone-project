@@ -153,7 +153,7 @@ const PenggunaAset = () => {
 
   const columns: GridColDef[] = [
     {
-      field: "id",
+      field: "number",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "No",
@@ -208,7 +208,7 @@ const PenggunaAset = () => {
         return (
           <>
             <IconButton
-              onClick={(e) => {
+              onClick={e => {
                 setStatusItem(params.row.status);
                 handleClickAction(e, params.id, params);
               }}
