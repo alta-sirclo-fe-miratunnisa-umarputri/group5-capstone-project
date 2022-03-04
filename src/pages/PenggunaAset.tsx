@@ -58,8 +58,8 @@ const PenggunaAset = () => {
 
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const [mbDdown, setMbDdown] = useState("5%");
-
+  const [mbDdown, setMbDdown] = useState("2%");
+  const [mbDdownxs, setMbDdownxs] = useState("2%");
   const queryClient = useQueryClient();
 
   let { isLoading, error, isError, refetch } = useQuery(
@@ -304,45 +304,25 @@ const PenggunaAset = () => {
                 </Typography>
               </MenuItem>
             </Menu>
-
-            {/* <Menu
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={() => setAnchorElUser(null)}
-              >
-                <MenuItem onClick={handleModal}>
-                  <Typography
-                    variant="subtitle2"
-                    sx={{
-                      ...primary,
-                      textAlign: "center",
-                      fontFamily: "Poppins",
-                      fontWeight: "medium",
-                    }}
-                  >
-                    Lihat Detail
-                  </Typography>
-                </MenuItem>
-              </Menu> */}
           </>
         );
       },
     },
   ];
 
-  // const fetchNav = async (data: any) => {
-  //   console.log(data);
-  // };
+  const formatInput = (rows: any) => {
+    if (!rows) {
+      return [];
+    }
+
+    for (let i = 0; i < rows.length; i++) {
+      rows[i].number = i + 1;
+      rows[i].requestdate = new Date(rows[i].requestdate).toLocaleString();
+    }
+
+    return rows;
+  };
+
   const fetchData = async () => {
     console.log(status);
   };
@@ -355,18 +335,21 @@ const PenggunaAset = () => {
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
     setMbDdown("30%");
+    setMbDdownxs("50%");
   };
 
   const handleMenuItemClick = (item: any) => {
     setSelectedIndex(item.id - 1);
     setOpen(false);
-    // console.log(item.id);
-    setMbDdown("5%");
+    setMbDdown("2%");
+    setMbDdownxs("2%");
   };
 
   const handleAllMenuClick = () => {
     setSelectedIndex(100);
     setOpen(false);
+    setMbDdown("2%");
+    setMbDdownxs("2%");
   };
 
   const handleClose = (event: Event) => {
@@ -378,6 +361,8 @@ const PenggunaAset = () => {
     }
 
     setOpen(false);
+    setMbDdown("2%");
+    setMbDdownxs("2%");
   };
 
   return (
@@ -438,7 +423,7 @@ const PenggunaAset = () => {
       </Box>
       <Box
         sx={{
-          marginBottom: `${mbDdown}`,
+          marginBottom: { xs: mbDdownxs, sm: mbDdown },
           marginTop: "5%",
           marginLeft: "2%",
           display: { sx: "block", sm: "block", md: "none" },
@@ -485,13 +470,6 @@ const PenggunaAset = () => {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList id="split-button-menu">
-                    <MenuItem
-                      onClick={() => {
-                        handleAllMenuClick();
-                      }}
-                    >
-                      Semua Pengguna
-                    </MenuItem>
                     {buttonStatusPenggunaAset.map(item => (
                       <MenuItem
                         key={item.id}
@@ -523,19 +501,18 @@ const PenggunaAset = () => {
       >
         <Box
           sx={{
-            height: items.length * 60 + 70,
+            height: 10 * 60 + 70,
             width: { xs: "100%", sm: "100%", md: "95%" },
             marginTop: 3,
             marginBottom: 1,
-            // marginLeft: { sx: 0, sm: 0, md: "10%" },
-            // marginRight: { sx: 0, sm: 0, md: "10%" },
+
             textAlign: "center",
             alignItems: "center",
           }}
           className={classes.root}
         >
           <DataGrid
-            rows={status === "all" ? items : data}
+            rows={status === "all" ? formatInput(items) : formatInput(data)}
             columns={columns}
             pageSize={10}
             rowsPerPageOptions={[10]}
