@@ -58,7 +58,8 @@ const PermohonanPersetujuan = () => {
 
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const [mbDdown, setMbDdown] = useState("5%");
+  const [mbDdown, setMbDdown] = useState("2%");
+  const [mbDdownxs, setMbDdownxs] = useState("2%");
 
   const queryClient = useQueryClient();
 
@@ -169,7 +170,7 @@ const PermohonanPersetujuan = () => {
 
   const columns: GridColDef[] = [
     {
-      field: "id",
+      field: "number",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "No",
@@ -333,18 +334,18 @@ const PermohonanPersetujuan = () => {
   const handleClick = () => {};
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
-    setMbDdown("30%");
+    setMbDdown("20%");
+    setMbDdownxs("45%");
   };
 
   const handleMenuItemClick = (item: any) => {
     setSelectedIndex(item.id - 1);
     setOpen(false);
-    // console.log(item.id);
-    setMbDdown("5%");
+    setMbDdown("2%");
+    setMbDdownxs("2%");
   };
 
   const handleAllMenuClick = () => {
-    setSelectedIndex(100);
     setOpen(false);
   };
 
@@ -357,6 +358,19 @@ const PermohonanPersetujuan = () => {
     }
 
     setOpen(false);
+  };
+
+  const formatInput = (rows: any) => {
+    if (!rows) {
+      return [];
+    }
+
+    for (let i = 0; i < rows.length; i++) {
+      rows[i].number = i + 1;
+      rows[i].requestdate = new Date(rows[i].requestdate).toLocaleString();
+    }
+
+    return rows;
   };
 
   return (
@@ -407,10 +421,10 @@ const PermohonanPersetujuan = () => {
       </Box>
       <Box
         sx={{
-          marginBottom: `${mbDdown}`,
+          marginBottom: { xs: mbDdownxs, sm: mbDdown },
           marginTop: "5%",
           marginLeft: "2%",
-          display: { sx: "block", sm: "block", md: "none" },
+          display: { xs: "block", sm: "block", md: "none" },
         }}
       >
         <ButtonGroup
@@ -454,19 +468,13 @@ const PermohonanPersetujuan = () => {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList id="split-button-menu">
-                    <MenuItem
-                      onClick={() => {
-                        handleAllMenuClick();
-                      }}
-                    >
-                      Semua Pengguna
-                    </MenuItem>
                     {buttonStatusPermohonanPersetujuan.map(item => (
                       <MenuItem
                         key={item.id}
                         selected={item.id === selectedIndex}
                         onClick={() => {
                           setStatus(item.status);
+                          setFilter(item.name);
                           handleMenuItemClick(item);
                         }}
                       >
@@ -496,15 +504,13 @@ const PermohonanPersetujuan = () => {
             width: { xs: "100%", sm: "100%", md: "95%" },
             marginTop: 3,
             marginBottom: 1,
-            // marginLeft: { sx: 0, sm: 0, md: "10%" },
-            // marginRight: { sx: 0, sm: 0, md: "10%" },
             textAlign: "center",
             alignItems: "center",
           }}
           className={classes.root}
         >
           <DataGrid
-            rows={status === "all" ? items : data}
+            rows={status === "all" ? formatInput(items) : formatInput(data)}
             columns={columns}
             pageSize={10}
             rowsPerPageOptions={[10]}
