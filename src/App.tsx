@@ -13,7 +13,7 @@ import AddNewAsset from "./components/Beranda/Admin/AddNewAsset";
 import AssignAsset from "./components/Beranda/Admin/AssignAsset";
 import DetailModal from "./components/PenggunaAset/admin/DetailModal";
 import DetailModalManager from "./components/PermohonanPeminjaman/manager/DetailModalManager";
-import PengadaanModalManager from "./components/PengadaanAset/admin/PengadaanModalAdmin";
+import PengadaanModalManager from "./components/PermohonanPengadaan/manager/PengadaanModalManager";
 import PengadaanModalAdmin from "./components/PengadaanAset/admin/PengadaanModalAdmin";
 
 import { responsiveFontSize } from "./styles/theme.styles";

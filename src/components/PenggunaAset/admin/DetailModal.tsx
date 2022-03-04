@@ -30,12 +30,13 @@ import { generalFont } from "../../../styles/font.style";
 import { EMPLOYEE_STATUS } from "../../../constants";
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { capstoneAxios } from "../../../axios-instance";
 import { useParams } from "react-router-dom";
 import Loading from "../../Loading";
 import Error from "../../Alert/Error";
 import { AxiosError } from "axios";
+import { useMutation, QueryClient } from "react-query";
 
 const DetailModal = () => {
   const role = localStorage.getItem("role");
@@ -50,6 +51,7 @@ const DetailModal = () => {
     navigate("/pengguna-aset");
   };
   const [status, setStatus] = useState("");
+  const queryClient = useQueryClient();
 
   let { isLoading, error, isError, refetch, data } = useQuery(
     ["ApplicationsById"],
@@ -63,6 +65,18 @@ const DetailModal = () => {
       console.log(data.data);
       return data;
     }
+  );
+
+  const { mutateAsync } = useMutation(
+    async (newStatus: any) => {
+      await capstoneAxios({
+        method: "PUT",
+        data: { status: newStatus },
+        url: `/applications/` + id,
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")!}` },
+      });
+    },
+    { onSuccess: () => queryClient.invalidateQueries("allApplications") }
   );
 
   if (isLoading) {
@@ -81,14 +95,24 @@ const DetailModal = () => {
     navigate("/pengguna-aset");
   };
 
-  const handleReturn = () => {
-    console.log("ajukan pengembalian");
+  const handleReturn = async () => {
+    await mutateAsync("donereturn");
   };
 
   const handleReapply = () => {
     console.log("ajukan peminjaman ulang");
   };
-  const askApproval = () => {};
+  const askApproval = async () => {
+    await mutateAsync("tomanager");
+  };
+
+  const handleDecline = async () => {
+    await mutateAsync("decline");
+  };
+
+  const handleAccept = async () => {
+    await mutateAsync("inuse");
+  };
 
   return (
     <Dialog
@@ -214,10 +238,10 @@ const DetailModal = () => {
             <Grid item xs={8} sx={buttonContainer}>
               {data && data.data.status === "toAdmin" && (
                 <>
-                  <Button sx={cancellationButton} onClick={handleCancellation}>
+                  <Button sx={cancellationButton} onClick={handleDecline}>
                     Tolak
                   </Button>
-                  <Button variant="contained" sx={backButton}>
+                  <Button variant="contained" sx={backButton} disabled={true}>
                     Terima Permohonan
                   </Button>
                 </>
@@ -225,10 +249,12 @@ const DetailModal = () => {
 
               {data && data.data.status === "toReturn" && (
                 <>
-                  <Button sx={cancellationButton} onClick={handleCancellation}>
+                  <Button sx={cancellationButton} onClick={handleDecline}>
                     Tolak
                   </Button>
                   <Button variant="contained" sx={backButton}>
+                    {" "}
+                    onClick={handleReturn}
                     Terima Permohonan
                   </Button>
                 </>
@@ -236,10 +262,14 @@ const DetailModal = () => {
 
               {data && data.data.status === "toAccept" && (
                 <>
-                  <Button sx={cancellationButton} onClick={handleCancellation}>
+                  <Button sx={cancellationButton} onClick={handleDecline}>
                     Tolak
                   </Button>
-                  <Button variant="contained" sx={backButton}>
+                  <Button
+                    variant="contained"
+                    sx={backButton}
+                    onClick={handleAccept}
+                  >
                     Terima Permohonan
                   </Button>
                 </>
@@ -251,7 +281,7 @@ const DetailModal = () => {
                   <Button
                     variant="contained"
                     sx={backButton}
-                    onClick={handleReturn}
+                    onClick={handleCancellation}
                   >
                     Ajukan Pengembalian
                   </Button>

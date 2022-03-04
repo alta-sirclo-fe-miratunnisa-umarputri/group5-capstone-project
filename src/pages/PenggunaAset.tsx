@@ -5,7 +5,7 @@ import {
   buttonStatusPenggunaAset,
 } from "../components/PermohonanPengadaan/UpperButton.style";
 import React from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
 import { useState, MouseEvent } from "react";
 import Layout from "../components/Layout";
@@ -37,6 +37,7 @@ import Error from "../components/Alert/Error";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { idText } from "typescript";
+import { useMutation } from "react-query";
 
 const PenggunaAset = () => {
   const role = localStorage.getItem("role");
@@ -53,10 +54,13 @@ const PenggunaAset = () => {
   const [isOpenUser, setIsOpenUser] = useState(false);
   const [status, setStatus] = useState("all");
   const [statusItem, setStatusItem] = useState("");
+  const [newStatusItem, setNewStatusItem] = useState("");
 
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const [mbDdown, setMbDdown] = useState("5%");
+  const [mbDdown, setMbDdown] = useState("2%");
+  const [mbDdownxs, setMbDdownxs] = useState("2%");
+  const queryClient = useQueryClient();
 
   let { isLoading, error, isError, refetch } = useQuery(
     ["ApplicationsByStatus", status],
@@ -76,6 +80,18 @@ const PenggunaAset = () => {
       return data;
     },
     { enabled: status !== "all" ? true : false }
+  );
+
+  const { mutateAsync } = useMutation(
+    async (newStatus: any) => {
+      await capstoneAxios({
+        method: "PUT",
+        data: { status: newStatus },
+        url: `/applications/` + clickedMenuId,
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")!}` },
+      });
+    },
+    { onSuccess: () => queryClient.invalidateQueries("ApplicationsByStatus") }
   );
 
   ({ isLoading, error, isError } = useQuery(["allApplications"], async () => {
@@ -136,16 +152,23 @@ const PenggunaAset = () => {
     navigate("/pengguna-aset");
   };
 
-  const handleAcceptRequest = () => {
-    if (statusItem === "toAdmin") {
-      console.log(clickedMenuId);
-    } else if (statusItem === "toReturn") {
-    } else if (statusItem === "toAccept") {
+  const handleAcceptRequest = async () => {
+    if (statusItem === "toadmin") {
+      await mutateAsync("tomanager");
+    } else if (statusItem === "toreturn") {
+      await mutateAsync("donereturn");
+    } else if (statusItem === "toaccept") {
+      await mutateAsync("inuse");
     }
+    setAnchorElUser(null);
+    navigate("/pengguna-aset");
   };
 
-  const handleRejectRequest = () => {
-    // console.log(clickedMenuId);
+  const handleRejectRequest = async () => {
+    if (statusItem === "toaccept") {
+      await mutateAsync("decline");
+      setAnchorElUser(null);
+    }
   };
 
   const handleModal = () => {
@@ -218,24 +241,24 @@ const PenggunaAset = () => {
               <MoreHorizRoundedIcon fontSize="medium" />
             </IconButton>
 
-            {statusItem === "toAdmin" ||
-            statusItem === "toReturn" ||
-            statusItem === "toAccept" ? (
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={() => setAnchorElUser(null)}
-              >
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={() => setAnchorElUser(null)}
+            >
+              {statusItem === "toadmin" ||
+              statusItem === "toreturn" ||
+              statusItem === "toaccept" ? (
                 <MenuItem onClick={handleAcceptRequest}>
                   <Typography
                     variant="subtitle2"
@@ -249,7 +272,7 @@ const PenggunaAset = () => {
                     Terima Permohonan
                   </Typography>
                 </MenuItem>
-
+              ) : statusItem === "toaccept" ? (
                 <MenuItem onClick={handleRejectRequest}>
                   <Typography
                     variant="subtitle2"
@@ -263,61 +286,43 @@ const PenggunaAset = () => {
                     Tolak Permohonan
                   </Typography>
                 </MenuItem>
+              ) : (
+                <MenuItem></MenuItem>
+              )}
 
-                <MenuItem onClick={handleModal}>
-                  <Typography
-                    variant="subtitle2"
-                    sx={{
-                      ...primary,
-                      textAlign: "center",
-                      fontFamily: "Poppins",
-                      fontWeight: "medium",
-                    }}
-                  >
-                    Lihat Detail
-                  </Typography>
-                </MenuItem>
-              </Menu>
-            ) : (
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={() => setAnchorElUser(null)}
-              >
-                <MenuItem onClick={handleModal}>
-                  <Typography
-                    variant="subtitle2"
-                    sx={{
-                      ...primary,
-                      textAlign: "center",
-                      fontFamily: "Poppins",
-                      fontWeight: "medium",
-                    }}
-                  >
-                    Lihat Detail
-                  </Typography>
-                </MenuItem>
-              </Menu>
-            )}
+              <MenuItem onClick={handleModal}>
+                <Typography
+                  variant="subtitle2"
+                  sx={{
+                    ...primary,
+                    textAlign: "center",
+                    fontFamily: "Poppins",
+                    fontWeight: "medium",
+                  }}
+                >
+                  Lihat Detail
+                </Typography>
+              </MenuItem>
+            </Menu>
           </>
         );
       },
     },
   ];
 
-  // const fetchNav = async (data: any) => {
-  //   console.log(data);
-  // };
+  const formatInput = (rows: any) => {
+    if (!rows) {
+      return [];
+    }
+
+    for (let i = 0; i < rows.length; i++) {
+      rows[i].number = i + 1;
+      rows[i].requestdate = new Date(rows[i].requestdate).toLocaleString();
+    }
+
+    return rows;
+  };
+
   const fetchData = async () => {
     console.log(status);
   };
@@ -330,18 +335,21 @@ const PenggunaAset = () => {
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
     setMbDdown("30%");
+    setMbDdownxs("50%");
   };
 
   const handleMenuItemClick = (item: any) => {
     setSelectedIndex(item.id - 1);
     setOpen(false);
-    // console.log(item.id);
-    setMbDdown("5%");
+    setMbDdown("2%");
+    setMbDdownxs("2%");
   };
 
   const handleAllMenuClick = () => {
     setSelectedIndex(100);
     setOpen(false);
+    setMbDdown("2%");
+    setMbDdownxs("2%");
   };
 
   const handleClose = (event: Event) => {
@@ -353,6 +361,8 @@ const PenggunaAset = () => {
     }
 
     setOpen(false);
+    setMbDdown("2%");
+    setMbDdownxs("2%");
   };
 
   return (
@@ -413,7 +423,7 @@ const PenggunaAset = () => {
       </Box>
       <Box
         sx={{
-          marginBottom: `${mbDdown}`,
+          marginBottom: { xs: mbDdownxs, sm: mbDdown },
           marginTop: "5%",
           marginLeft: "2%",
           display: { sx: "block", sm: "block", md: "none" },
@@ -460,13 +470,6 @@ const PenggunaAset = () => {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList id="split-button-menu">
-                    <MenuItem
-                      onClick={() => {
-                        handleAllMenuClick();
-                      }}
-                    >
-                      Semua Pengguna
-                    </MenuItem>
                     {buttonStatusPenggunaAset.map(item => (
                       <MenuItem
                         key={item.id}
@@ -498,19 +501,18 @@ const PenggunaAset = () => {
       >
         <Box
           sx={{
-            height: items.length * 60 + 70,
+            height: 10 * 60 + 70,
             width: { xs: "100%", sm: "100%", md: "95%" },
             marginTop: 3,
             marginBottom: 1,
-            // marginLeft: { sx: 0, sm: 0, md: "10%" },
-            // marginRight: { sx: 0, sm: 0, md: "10%" },
+
             textAlign: "center",
             alignItems: "center",
           }}
           className={classes.root}
         >
           <DataGrid
-            rows={status === "all" ? items : data}
+            rows={status === "all" ? formatInput(items) : formatInput(data)}
             columns={columns}
             pageSize={10}
             rowsPerPageOptions={[10]}
