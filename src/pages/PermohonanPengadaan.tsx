@@ -58,7 +58,8 @@ const PermohonanPengadaan = () => {
 
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const [mbDdown, setMbDdown] = useState("5%");
+  const [mbDdown, setMbDdown] = useState("2%");
+  const [mbDdownxs, setMbDdownxs] = useState("2%");
 
   const queryClient = useQueryClient();
 
@@ -168,7 +169,7 @@ const PermohonanPengadaan = () => {
 
   const columns: GridColDef[] = [
     {
-      field: "id",
+      field: "number",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "No",
@@ -320,6 +321,19 @@ const PermohonanPengadaan = () => {
     },
   ];
 
+  const formatInput = (rows: any) => {
+    if (!rows) {
+      return [];
+    }
+
+    for (let i = 0; i < rows.length; i++) {
+      rows[i].number = i + 1;
+      rows[i].requestDate = new Date(rows[i].requestDate).toLocaleString();
+    }
+
+    return rows;
+  };
+
   const handleFilter = (item: string) => {
     console.log(status);
   };
@@ -328,18 +342,21 @@ const PermohonanPengadaan = () => {
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
     setMbDdown("30%");
+    setMbDdownxs("40%");
   };
 
   const handleMenuItemClick = (item: any) => {
     setSelectedIndex(item.id - 1);
     setOpen(false);
-    // console.log(item.id);
-    setMbDdown("5%");
+    setMbDdown("2%");
+    setMbDdownxs("2%");
   };
 
   const handleAllMenuClick = () => {
     setSelectedIndex(100);
     setOpen(false);
+    setMbDdown("2%");
+    setMbDdownxs("2%");
   };
 
   const handleClose = (event: Event) => {
@@ -351,6 +368,8 @@ const PermohonanPengadaan = () => {
     }
 
     setOpen(false);
+    setMbDdown("2%");
+    setMbDdownxs("2%");
   };
 
   return (
@@ -401,10 +420,10 @@ const PermohonanPengadaan = () => {
       </Box>
       <Box
         sx={{
-          marginBottom: `${mbDdown}`,
+          marginBottom: { xs: mbDdownxs, sm: mbDdown },
           marginTop: "5%",
           marginLeft: "2%",
-          display: { sx: "block", sm: "block", md: "none" },
+          display: { xs: "block", sm: "block", md: "none" },
         }}
       >
         <ButtonGroup
@@ -448,13 +467,6 @@ const PermohonanPengadaan = () => {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList id="split-button-menu">
-                    <MenuItem
-                      onClick={() => {
-                        handleAllMenuClick();
-                      }}
-                    >
-                      Semua Pengguna
-                    </MenuItem>
                     {buttonStatusPermohonanPengadaan.map(item => (
                       <MenuItem
                         key={item.id}
@@ -462,6 +474,7 @@ const PermohonanPengadaan = () => {
                         onClick={() => {
                           setStatus(item.status);
                           handleMenuItemClick(item);
+                          setFilter(item.name);
                         }}
                       >
                         {item.name}
@@ -490,15 +503,13 @@ const PermohonanPengadaan = () => {
             width: { xs: "100%", sm: "100%", md: "85%" },
             marginTop: 3,
             marginBottom: 1,
-            // marginLeft: { sx: 0, sm: 0, md: "10%" },
-            // marginRight: { sx: 0, sm: 0, md: "10%" },
             textAlign: "center",
             alignItems: "center",
           }}
           className={classes.root}
         >
           <DataGrid
-            rows={status === "all" ? items : data}
+            rows={status === "all" ? formatInput(items) : formatInput(data)}
             columns={columns}
             pageSize={10}
             rowsPerPageOptions={[10]}
