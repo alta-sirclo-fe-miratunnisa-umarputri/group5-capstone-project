@@ -42,7 +42,7 @@ const App = () => {
       navigate("/");
       return;
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <QueryClientProvider client={queryClient}>

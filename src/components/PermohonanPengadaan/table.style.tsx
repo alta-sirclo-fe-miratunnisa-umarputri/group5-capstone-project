@@ -1,11 +1,5 @@
-import React from "react";
 import { makeStyles } from "@mui/styles";
-import {
-  bgwhite,
-  primary,
-  quaternary,
-  tertiary,
-} from "../../styles/color.styles";
+import { bgwhite, primary, quaternary } from "../../styles/color.styles";
 
 export const useStyles = makeStyles({
   root: {
