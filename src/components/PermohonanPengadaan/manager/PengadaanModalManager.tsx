@@ -1,4 +1,3 @@
-// import { useParams } from "react-router-dom";
 import {
   Button,
   Dialog,
@@ -13,22 +12,18 @@ import {
   DialogActions,
 } from "@mui/material";
 
-import { DetailAndEmployeeModal } from "../../../types/direktori-aset";
 import DetailModalInfo from "./DetailModalInfo";
 import {
-  availabilityFont,
   avatar,
   avatarContainer,
   backButton,
   buttonContainer,
   buttonContainerStart,
   cancellationButton,
-  categoryFont,
   itemFont,
 } from "../../PenggunaAset/admin/DetailActivity.style";
 import { generalFont } from "../../../styles/font.style";
-import { EMPLOYEE_STATUS } from "../../../constants";
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "react-query";
 import { capstoneAxios } from "../../../axios-instance";
@@ -36,11 +31,9 @@ import { useParams } from "react-router-dom";
 import Loading from "../../Loading";
 import Error from "../../Alert/Error";
 import { AxiosError } from "axios";
-import { useMutation, QueryClient } from "react-query";
+import { useMutation } from "react-query";
 
 const PengadaanModalManager = () => {
-  const role = localStorage.getItem("role");
-  const [Procurement, setProcurement] = useState<any[]>([]);
   const { id } = useParams();
   const navigate = useNavigate();
   const theme = useTheme();
@@ -50,19 +43,16 @@ const PengadaanModalManager = () => {
     setIsOpen(false);
     navigate("/permohonan-pengadaan");
   };
-  const [status, setStatus] = useState("");
   const queryClient = useQueryClient();
 
-  let { isLoading, error, isError, refetch, data } = useQuery(
+  let { isLoading, error, isError, data } = useQuery(
     ["ProcurementById"],
     async () => {
       const { data } = await capstoneAxios({
         method: "GET",
         url: `/procurements/` + id,
       });
-      // console.log(data.data.id);
-      setProcurement(data.data);
-      console.log(data.data.employeeName);
+
       return data;
     }
   );

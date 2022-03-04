@@ -10,10 +10,9 @@ import { AxiosError } from "axios";
 import { useState, MouseEvent } from "react";
 import Layout from "../components/Layout";
 import Header from "../components/Header";
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { makeStyles } from "@mui/styles";
-import { bgwhite, primary, quaternary, tertiary } from "../styles/color.styles";
+import { primary } from "../styles/color.styles";
 import { useStyles } from "../components/PermohonanPengadaan/table.style";
 import {
   Box,
@@ -34,13 +33,10 @@ import MenuList from "@mui/material/MenuList";
 import { capstoneAxios } from "../axios-instance";
 import Loading from "../components/Loading";
 import Error from "../components/Alert/Error";
-import { useEffect } from "react";
 import { useRef } from "react";
-import { idText } from "typescript";
 import { useMutation } from "react-query";
 
 const PermohonanPengadaan = () => {
-  const role = localStorage.getItem("role");
   const [items, setItems] = useState<any[]>([]);
   const [data, setData] = useState<any[]>([]);
   const anchorRef = useRef<HTMLDivElement>(null);
@@ -50,11 +46,8 @@ const PermohonanPengadaan = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [clickedMenuId, setClickedMenuId] = useState(0);
   const classes = useStyles();
-  const [isOpenDetail, setIsOpenDetail] = useState(false);
-  const [isOpenUser, setIsOpenUser] = useState(false);
   const [status, setStatus] = useState("all");
   const [statusItem, setStatusItem] = useState("");
-  const [newStatusItem, setNewStatusItem] = useState("");
 
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
@@ -63,7 +56,7 @@ const PermohonanPengadaan = () => {
 
   const queryClient = useQueryClient();
 
-  let { isLoading, error, isError, refetch } = useQuery(
+  let { isLoading, error, isError } = useQuery(
     ["ProcurementsByStatus", status],
     async () => {
       const { data } = await capstoneAxios({
@@ -131,24 +124,6 @@ const PermohonanPengadaan = () => {
     setAnchorElUser(e.currentTarget);
     setClickedMenuId(id);
     console.log(params.row.status);
-  };
-
-  const handleCloseDetail = () => {
-    setIsOpenDetail(false);
-    navigate("/permohonan-pengadaan");
-  };
-
-  const handleOpenDetail = () => {
-    setIsOpenDetail(true);
-  };
-
-  const handleOpenUser = () => {
-    setIsOpenUser(true);
-  };
-
-  const handleCloseUser = () => {
-    setIsOpenUser(false);
-    navigate("/permohonan-pengadaan");
   };
 
   const handleAcceptRequest = async () => {
@@ -219,7 +194,7 @@ const PermohonanPengadaan = () => {
         return (
           <>
             <IconButton
-              onClick={e => {
+              onClick={(e) => {
                 setStatusItem(params.row.status);
                 handleClickAction(e, params.id, params);
               }}
@@ -340,20 +315,13 @@ const PermohonanPengadaan = () => {
 
   const handleClick = () => {};
   const handleToggle = () => {
-    setOpen(prevOpen => !prevOpen);
+    setOpen((prevOpen) => !prevOpen);
     setMbDdown("30%");
     setMbDdownxs("40%");
   };
 
   const handleMenuItemClick = (item: any) => {
     setSelectedIndex(item.id - 1);
-    setOpen(false);
-    setMbDdown("2%");
-    setMbDdownxs("2%");
-  };
-
-  const handleAllMenuClick = () => {
-    setSelectedIndex(100);
     setOpen(false);
     setMbDdown("2%");
     setMbDdownxs("2%");
@@ -401,7 +369,7 @@ const PermohonanPengadaan = () => {
             boxShadow: 0,
           }}
         >
-          {buttonStatusPermohonanPengadaan.map(item => (
+          {buttonStatusPermohonanPengadaan.map((item) => (
             <Button
               key={item.id}
               variant="contained"
@@ -467,7 +435,7 @@ const PermohonanPengadaan = () => {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList id="split-button-menu">
-                    {buttonStatusPermohonanPengadaan.map(item => (
+                    {buttonStatusPermohonanPengadaan.map((item) => (
                       <MenuItem
                         key={item.id}
                         selected={item.id === selectedIndex}
