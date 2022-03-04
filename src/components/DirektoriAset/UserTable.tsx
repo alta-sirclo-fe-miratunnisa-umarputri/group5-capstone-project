@@ -63,7 +63,8 @@ const UserTable = ({ data }: any) => {
     user.nomor = idx + 1;
     user.penggunaAset = data.assetUser;
     user.tanggalPeminjaman = data.lendingDate.toLocaleString();
-    user.status = data.usageStatus;
+    user.status =
+      data.usageStatus === "donereturn" ? "Dikembalikan" : "Digunakan";
     return newArr.push(user);
   });
 

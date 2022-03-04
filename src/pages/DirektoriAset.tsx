@@ -28,11 +28,15 @@ const DirektoriAset = () => {
   const [searchValue, setSearchValue] = useState("");
 
   const [assets, setAssets] = useState<any[]>([]);
-  // const [pageEmp, setPageEmp] = useState(1);
-  // const [totalPageEmp, setTotalPageEmp] = useState(1);
-  // const [filterIdEmp, setFilterIdEmp] = useState(0);
-  // const [availStatusEmp, setAvailStatusEmp] = useState("");
-  // const [searchValueEmp, setSearchValueEmp] = useState("");
+
+  const { data: dataCategories } = useQuery("getCategories", async () => {
+    const { data } = await capstoneAxios({
+      method: "GET",
+      url: "/categories",
+    });
+
+    return data;
+  });
 
   let { isLoading, error, isError } = useQuery(
     ["directoryAssetAdmin", page],
@@ -108,8 +112,6 @@ const DirektoriAset = () => {
           page,
         },
       });
-
-      console.log(data.data.assets);
 
       setAssets(data.data.assets);
       setTotalPage(data.data.totalpage);
@@ -255,18 +257,17 @@ const DirektoriAset = () => {
               </Grid>
               <Grid item xs={12} lg={9}>
                 <Stack sx={{ flexDirection: { xs: "column", md: "row" } }}>
-                  {["Laptop", "Alat Tulis", "Kendaraan", "Lainnya"].map(
-                    (el, idx) => (
+                  {dataCategories &&
+                    dataCategories.data.map((el: any) => (
                       <Chip
-                        key={idx}
-                        label={el}
-                        onClick={() => handleClickFilter(idx + 1)}
-                        variant={filterId === idx + 1 ? "filled" : "outlined"}
+                        key={el.id}
+                        label={el.name}
+                        onClick={() => handleClickFilter(el.id)}
+                        variant={filterId === el.id ? "filled" : "outlined"}
                         size="small"
                         sx={{ ...primary, mx: 1, my: 1 }}
                       />
-                    )
-                  )}
+                    ))}
                 </Stack>
               </Grid>
             </Grid>

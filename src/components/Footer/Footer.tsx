@@ -9,33 +9,57 @@ import facebook from "../../assets/facebook2.svg";
 import twitter from "../../assets/twitter2.svg";
 import instagram from "../../assets/instagram2.svg";
 import WhereToFindUs from "./WhereToFindUs";
+import { ROLE } from "../../constants";
 
 const Footer = () => {
+  const role = localStorage.getItem("role");
+
   return (
     <Grid container sx={{ bgcolor: tertiary.color }}>
       <Grid item xs={12} md={6} sx={wrapper}>
-        <Title label="What is Avengers?" />
+        <Title label="Apa itu Avengers?" />
         <Description>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in
-          libero at metus interdum tempus. Aliquam ex sapien, ultrices vitae
-          venenatis in, volutpat sit amet velit. Proin non odio tellus.
-          Suspendisse elementum, enim sagittis imperdiet ultricies, risus ipsum
-          pellentesque tortor, a imperdiet orci turpis at metus. Integer
-          condimentum nunc non diam vestibulum malesuada. Nulla et leo ut libero
-          bibendum bibendum eget bibendum sapien. Fusce malesuada nisl quis
-          risus varius interdum.
+          Avengers merupakan aplikasi manajemen aset perusahaan Avengers.Corp.
+          Bertujuan untuk memudahkan alur peminjaman aset kepada pegawai demi
+          menunjang kinerja mereka. Dengan Avengers, tidak perlu surat, tidak
+          perlu tatap muka, cukup ajukan saja. Sekali klik, maka aset sudah
+          dapat digunakan.
         </Description>
       </Grid>
 
       <Grid item xs={12} md={3} sx={wrapper}>
-        <Title label="Useful Links" />
-        <UsefulLink path="/" label="Home" />
-        <UsefulLink path="profile" label="Profile" />
-        <UsefulLink path="#" label="Contact" />
+        <Title label="Akses Cepat" />
+        {role === ROLE.EMPLOYEE && (
+          <>
+            <UsefulLink path="/beranda" label="Beranda" />
+            <UsefulLink path="/direktori-aset" label="Direktori Aset" />
+          </>
+        )}
+        {role === ROLE.ADMIN && (
+          <>
+            <UsefulLink path="/beranda" label="Beranda" />
+            <UsefulLink path="/direktori-aset" label="Direktori Aset" />
+            <UsefulLink path="/pengguna-aset" label="Pengguna Aset" />
+            <UsefulLink path="/pengadaan-aset" label="Pengadaan Aset" />
+          </>
+        )}
+        {role === ROLE.MANAGER && (
+          <>
+            <UsefulLink path="/beranda" label="Beranda" />
+            <UsefulLink
+              path="/permohonan-persetujuan"
+              label="Permohonan Persetujuan"
+            />
+            <UsefulLink
+              path="/permohonan-pengadaan"
+              label="Permohonan Pengadaan"
+            />
+          </>
+        )}
       </Grid>
 
       <Grid item xs={12} md={3} sx={wrapper}>
-        <Title label="Where to Find Us:" />
+        <Title label="Temukan Kami :" />
         <WhereToFindUs
           link="https://www.facebook.com/avengers/"
           icon={facebook}

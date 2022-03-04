@@ -92,6 +92,8 @@ const ActivityItemCard = ({ item }: any) => {
     navigate("/pemeliharaan");
   };
 
+  const applyWaiting = ["toadmin", "tomanager", "toaccept"];
+
   return (
     <>
       <Card sx={card}>
@@ -115,7 +117,18 @@ const ActivityItemCard = ({ item }: any) => {
         <Grid container sx={bottomCont}>
           <Grid item xs={9} sx={statusGrid}>
             <Box sx={statusBox}>
-              <Typography sx={statusFont}>{item.status}</Typography>
+              {applyWaiting.includes(item.status) && (
+                <Typography sx={statusFont}>Menunggu Persetujuan</Typography>
+              )}
+              {item.status === "inuse" && (
+                <Typography sx={statusFont}>Digunakan</Typography>
+              )}
+              {item.status === "decline" && (
+                <Typography sx={statusFont}>Ditolak</Typography>
+              )}
+              {item.status === "toreturn" && (
+                <Typography sx={statusFont}>Menunggu Pengembalian</Typography>
+              )}
             </Box>
           </Grid>
 
