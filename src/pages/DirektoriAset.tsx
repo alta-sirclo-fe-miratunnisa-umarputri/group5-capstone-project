@@ -206,10 +206,7 @@ const DirektoriAset = () => {
     <Layout>
       <Header
         title="Direktori Aset"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-        dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit."
+        description="Halaman untuk melihat aset-aset yang dimiliki oleh perusahaan"
       />
 
       <Outlet />
