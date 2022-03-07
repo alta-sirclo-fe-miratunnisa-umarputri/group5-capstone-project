@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { useQuery } from "react-query";
 import { Outlet } from "react-router-dom";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 import Layout from "../components/Layout";
 import ContentContainer from "../components/ContentContainer";
@@ -17,6 +17,7 @@ import { ROLE } from "../constants";
 import {
   botCarousel,
   buttonBerandaContainer,
+  mobileHeader,
   statisticsContainer,
   tableContainer,
   topCarousel,
@@ -75,6 +76,12 @@ const Beranda = () => {
       <ContentContainer>
         <Outlet />
         <Grid container sx={topCarousel}>
+          <Grid item xs={12} sx={{ display: { xs: "block", md: "none" } }}>
+            <Typography variant="h4" sx={mobileHeader}>
+              Beranda
+            </Typography>
+          </Grid>
+
           <Grid item xs={12} md={8} lg={9}>
             <Carousel />
           </Grid>
