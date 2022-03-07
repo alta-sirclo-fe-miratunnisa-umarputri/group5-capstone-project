@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { useMutation, useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -30,6 +30,7 @@ const AssignAsset = () => {
   const [employees, setEmployees] = useState([]);
   const [isOpen, setIsOpen] = useState(true);
 
+  const { setIsSuccess, setSuccessMessage } = useOutletContext<any>();
   const navigate = useNavigate();
 
   const theme = useTheme();
@@ -79,6 +80,7 @@ const AssignAsset = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSuccess(false);
 
     const data = new FormData(e.currentTarget);
     const asset = assets.filter((el: any) => el.name === data.get("nama-aset"));
@@ -94,6 +96,8 @@ const AssignAsset = () => {
       returndate: data.get("date"),
     });
 
+    setSuccessMessage("Sukses assign aset ke karyawan");
+    setIsSuccess(true);
     setIsOpen(false);
     navigate("/beranda");
   };
