@@ -92,6 +92,8 @@ const ActivityItemCard = ({ item }: any) => {
     navigate("/pemeliharaan");
   };
 
+  const assetInEmployee = ["inuse", "askreturn"];
+
   const applyWaiting = ["toadmin", "tomanager", "toaccept"];
 
   return (
@@ -129,6 +131,9 @@ const ActivityItemCard = ({ item }: any) => {
               {item.status === "toreturn" && (
                 <Typography sx={statusFont}>Menunggu Pengembalian</Typography>
               )}
+              {item.status === "askreturn" && (
+                <Typography sx={statusFont}>Diminta Mengembalikan</Typography>
+              )}
             </Box>
           </Grid>
 
@@ -164,7 +169,7 @@ const ActivityItemCard = ({ item }: any) => {
                   </MenuItem>
                 </Link>
 
-                {item.status === "inuse" && (
+                {assetInEmployee.includes(item.status) && (
                   <MenuItem onClick={handleReturn}>
                     <Typography variant="subtitle2" sx={dotMenu}>
                       Ajukan Pengembalian
