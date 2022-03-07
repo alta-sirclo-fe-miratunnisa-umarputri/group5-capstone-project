@@ -21,7 +21,6 @@ const Header = ({ title, description }: TheHeader) => {
         sx={{ color: "white", fontFamily: "Poppins", fontWeight: "regular" }}
       >
         {title}
-        {/* Direktori Aset */}
       </Typography>
       <Typography
         variant="body2"
@@ -35,10 +34,6 @@ const Header = ({ title, description }: TheHeader) => {
         }}
       >
         {description}
-        {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-        dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit. */}
       </Typography>
     </Box>
   );

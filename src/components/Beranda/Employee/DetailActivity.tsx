@@ -30,6 +30,31 @@ import {
 } from "./DetailActivity.style";
 import { generalFont } from "../../../styles/font.style";
 
+const getStatus = (status: string) => {
+  const waiting =
+    status === "toadmin" || status === "tomanager" || status === "toaccept";
+
+  if (waiting) {
+    return "Menunggu Persetujuan";
+  }
+
+  if (status === "inuse") {
+    return "Digunakan";
+  }
+
+  if (status === "decline") {
+    return "Ditolak";
+  }
+
+  if (status === "toreturn") {
+    return "Menunggu Pengembalian";
+  }
+
+  if (status === "askreturn") {
+    return "Diminta Mengembalikan";
+  }
+};
+
 const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -122,7 +147,7 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
                 />
                 <DetailActivityInfo
                   label="Status Pengajuan"
-                  description={data.data.status}
+                  description={getStatus(data.data.status)!}
                 />
               </Grid>
 

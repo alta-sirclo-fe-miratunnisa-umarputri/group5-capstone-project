@@ -55,7 +55,10 @@ const DirektoriAset = () => {
     },
     {
       enabled:
-        filterId === 0 && availStatus === "" && role === ROLE.ADMIN
+        filterId === 0 &&
+        availStatus === "" &&
+        role === ROLE.ADMIN &&
+        searchValue === ""
           ? true
           : false,
     }
@@ -119,7 +122,10 @@ const DirektoriAset = () => {
     },
     {
       enabled:
-        filterId === 0 && availStatus === "" && role === ROLE.EMPLOYEE
+        filterId === 0 &&
+        availStatus === "" &&
+        role === ROLE.EMPLOYEE &&
+        searchValue === ""
           ? true
           : false,
     }
@@ -206,10 +212,7 @@ const DirektoriAset = () => {
     <Layout>
       <Header
         title="Direktori Aset"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-        dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit."
+        description="Halaman untuk melihat aset-aset yang dimiliki oleh perusahaan"
       />
 
       <Outlet />
@@ -218,6 +221,7 @@ const DirektoriAset = () => {
         <Box sx={containerDir}>
           <SearchBar
             setItems={setItems}
+            setAssets={setAssets}
             setTotalPage={setTotalPage}
             page={page}
             filterId={filterId}

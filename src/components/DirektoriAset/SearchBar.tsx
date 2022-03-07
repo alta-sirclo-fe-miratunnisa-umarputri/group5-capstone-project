@@ -7,6 +7,7 @@ import { useQuery } from "react-query";
 import { capstoneAxios } from "../../axios-instance";
 import Error from "../Alert/Error";
 import { AxiosError } from "axios";
+import { ROLE } from "../../constants";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -57,21 +58,27 @@ type SearchBarProps = {
   setAvailStatus: Dispatch<SetStateAction<string>>;
   searchValue: string;
   setSearchValue: Dispatch<SetStateAction<string>>;
+  setAssets: Dispatch<SetStateAction<any[]>>;
 };
 
 const SearchBar = ({
   setItems,
   setTotalPage,
   page,
-  filterId,
   setFilterId,
-  availStatus,
   setAvailStatus,
   searchValue,
   setSearchValue,
+  setAssets,
 }: SearchBarProps) => {
-  const { isLoading, isError, error } = useQuery(
-    ["fetchSearch", searchValue],
+  const role = localStorage.getItem("role")!;
+
+  const {
+    isLoading: isLoadingItems,
+    isError: isErrorItems,
+    error: errorItems,
+  } = useQuery(
+    ["fetchSearchItems", searchValue],
     async () => {
       const { data } = await capstoneAxios({
         method: "GET",
@@ -83,7 +90,29 @@ const SearchBar = ({
       setTotalPage(data.data.totalPage);
       return data;
     },
-    { enabled: searchValue !== "" ? true : false }
+    { enabled: searchValue !== "" && role === ROLE.ADMIN ? true : false }
+  );
+
+  const {
+    isLoading: isLoadingAssets,
+    isError: isErrorAssets,
+    error: errorAssets,
+  } = useQuery(
+    ["fetchSearchAssets", searchValue],
+    async () => {
+      const { data } = await capstoneAxios({
+        method: "GET",
+        url: "/assets",
+        params: { keyword: searchValue, page },
+      });
+
+      console.log(data);
+
+      setAssets(data.data.assets);
+      setTotalPage(data.data.totalPage);
+      return data;
+    },
+    { enabled: searchValue !== "" && role === ROLE.EMPLOYEE ? true : false }
   );
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -100,14 +129,19 @@ const SearchBar = ({
           <SearchRoundedIcon />
         </SearchIconWrapper>
         <StyledInputBase
-          placeholder={isLoading ? "Loading..." : "Pencarian…"}
+          placeholder={
+            isLoadingItems || isLoadingAssets ? "Loading..." : "Pencarian…"
+          }
           inputProps={{ "aria-label": "search" }}
           onChange={handleSearch}
           value={searchValue}
         />
       </Search>
-      {isError && (
-        <Error message={(error as AxiosError).response!.data!.message!} />
+      {isErrorItems && (
+        <Error message={(errorItems as AxiosError).response!.data!.message!} />
+      )}
+      {isErrorAssets && (
+        <Error message={(errorAssets as AxiosError).response!.data!.message!} />
       )}
     </>
   );
