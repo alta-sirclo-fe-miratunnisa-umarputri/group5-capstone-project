@@ -55,7 +55,10 @@ const DirektoriAset = () => {
     },
     {
       enabled:
-        filterId === 0 && availStatus === "" && role === ROLE.ADMIN
+        filterId === 0 &&
+        availStatus === "" &&
+        role === ROLE.ADMIN &&
+        searchValue === ""
           ? true
           : false,
     }
@@ -119,7 +122,10 @@ const DirektoriAset = () => {
     },
     {
       enabled:
-        filterId === 0 && availStatus === "" && role === ROLE.EMPLOYEE
+        filterId === 0 &&
+        availStatus === "" &&
+        role === ROLE.EMPLOYEE &&
+        searchValue === ""
           ? true
           : false,
     }
@@ -215,6 +221,7 @@ const DirektoriAset = () => {
         <Box sx={containerDir}>
           <SearchBar
             setItems={setItems}
+            setAssets={setAssets}
             setTotalPage={setTotalPage}
             page={page}
             filterId={filterId}
