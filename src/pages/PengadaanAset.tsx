@@ -345,13 +345,7 @@ const PengadaanAset = () => {
 
   return (
     <Layout>
-      <Header
-        title="Permohonan Pengadaan"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit."
-      />
+      <Header title="Permohonan Pengadaan" description="" />
 
       <Box
         sx={{
@@ -372,7 +366,7 @@ const PengadaanAset = () => {
             boxShadow: 0,
           }}
         >
-          {buttonStatusPengadaanAset.map((item) => (
+          {buttonStatusPengadaanAset.map(item => (
             <Button
               key={item.id}
               variant="contained"
@@ -438,7 +432,7 @@ const PengadaanAset = () => {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList id="split-button-menu">
-                    {buttonStatusPengadaanAset.map((item) => (
+                    {buttonStatusPengadaanAset.map(item => (
                       <MenuItem
                         key={item.id}
                         selected={item.id === selectedIndex}

@@ -136,6 +136,8 @@ const PermohonanPersetujuan = () => {
 
   const handleRejectRequest = async () => {
     await mutateAsync("decline");
+    setAnchorElUser(null);
+    navigate("/permohonan-persetujuan");
   };
 
   const handleModal = () => {
@@ -200,7 +202,7 @@ const PermohonanPersetujuan = () => {
         return (
           <>
             <IconButton
-              onClick={(e) => {
+              onClick={e => {
                 setStatusItem(params.row.status);
                 handleClickAction(e, params.id, params);
               }}
@@ -308,7 +310,7 @@ const PermohonanPersetujuan = () => {
 
   const handleClick = () => {};
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+    setOpen(prevOpen => !prevOpen);
     setMbDdown("20%");
     setMbDdownxs("45%");
   };
@@ -346,13 +348,7 @@ const PermohonanPersetujuan = () => {
 
   return (
     <Layout>
-      <Header
-        title="Permohonan Persetujuan"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit."
-      />
+      <Header title="Permohonan Persetujuan" description="" />
 
       <Box
         sx={{
@@ -373,7 +369,7 @@ const PermohonanPersetujuan = () => {
             boxShadow: 0,
           }}
         >
-          {buttonStatusPermohonanPersetujuan.map((item) => (
+          {buttonStatusPermohonanPersetujuan.map(item => (
             <Button
               key={item.id}
               variant="contained"
@@ -439,7 +435,7 @@ const PermohonanPersetujuan = () => {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList id="split-button-menu">
-                    {buttonStatusPermohonanPersetujuan.map((item) => (
+                    {buttonStatusPermohonanPersetujuan.map(item => (
                       <MenuItem
                         key={item.id}
                         selected={item.id === selectedIndex}

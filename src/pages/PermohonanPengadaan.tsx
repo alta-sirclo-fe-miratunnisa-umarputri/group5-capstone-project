@@ -342,13 +342,7 @@ const PermohonanPengadaan = () => {
 
   return (
     <Layout>
-      <Header
-        title="Permohonan Pengadaan"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit."
-      />
+      <Header title="Permohonan Pengadaan" description="" />
 
       <Box
         sx={{
@@ -369,7 +363,7 @@ const PermohonanPengadaan = () => {
             boxShadow: 0,
           }}
         >
-          {buttonStatusPermohonanPengadaan.map((item) => (
+          {buttonStatusPermohonanPengadaan.map(item => (
             <Button
               key={item.id}
               variant="contained"
@@ -435,7 +429,7 @@ const PermohonanPengadaan = () => {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList id="split-button-menu">
-                    {buttonStatusPermohonanPengadaan.map((item) => (
+                    {buttonStatusPermohonanPengadaan.map(item => (
                       <MenuItem
                         key={item.id}
                         selected={item.id === selectedIndex}
