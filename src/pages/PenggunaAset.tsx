@@ -140,10 +140,15 @@ const PenggunaAset = () => {
   };
 
   const handleRejectRequest = async () => {
-    if (statusItem === "toaccept") {
+    if (statusItem === "toaccept" || statusItem === "toadmin") {
       await mutateAsync("decline");
       setAnchorElUser(null);
     }
+  };
+
+  const handleAskBack = async () => {
+    await mutateAsync("askreturn");
+    setAnchorElUser(null);
   };
 
   const handleModal = () => {
@@ -216,71 +221,143 @@ const PenggunaAset = () => {
               <MoreHorizRoundedIcon fontSize="medium" />
             </IconButton>
 
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={() => setAnchorElUser(null)}
-            >
-              {statusItem === "toadmin" ||
-              statusItem === "toreturn" ||
-              statusItem === "toaccept" ? (
-                <MenuItem onClick={handleAcceptRequest}>
-                  <Typography
-                    variant="subtitle2"
-                    sx={{
-                      ...primary,
-                      textAlign: "center",
-                      fontFamily: "Poppins",
-                      fontWeight: "medium",
-                    }}
-                  >
-                    Terima Permohonan
-                  </Typography>
-                </MenuItem>
-              ) : statusItem === "toadmin" ||
-                statusItem === "toreturn" ||
-                statusItem === "toaccept" ? (
-                <MenuItem onClick={handleRejectRequest}>
-                  <Typography
-                    variant="subtitle2"
-                    sx={{
-                      ...primary,
-                      textAlign: "center",
-                      fontFamily: "Poppins",
-                      fontWeight: "medium",
-                    }}
-                  >
-                    Tolak Permohonan
-                  </Typography>
-                </MenuItem>
-              ) : (
-                <MenuItem></MenuItem>
-              )}
+            {statusItem === "toadmin" ||
+            statusItem === "toaccept" ||
+            statusItem === "toreturn" ? (
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={() => setAnchorElUser(null)}
+              >
+                <>
+                  <MenuItem onClick={handleAcceptRequest}>
+                    <Typography
+                      variant="subtitle2"
+                      sx={{
+                        ...primary,
+                        textAlign: "center",
+                        fontFamily: "Poppins",
+                        fontWeight: "medium",
+                      }}
+                    >
+                      Terima Permohonan
+                    </Typography>
+                  </MenuItem>
 
-              <MenuItem onClick={handleModal}>
-                <Typography
-                  variant="subtitle2"
-                  sx={{
-                    ...primary,
-                    textAlign: "center",
-                    fontFamily: "Poppins",
-                    fontWeight: "medium",
-                  }}
-                >
-                  Lihat Detail
-                </Typography>
-              </MenuItem>
-            </Menu>
+                  <MenuItem onClick={handleRejectRequest}>
+                    <Typography
+                      variant="subtitle2"
+                      sx={{
+                        ...primary,
+                        textAlign: "center",
+                        fontFamily: "Poppins",
+                        fontWeight: "medium",
+                      }}
+                    >
+                      Tolak Permohonan
+                    </Typography>
+                  </MenuItem>
+                </>
+
+                <MenuItem onClick={handleModal}>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      ...primary,
+                      textAlign: "center",
+                      fontFamily: "Poppins",
+                      fontWeight: "medium",
+                    }}
+                  >
+                    Lihat Detail
+                  </Typography>
+                </MenuItem>
+              </Menu>
+            ) : statusItem === "inuse" ? (
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={() => setAnchorElUser(null)}
+              >
+                <MenuItem onClick={handleAskBack}>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      ...primary,
+                      textAlign: "center",
+                      fontFamily: "Poppins",
+                      fontWeight: "medium",
+                    }}
+                  >
+                    Ajukan Pengembalian
+                  </Typography>
+                </MenuItem>
+
+                <MenuItem onClick={handleModal}>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      ...primary,
+                      textAlign: "center",
+                      fontFamily: "Poppins",
+                      fontWeight: "medium",
+                    }}
+                  >
+                    Lihat Detail
+                  </Typography>
+                </MenuItem>
+              </Menu>
+            ) : (
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={() => setAnchorElUser(null)}
+              >
+                <MenuItem onClick={handleModal}>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      ...primary,
+                      textAlign: "center",
+                      fontFamily: "Poppins",
+                      fontWeight: "medium",
+                    }}
+                  >
+                    Lihat Detail
+                  </Typography>
+                </MenuItem>
+              </Menu>
+            )}
           </>
         );
       },
@@ -295,6 +372,9 @@ const PenggunaAset = () => {
     for (let i = 0; i < rows.length; i++) {
       rows[i].number = i + 1;
       rows[i].requestdate = new Date(rows[i].requestdate).toLocaleString();
+      // rows[i].date1 = new Date(rows[i].requestdate);
+      // rows[i].date2 = new Date(rows.returnDate);
+      // rows[i].sisaWaktu = rows[i].date2.getTime() - rows[i].date1.getTime();
     }
 
     return rows;
@@ -306,7 +386,7 @@ const PenggunaAset = () => {
 
   const handleClick = () => {};
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+    setOpen(prevOpen => !prevOpen);
     setMbDdown("30%");
     setMbDdownxs("50%");
   };
@@ -333,13 +413,7 @@ const PenggunaAset = () => {
 
   return (
     <Layout>
-      <Header
-        title="Pengguna Aset"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit."
-      />
+      <Header title="Pengguna Aset" description="" />
 
       <Box
         sx={{
@@ -370,7 +444,7 @@ const PenggunaAset = () => {
           >
             Semua Pengguna
           </Button> */}
-          {buttonStatusPenggunaAset.map((item) => (
+          {buttonStatusPenggunaAset.map(item => (
             <Button
               key={item.id}
               variant="contained"
@@ -436,7 +510,7 @@ const PenggunaAset = () => {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList id="split-button-menu">
-                    {buttonStatusPenggunaAset.map((item) => (
+                    {buttonStatusPenggunaAset.map(item => (
                       <MenuItem
                         key={item.id}
                         selected={item.id === selectedIndex}
