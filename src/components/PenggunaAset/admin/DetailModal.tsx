@@ -111,6 +111,11 @@ const DetailModal = () => {
     navigate("/pengguna-aset");
   };
 
+  const handleAskBack = async () => {
+    await mutateAsync("askreturn");
+    navigate("/pengguna-aset");
+  };
+
   return (
     <Dialog
       open={isOpen}
@@ -163,10 +168,19 @@ const DetailModal = () => {
               <DetailModalInfo
                 label="Status Pengajuan"
                 description={
-                  data.data.status === "toAdmin" ||
-                  data.data.status === "tomanager"
-                    ? "Menunggu Persetujuan"
-                    : "Disetujui"
+                  data.data.status === "toadmin"
+                    ? "Menunggu Admin"
+                    : data.data.status === "decline"
+                    ? "Ditolak"
+                    : data.data.status === "tomanager"
+                    ? "Menunggu Manager"
+                    : data.data.status === "toaccept"
+                    ? "Manager setuju"
+                    : data.data.status === "inuse"
+                    ? "Digunakan"
+                    : data.data.status === "toreturn"
+                    ? "Cek Pengembalian"
+                    : "Sudah Kembali"
                 }
               />
             </Grid>
@@ -203,7 +217,7 @@ const DetailModal = () => {
               />
             </Grid>
             <Grid item xs={7}>
-              <Button
+              {/* <Button
                 sx={{
                   textTransform: "none",
                   fontFamily: "Poppins",
@@ -215,7 +229,19 @@ const DetailModal = () => {
                 {data.data.status === "tomanager"
                   ? "Minta Persetujuan"
                   : "Menunggu Persetujuan"}
-              </Button>
+              </Button> */}
+
+              <DetailModalInfo
+                label="Status Pengajuan"
+                description={
+                  data.data.status === "toadmin" ||
+                  data.data.status === "tomanager"
+                    ? "Menunggu Persetujuan"
+                    : data.data.status === "decline"
+                    ? "Ditolak"
+                    : "Disetujui"
+                }
+              />
             </Grid>
           </Grid>
         )}
@@ -278,11 +304,10 @@ const DetailModal = () => {
 
               {data && data.data.status === "inuse" && (
                 <>
-                  <Button sx={cancellationButton}>Kembali</Button>
                   <Button
                     variant="contained"
                     sx={backButton}
-                    onClick={handleCancellation}
+                    onClick={handleAskBack}
                   >
                     Ajukan Pengembalian
                   </Button>
