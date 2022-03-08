@@ -1,4 +1,5 @@
 import { SxProps } from "@mui/material";
+import { generalFont } from "../../styles/font.style";
 
 export const topCarousel: SxProps = { mt: 3 };
 
@@ -21,4 +22,11 @@ export const buttonBerandaContainer: SxProps = {
   alignItems: { xs: "center", lg: "end" },
   justifyContent: "start",
   mt: { xs: 3, md: 0 },
+};
+
+export const mobileHeader: SxProps = {
+  ...generalFont,
+  textAlign: "center",
+  mb: 2,
+  fontWeight: "medium",
 };

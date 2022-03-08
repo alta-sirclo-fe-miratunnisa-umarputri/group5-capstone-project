@@ -12,7 +12,7 @@ import {
 
 import { generalFont } from "../../../styles/font.style";
 import { useState, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import CustomFormInput from "../../CustomFormInput";
 import CustomFormSelect from "../../CustomFormSelect";
 import { backButton, cancellationButton } from "./DetailActivity.style";
@@ -25,6 +25,7 @@ import { AxiosError } from "axios";
 const Application = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [asset, setAsset] = useState("");
+  const { setIsSuccess, setSuccessMessage } = useOutletContext<any>();
 
   const navigate = useNavigate();
 
@@ -72,6 +73,8 @@ const Application = () => {
     );
     const employeeId = localStorage.getItem("id")!;
 
+    setIsSuccess(false);
+
     await mutateAsync({
       employeeid: parseInt(employeeId),
       assetid: (asset[0] as any).id,
@@ -80,6 +83,8 @@ const Application = () => {
       returndate: formData.get("date"),
     });
 
+    setSuccessMessage("Berhasil mengajukan permohonan peminjaman aset");
+    setIsSuccess(true);
     setIsOpen(false);
     navigate("/beranda");
   };

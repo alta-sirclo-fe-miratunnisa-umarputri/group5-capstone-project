@@ -12,7 +12,7 @@ import {
 
 import { generalFont } from "../../../styles/font.style";
 import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import CustomFormInput from "../../CustomFormInput";
 import { backButton, cancellationButton } from "./DetailActivity.style";
 import { useMutation } from "react-query";
@@ -20,6 +20,7 @@ import { capstoneAxios } from "../../../axios-instance";
 
 const Procurement = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const { setIsSuccess, setSuccessMessage } = useOutletContext<any>();
 
   const navigate = useNavigate();
 
@@ -46,6 +47,8 @@ const Procurement = () => {
     const data = new FormData(e.currentTarget);
     const employeeId = localStorage.getItem("id")!;
 
+    setIsSuccess(false);
+
     await mutateAsync({
       employeeid: parseInt(employeeId),
       spesification: data.get("spec"),
@@ -53,6 +56,8 @@ const Procurement = () => {
       assetName: data.get("name"),
     });
 
+    setSuccessMessage("Berhasil mengajukan permohonan pengajuan aset baru");
+    setIsSuccess(true);
     setIsOpen(false);
     navigate("/beranda");
   };

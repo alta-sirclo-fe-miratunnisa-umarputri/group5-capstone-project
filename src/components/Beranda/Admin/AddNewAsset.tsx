@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { AxiosError } from "axios";
 import {
   Dialog,
@@ -31,6 +31,7 @@ const AddNewAsset = () => {
 
   const [category, setCategory] = useState(ASSET_CATEGORIES[0]);
   const [isOpen, setIsOpen] = useState(true);
+  const { setIsSuccess, setSuccessMessage } = useOutletContext<any>();
 
   const navigate = useNavigate();
 
@@ -60,6 +61,7 @@ const AddNewAsset = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSuccess(false);
 
     const categoryId = ASSET_CATEGORIES.indexOf(category) + 1;
     const data = new FormData(e.currentTarget);
@@ -69,6 +71,8 @@ const AddNewAsset = () => {
 
     await mutateAsync(data);
 
+    setSuccessMessage("Sukses menambahkan aset baru");
+    setIsSuccess(true);
     setIsOpen(false);
     navigate("/beranda");
   };

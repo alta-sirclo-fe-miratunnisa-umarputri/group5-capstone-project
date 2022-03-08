@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { useQuery } from "react-query";
 import { Outlet } from "react-router-dom";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 import Layout from "../components/Layout";
 import ContentContainer from "../components/ContentContainer";
@@ -17,16 +17,21 @@ import { ROLE } from "../constants";
 import {
   botCarousel,
   buttonBerandaContainer,
+  mobileHeader,
   statisticsContainer,
   tableContainer,
   topCarousel,
 } from "../components/Beranda/Beranda.style";
 import { capstoneAxios } from "../axios-instance";
+import { useState } from "react";
+import Success from "../components/Alert/Success";
 
 const Beranda = () => {
   const role = localStorage.getItem("role")!;
   const employeeId = parseInt(localStorage.getItem("id")!);
   const higherRoles = [ROLE.ADMIN, ROLE.MANAGER];
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const { data: dataEmployee } = useQuery(
     "tableBerandaEmployee",
@@ -73,8 +78,16 @@ const Beranda = () => {
   return (
     <Layout>
       <ContentContainer>
-        <Outlet />
+        <Outlet context={{ setIsSuccess, setSuccessMessage }} />
+        {isSuccess && <Success message={successMessage} />}
+
         <Grid container sx={topCarousel}>
+          <Grid item xs={12} sx={{ display: { xs: "block", md: "none" } }}>
+            <Typography variant="h4" sx={mobileHeader}>
+              Beranda
+            </Typography>
+          </Grid>
+
           <Grid item xs={12} md={8} lg={9}>
             <Carousel />
           </Grid>
