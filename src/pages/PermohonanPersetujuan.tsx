@@ -125,7 +125,6 @@ const PermohonanPersetujuan = () => {
   ) => {
     setAnchorElUser(e.currentTarget);
     setClickedMenuId(id);
-    console.log(params.row.status);
   };
 
   const handleAcceptRequest = async () => {
@@ -304,9 +303,7 @@ const PermohonanPersetujuan = () => {
     },
   ];
 
-  const handleFilter = (item: string) => {
-    console.log(status);
-  };
+  const handleFilter = (item: string) => {};
 
   const handleClick = () => {};
   const handleToggle = () => {
