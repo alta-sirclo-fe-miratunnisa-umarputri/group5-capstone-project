@@ -184,7 +184,7 @@ const PermohonanPersetujuan = () => {
       width: 250,
     },
     {
-      field: "sisaWaktu",
+      field: "duration",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "Sisa Waktu",

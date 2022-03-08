@@ -195,7 +195,7 @@ const PenggunaAset = () => {
       width: 250,
     },
     {
-      field: "sisaWaktu",
+      field: "duration",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "Sisa Waktu",
@@ -372,9 +372,6 @@ const PenggunaAset = () => {
     for (let i = 0; i < rows.length; i++) {
       rows[i].number = i + 1;
       rows[i].requestdate = new Date(rows[i].requestdate).toLocaleString();
-      // rows[i].date1 = new Date(rows[i].requestdate);
-      // rows[i].date2 = new Date(rows.returnDate);
-      // rows[i].sisaWaktu = rows[i].date2.getTime() - rows[i].date1.getTime();
     }
 
     return rows;
