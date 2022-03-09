@@ -1,7 +1,7 @@
 import { SxProps } from "@mui/material";
-import { primary } from "../../../styles/color.styles";
+import { theBlack } from "../../../styles/color.styles";
 
-const font: SxProps = { ...primary, fontFamily: "Poppins" };
+const font: SxProps = { color: theBlack.color, fontFamily: "Poppins" };
 
 export const labelFont: SxProps = { ...font, fontWeight: "regular" };
 
