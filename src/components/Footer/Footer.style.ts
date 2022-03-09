@@ -1,6 +1,5 @@
 import { SxProps } from "@mui/material";
-
-import { bgwhite } from "../../styles/color.styles";
+import { theWhite } from "../../styles/color.styles";
 
 export const wrapper: SxProps = {
   display: "flex",
@@ -12,13 +11,13 @@ export const wrapper: SxProps = {
 };
 
 export const title: SxProps = {
+  ...theWhite,
   fontFamily: "Poppins",
-  fontWeight: "medium",
-  color: bgwhite.backgroundColor,
+  fontWeight: "bold",
 };
 
 export const information: SxProps = {
+  ...theWhite,
   fontFamily: "Poppins",
-  fontWeight: "light",
-  color: bgwhite.backgroundColor,
+  fontWeight: "medium",
 };

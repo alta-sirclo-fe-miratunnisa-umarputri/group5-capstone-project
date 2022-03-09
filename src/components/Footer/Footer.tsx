@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 
-import { tertiary } from "../../styles/color.styles";
+import { tertiary, theGreen } from "../../styles/color.styles";
 import { wrapper } from "./Footer.style";
 import Title from "./Title";
 import Description from "./Description";
@@ -15,13 +15,13 @@ const Footer = () => {
   const role = localStorage.getItem("role");
 
   return (
-    <Grid container sx={{ bgcolor: tertiary.color }}>
+    <Grid container sx={{ bgcolor: theGreen.color }}>
       <Grid item xs={12} md={6} sx={wrapper}>
-        <Title label="Apa itu Avengers?" />
+        <Title label="Apa itu Sipangseet?" />
         <Description>
-          Avengers merupakan aplikasi manajemen aset perusahaan Avengers.Corp.
+          Sipangseet merupakan aplikasi manajemen aset perusahaan Avengers.Corp.
           Bertujuan untuk memudahkan alur peminjaman aset kepada pegawai demi
-          menunjang kinerja mereka. Dengan Avengers, tidak perlu surat, tidak
+          menunjang kinerja mereka. Dengan Sipangseet, tidak perlu surat, tidak
           perlu tatap muka, cukup ajukan saja. Sekali klik, maka aset sudah
           dapat digunakan.
         </Description>

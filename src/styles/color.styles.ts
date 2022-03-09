@@ -18,8 +18,12 @@ export const bgwhite = {
   backgroundColor: "#FFFFFF",
 };
 
-export const theGreen = {
+export const theLightGreen = {
   color: "#00AA46",
+};
+
+export const theGreen = {
+  color: "#004E29",
 };
 
 export const theBlack = {
