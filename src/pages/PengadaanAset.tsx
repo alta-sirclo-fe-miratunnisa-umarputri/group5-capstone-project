@@ -353,6 +353,7 @@ const PengadaanAset = () => {
         <ButtonGroup
           variant="contained"
           aria-label="contained primary button group"
+          color="inherit"
           sx={{
             width: "100%",
             display: "flex",
