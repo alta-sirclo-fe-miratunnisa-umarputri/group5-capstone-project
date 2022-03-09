@@ -341,7 +341,7 @@ const PengadaanAset = () => {
 
   return (
     <Layout>
-      <Header title="Permohonan Pengadaan" description="" />
+      <Header title="Pengadaan Aset" description="" />
 
       <Box
         sx={{
