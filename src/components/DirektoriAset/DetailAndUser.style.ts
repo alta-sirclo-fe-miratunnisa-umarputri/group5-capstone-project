@@ -1,11 +1,11 @@
 import { SxProps } from "@mui/material";
 
-import { primary } from "../../styles/color.styles";
+import { theBlack, theGreen } from "../../styles/color.styles";
 
 export const title: SxProps = {
   fontFamily: "Poppins",
   fontWeight: "medium",
-  ...primary,
+  color: theBlack.color,
 };
 
 export const detailImg = {
@@ -28,9 +28,9 @@ export const buttonActions: SxProps = {
   textTransform: "none",
   fontWeight: "medium",
   fontFamily: "Poppins",
-  backgroundColor: primary.color,
+  backgroundColor: theGreen.color,
   "&:hover": {
-    backgroundColor: primary.color,
+    backgroundColor: theGreen.color,
   },
 };
 

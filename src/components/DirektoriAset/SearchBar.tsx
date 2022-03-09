@@ -2,7 +2,7 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { InputBase } from "@mui/material";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import { styled, alpha } from "@mui/material/styles";
-import { primary, theBlack, theGreen } from "../../styles/color.styles";
+import { theBlack } from "../../styles/color.styles";
 import { useQuery } from "react-query";
 import { capstoneAxios } from "../../axios-instance";
 import Error from "../Alert/Error";
