@@ -21,7 +21,7 @@ const Header = ({ title, description }: TheHeader) => {
         sx={{
           color: theBlack.color,
           fontFamily: "Poppins",
-          fontWeight: "regular",
+          fontWeight: "bold",
         }}
       >
         {title}
@@ -32,7 +32,7 @@ const Header = ({ title, description }: TheHeader) => {
         sx={{
           color: theBlack.color,
           fontFamily: "Poppins",
-          fontWeight: "light",
+          fontWeight: "medium",
           px: { xs: 3, md: 20 },
           textAlign: "center",
         }}

@@ -2,7 +2,7 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { InputBase } from "@mui/material";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import { styled, alpha } from "@mui/material/styles";
-import { primary } from "../../styles/color.styles";
+import { primary, theBlack, theGreen } from "../../styles/color.styles";
 import { useQuery } from "react-query";
 import { capstoneAxios } from "../../axios-instance";
 import Error from "../Alert/Error";
@@ -12,18 +12,19 @@ import { ROLE } from "../../constants";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.black, 0.15),
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.black, 0.25),
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   width: "90%",
   [theme.breakpoints.up("sm")]: {
     width: "40%",
   },
+  border: "3px solid black",
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
-  ...primary,
+  color: theBlack.color,
   padding: theme.spacing(0, 2),
   height: "100%",
   position: "absolute",
