@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { makeStyles } from "@mui/styles";
-import { bgwhite, primary, tertiary } from "../../styles/color.styles";
+import { bgwhite, theBlack, theGreen } from "../../styles/color.styles";
 
 const columns: GridColDef[] = [
   {
@@ -39,14 +39,14 @@ const columns: GridColDef[] = [
 const useStyles = makeStyles({
   root: {
     "& .super-app-theme--header": {
-      backgroundColor: tertiary.color,
+      backgroundColor: theGreen.color,
       color: bgwhite.backgroundColor,
       fontFamily: "Poppins",
       fontSize: "16px",
       fontWeight: "normal",
     },
     "& .super-app-theme--cell": {
-      ...primary,
+      color: theBlack.color,
       fontFamily: "Poppins",
       fontSize: "14px",
     },

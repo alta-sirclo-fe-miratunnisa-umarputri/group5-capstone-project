@@ -1,5 +1,5 @@
 import { SxProps } from "@mui/material";
-import { primary } from "../../../styles/color.styles";
+import { theGreen, theLightGreen } from "../../../styles/color.styles";
 
 const button = {
   textTransform: "none",
@@ -8,7 +8,7 @@ const button = {
 };
 
 export const leftButton: SxProps = {
-  ...primary,
+  color: theLightGreen.color,
   ...button,
   mx: 1,
 };
@@ -18,6 +18,6 @@ export const rightButton: SxProps = {
   textTransform: "none",
   fontFamily: "Poppins",
   fontWeight: "medium",
-  bgcolor: primary.color,
-  "&:hover": { bgcolor: primary.color },
+  bgcolor: theGreen.color,
+  "&:hover": { bgcolor: theGreen.color },
 };
