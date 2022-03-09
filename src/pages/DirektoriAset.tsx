@@ -14,7 +14,7 @@ import Error from "../components/Alert/Error";
 
 import { containerDir } from "../components/DirektoriAset/DirektoriAset.style";
 import { capstoneAxios } from "../axios-instance";
-import { primary } from "../styles/color.styles";
+import { theBlack } from "../styles/color.styles";
 import { ROLE } from "../constants";
 
 const DirektoriAset = () => {
@@ -255,7 +255,13 @@ const DirektoriAset = () => {
                 lg={3}
                 sx={{ display: "flex", alignItems: "center" }}
               >
-                <Typography variant="body2" align="left" mx={1} my={1}>
+                <Typography
+                  variant="body2"
+                  align="left"
+                  mx={1}
+                  my={1}
+                  color="black"
+                >
                   Kategori:
                 </Typography>
               </Grid>
@@ -269,7 +275,7 @@ const DirektoriAset = () => {
                         onClick={() => handleClickFilter(el.id)}
                         variant={filterId === el.id ? "filled" : "outlined"}
                         size="small"
-                        sx={{ ...primary, mx: 1, my: 1 }}
+                        sx={{ color: theBlack.color, mx: 1, my: 1 }}
                       />
                     ))}
                 </Stack>
@@ -300,7 +306,13 @@ const DirektoriAset = () => {
                 lg={3}
                 sx={{ display: "flex", alignItems: "center" }}
               >
-                <Typography variant="body2" align="left" mx={1} my={1}>
+                <Typography
+                  variant="body2"
+                  align="left"
+                  mx={1}
+                  my={1}
+                  color="black"
+                >
                   Ketersediaan:
                 </Typography>
               </Grid>
@@ -319,7 +331,7 @@ const DirektoriAset = () => {
                         onClick={() => handleClickAvail(el)}
                         variant={availStatus === el ? "filled" : "outlined"}
                         size="small"
-                        sx={{ ...primary, mx: 1, my: 1 }}
+                        sx={{ color: theBlack.color, mx: 1, my: 1 }}
                       />
                     ))}
                 </Stack>
