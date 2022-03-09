@@ -18,7 +18,7 @@ const WhereToFindUs = ({ link, icon, label }: FooterSocialMedia) => {
         pb: 1,
       }}
     >
-      <img src={icon} alt="Icon" />
+      <img src={icon} alt="Icon" width={30} />
       <Typography
         variant="caption"
         sx={{ ...information, color: bgwhite.backgroundColor, px: 1 }}

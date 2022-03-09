@@ -17,3 +17,19 @@ export const quaternary = {
 export const bgwhite = {
   backgroundColor: "#FFFFFF",
 };
+
+export const theLightGreen = {
+  color: "#00AA46",
+};
+
+export const theGreen = {
+  color: "#004E29",
+};
+
+export const theBlack = {
+  color: "#000000",
+};
+
+export const theWhite = {
+  color: "#FFFFFF",
+};
