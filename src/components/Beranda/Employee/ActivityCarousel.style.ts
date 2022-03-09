@@ -1,12 +1,5 @@
 import { SxProps } from "@mui/material";
-import {
-  bgwhite,
-  primary,
-  quaternary,
-  theBlack,
-  theLightGreen,
-  theWhite,
-} from "../../../styles/color.styles";
+import { bgwhite, theBlack, theWhite } from "../../../styles/color.styles";
 
 export const titleCarousel: SxProps = {
   fontFamily: "Poppins",

@@ -1,5 +1,10 @@
 import { SxProps } from "@mui/material";
-import { primary, tertiary, bgwhite } from "../../styles/color.styles";
+import {
+  primary,
+  bgwhite,
+  theBlack,
+  theGreen,
+} from "../../styles/color.styles";
 
 export const masonry: SxProps = { mt: 2 };
 
@@ -14,25 +19,25 @@ export const cardContent: SxProps = {
 };
 
 export const category: SxProps = {
-  ...primary,
+  color: theBlack.color,
   fontWeight: "light",
   fontFamily: "Poppins",
 };
 
 export const title: SxProps = {
-  ...primary,
+  color: theBlack.color,
   fontWeight: "bold",
   fontFamily: "Poppins",
 };
 
 export const description: SxProps = {
-  ...primary,
+  color: theBlack.color,
   fontWeight: "regular",
   fontFamily: "Poppins",
 };
 
 export const availability: SxProps = {
-  ...primary,
+  color: theBlack.color,
   fontWeight: "light",
   fontFamily: "Poppins",
   fontSize: "10px",
@@ -49,9 +54,9 @@ export const button: SxProps = {
   fontFamily: "Poppins",
   color: bgwhite.backgroundColor,
   textTransform: "none",
-  backgroundColor: tertiary.color,
+  backgroundColor: theGreen.color,
   "&:hover": {
-    backgroundColor: tertiary.color,
+    backgroundColor: theGreen.color,
   },
 };
 

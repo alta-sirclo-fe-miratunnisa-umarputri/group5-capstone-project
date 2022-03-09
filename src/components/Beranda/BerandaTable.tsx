@@ -5,14 +5,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
 import { makeStyles } from "@mui/styles";
 
-import {
-  bgwhite,
-  primary,
-  tertiary,
-  theBlack,
-  theGreen,
-  theWhite,
-} from "../../styles/color.styles";
+import { theBlack, theGreen, theWhite } from "../../styles/color.styles";
 import { dotMenu, titleCarousel } from "./Employee/ActivityCarousel.style";
 import { ROLE } from "../../constants";
 import { capstoneAxios } from "../../axios-instance";

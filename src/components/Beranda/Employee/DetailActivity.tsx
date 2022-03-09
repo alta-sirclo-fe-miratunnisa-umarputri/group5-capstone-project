@@ -105,6 +105,8 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
     navigate("/pemeliharaan");
   };
 
+  const forReturnStatus = ["inuse", "askreturn"];
+
   return (
     <Dialog
       open={isOpen}
@@ -168,7 +170,8 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
                 <Grid item xs={4}></Grid>
                 <Grid item xs={8} sx={buttonContainer}>
                   {data.data.status !== "inuse" &&
-                    data.data.status !== "decline" && (
+                    data.data.status !== "decline" &&
+                    data.data.status !== "askreturn" && (
                       <Button
                         variant="contained"
                         sx={backButton}
@@ -178,7 +181,7 @@ const DetailActivity = ({ isOpen, handleClose }: DetailAndEmployeeModal) => {
                       </Button>
                     )}
 
-                  {data.data.status === "inuse" && (
+                  {forReturnStatus.includes(data.data.status) && (
                     <>
                       <Button
                         sx={cancellationButton}

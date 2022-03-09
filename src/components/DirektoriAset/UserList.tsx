@@ -25,7 +25,7 @@ import {
   title,
   userImg,
 } from "./DetailAndUser.style";
-import { primary } from "../../styles/color.styles";
+import { theBlack } from "../../styles/color.styles";
 
 const UserList = ({ isOpen, handleClose, id }: DetailAndEmployeeModal) => {
   const theme = useTheme();
@@ -82,7 +82,7 @@ const UserList = ({ isOpen, handleClose, id }: DetailAndEmployeeModal) => {
                   <Typography
                     variant="subtitle2"
                     sx={{
-                      ...primary,
+                      color: theBlack.color,
                       fontWeight: "regular",
                       fontFamily: "Poppins",
                     }}
@@ -92,7 +92,7 @@ const UserList = ({ isOpen, handleClose, id }: DetailAndEmployeeModal) => {
                   <Typography
                     variant="h5"
                     sx={{
-                      ...primary,
+                      color: theBlack.color,
                       fontWeight: "medium",
                       fontFamily: "Poppins",
                     }}

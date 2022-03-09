@@ -1,10 +1,5 @@
 import { SxProps } from "@mui/material";
-import {
-  bgwhite,
-  primary,
-  theBlack,
-  theLightGreen,
-} from "../../styles/color.styles";
+import { theBlack, theLightGreen } from "../../styles/color.styles";
 
 const mobile = {
   display: {

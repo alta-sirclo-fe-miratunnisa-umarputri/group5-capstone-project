@@ -1,14 +1,14 @@
 import { Box, Typography } from "@mui/material";
 
-import { primary } from "../styles/color.styles";
+import { theBlack } from "../styles/color.styles";
 import { TheHeader } from "../types/general";
 
 const Header = ({ title, description }: TheHeader) => {
   return (
     <Box
       sx={{
-        bgcolor: primary.color,
-        py: 2,
+        pt: 3,
+        pb: 1,
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -18,7 +18,11 @@ const Header = ({ title, description }: TheHeader) => {
       <Typography
         variant="h4"
         gutterBottom
-        sx={{ color: "white", fontFamily: "Poppins", fontWeight: "regular" }}
+        sx={{
+          color: theBlack.color,
+          fontFamily: "Poppins",
+          fontWeight: "bold",
+        }}
       >
         {title}
       </Typography>
@@ -26,9 +30,9 @@ const Header = ({ title, description }: TheHeader) => {
         variant="body2"
         gutterBottom
         sx={{
-          color: "white",
+          color: theBlack.color,
           fontFamily: "Poppins",
-          fontWeight: "light",
+          fontWeight: "medium",
           px: { xs: 3, md: 20 },
           textAlign: "center",
         }}
