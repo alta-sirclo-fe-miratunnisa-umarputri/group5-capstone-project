@@ -124,7 +124,6 @@ const PenggunaAset = () => {
   ) => {
     setAnchorElUser(e.currentTarget);
     setClickedMenuId(id);
-    console.log(params.row.status);
   };
 
   const handleAcceptRequest = async () => {
@@ -195,7 +194,7 @@ const PenggunaAset = () => {
       width: 250,
     },
     {
-      field: "sisaWaktu",
+      field: "duration",
       headerClassName: "super-app-theme--header",
       cellClassName: "super-app-theme--cell",
       headerName: "Sisa Waktu",
@@ -372,17 +371,12 @@ const PenggunaAset = () => {
     for (let i = 0; i < rows.length; i++) {
       rows[i].number = i + 1;
       rows[i].requestdate = new Date(rows[i].requestdate).toLocaleString();
-      // rows[i].date1 = new Date(rows[i].requestdate);
-      // rows[i].date2 = new Date(rows.returnDate);
-      // rows[i].sisaWaktu = rows[i].date2.getTime() - rows[i].date1.getTime();
     }
 
     return rows;
   };
 
-  const handleFilter = (item: string) => {
-    // console.log(status);
-  };
+  const handleFilter = (item: string) => {};
 
   const handleClick = () => {};
   const handleToggle = () => {

@@ -99,7 +99,6 @@ const PermohonanPengadaan = () => {
     } else {
       setItems([]);
     }
-    console.log(data.data);
 
     return data;
   }));
@@ -123,7 +122,6 @@ const PermohonanPengadaan = () => {
   ) => {
     setAnchorElUser(e.currentTarget);
     setClickedMenuId(id);
-    console.log(params.row.status);
   };
 
   const handleAcceptRequest = async () => {
@@ -194,7 +192,7 @@ const PermohonanPengadaan = () => {
         return (
           <>
             <IconButton
-              onClick={(e) => {
+              onClick={e => {
                 setStatusItem(params.row.status);
                 handleClickAction(e, params.id, params);
               }}
@@ -309,9 +307,7 @@ const PermohonanPengadaan = () => {
     return rows;
   };
 
-  const handleFilter = (item: string) => {
-    console.log(status);
-  };
+  const handleFilter = (item: string) => {};
 
   const handleClick = () => {};
   const handleToggle = () => {
