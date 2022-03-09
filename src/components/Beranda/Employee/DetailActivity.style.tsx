@@ -1,5 +1,9 @@
 import { SxProps } from "@mui/material";
-import { primary } from "../../../styles/color.styles";
+import {
+  theBlack,
+  theGreen,
+  theLightGreen,
+} from "../../../styles/color.styles";
 
 export const avatarContainer: SxProps = {
   display: "flex",
@@ -13,7 +17,7 @@ export const avatar: SxProps = {
   height: { xs: 100, sm: 210, md: 220 },
 };
 
-const font: SxProps = { ...primary, fontFamily: "Poppins" };
+const font: SxProps = { color: theBlack.color, fontFamily: "Poppins" };
 
 export const categoryFont: SxProps = {
   ...font,
@@ -44,7 +48,7 @@ const button = {
 };
 
 export const cancellationButton: SxProps = {
-  ...primary,
+  color: theLightGreen.color,
   ...button,
   mx: 1,
 };
@@ -54,6 +58,6 @@ export const backButton: SxProps = {
   textTransform: "none",
   fontFamily: "Poppins",
   fontWeight: "medium",
-  bgcolor: primary.color,
-  "&:hover": { bgcolor: primary.color },
+  bgcolor: theGreen.color,
+  "&:hover": { bgcolor: theGreen.color },
 };
