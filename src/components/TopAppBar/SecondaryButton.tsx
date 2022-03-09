@@ -28,7 +28,7 @@ const SecondaryButton = ({ label }: Partial<ButtonLoading>) => {
 
   return (
     <Button
-      size="small"
+      size="large"
       sx={{
         ...secondaryButton,
         textDecoration: getTextDecoration(label as string),

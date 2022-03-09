@@ -16,7 +16,7 @@ import {
   mobileMenu,
   mobileRight,
 } from "./TopAppBar.style";
-import { bgwhite } from "../../styles/color.styles";
+import { theLightGreen } from "../../styles/color.styles";
 import { useNavigate } from "react-router-dom";
 import SecondaryButton from "./SecondaryButton";
 
@@ -75,9 +75,7 @@ const RightMenu = () => {
         <SecondaryButton label={`Hi, ${name}!`} />
 
         <IconButton onClick={handleOpenUserMenu}>
-          <AccountCircleRoundedIcon
-            style={{ color: bgwhite.backgroundColor }}
-          />
+          <AccountCircleRoundedIcon fontSize="large" style={theLightGreen} />
         </IconButton>
 
         <Menu
