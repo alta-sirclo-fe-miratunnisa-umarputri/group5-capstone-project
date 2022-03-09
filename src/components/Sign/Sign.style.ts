@@ -1,9 +1,8 @@
 import { SxProps } from "@mui/material";
-
-import { primary, theBlack, theLightGreen } from "../../styles/color.styles";
+import { theBlack, theLightGreen } from "../../styles/color.styles";
 
 export const complimentContent: SxProps = {
-  backgroundColor: primary.color,
+  backgroundColor: theLightGreen.color,
   display: { xs: "none", md: "flex" },
   justifyContent: "center",
 };
