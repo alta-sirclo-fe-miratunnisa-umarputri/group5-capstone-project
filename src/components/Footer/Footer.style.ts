@@ -6,8 +6,8 @@ export const wrapper: SxProps = {
   flexDirection: "column",
   justifyContent: "start",
   alignItems: "start",
-  px: 7,
-  py: 2,
+  px: 8,
+  py: 4,
 };
 
 export const title: SxProps = {

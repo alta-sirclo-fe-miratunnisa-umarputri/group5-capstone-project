@@ -1,29 +1,29 @@
 import { Grid } from "@mui/material";
 
-import { tertiary, theGreen } from "../../styles/color.styles";
-import { wrapper } from "./Footer.style";
 import Title from "./Title";
 import Description from "./Description";
 import UsefulLink from "./UsefulLink";
-import facebook from "../../assets/facebook2.svg";
-import twitter from "../../assets/twitter2.svg";
-import instagram from "../../assets/instagram2.svg";
 import WhereToFindUs from "./WhereToFindUs";
+
 import { ROLE } from "../../constants";
+import { theGreen } from "../../styles/color.styles";
+import { wrapper } from "./Footer.style";
+import facebook from "../../assets/icons8-facebook-circled.svg";
+import twitter from "../../assets/icons8-twitter-circled.svg";
 
 const Footer = () => {
   const role = localStorage.getItem("role");
 
   return (
-    <Grid container sx={{ bgcolor: theGreen.color }}>
+    <Grid container sx={{ bgcolor: theGreen.color, mt: 3 }}>
       <Grid item xs={12} md={6} sx={wrapper}>
         <Title label="Apa itu Sipangseet?" />
         <Description>
           Sipangseet merupakan aplikasi manajemen aset perusahaan Avengers.Corp.
           Bertujuan untuk memudahkan alur peminjaman aset kepada pegawai demi
-          menunjang kinerja mereka. Dengan Sipangseet, tidak perlu surat, tidak
-          perlu tatap muka, cukup ajukan saja. Sekali klik, maka aset sudah
-          dapat digunakan.
+          kualitas kinerja yang lebih baik. Dengan Sipangseet, tidak perlu
+          surat, tidak perlu tatap muka, cukup ajukan saja. Sekali klik, maka
+          aset sudah dapat digunakan.
         </Description>
       </Grid>
 
@@ -63,17 +63,12 @@ const Footer = () => {
         <WhereToFindUs
           link="https://www.facebook.com/avengers/"
           icon={facebook}
-          label="@avengers"
+          label="@sipangseet"
         />
         <WhereToFindUs
           link="https://twitter.com/avengers"
           icon={twitter}
-          label="@Avengers"
-        />
-        <WhereToFindUs
-          link="https://www.instagram.com/avengers/?hl=en"
-          icon={instagram}
-          label="@avengers"
+          label="@Sipangseet"
         />
       </Grid>
     </Grid>
