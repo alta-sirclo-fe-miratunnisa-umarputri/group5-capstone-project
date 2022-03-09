@@ -1,11 +1,11 @@
 import { SxProps } from "@mui/material";
 
-import { bgwhite } from "../../styles/color.styles";
+import { theLightGreen } from "../../styles/color.styles";
 
 export const secondaryButton: SxProps = {
-  color: bgwhite.backgroundColor,
+  ...theLightGreen,
   display: "block",
   textTransform: "none",
-  fontWeight: "light",
+  fontWeight: "bold",
   fontFamily: "Poppins",
 };
