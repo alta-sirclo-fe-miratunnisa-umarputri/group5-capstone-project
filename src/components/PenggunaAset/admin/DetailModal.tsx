@@ -17,6 +17,7 @@ import {
   avatar,
   avatarContainer,
   backButton,
+  backButtonGreen,
   buttonContainer,
   buttonContainerStart,
   cancellationButton,
@@ -159,7 +160,7 @@ const DetailModal = () => {
                 label="Manager"
                 description={
                   data.data.managerid !== 0
-                    ? data.data.managerid
+                    ? data.data.managername
                     : "belum ditentukan"
                 }
               />
@@ -188,49 +189,32 @@ const DetailModal = () => {
             <Grid item xs={7}>
               <DetailModalInfo
                 label="Waktu Pengajuan"
-                description={data.data.requestdate.toLocaleString()}
+                description={new Date(data.data.requestdate).toLocaleString()}
               />
               <DetailModalInfo
                 label="Waktu Pengembalian"
                 description={
                   data.data.status !== "toAdmin" ||
                   data.data.status !== "tomanager"
-                    ? data.data.returndate
+                    ? new Date(data.data.returnDate).toLocaleString()
                     : "belum ditentukan"
                 }
               />
               <DetailModalInfo label="Sisa Waktu" description="3 hari" />
               <DetailModalInfo
                 label="Keterangan"
-                description={data.data.description}
+                description={data.data.duration}
               />
             </Grid>
           </Grid>
         )}
 
-        {data && data.data.status !== "toAdmin" && (
+        {data && data.data.status !== "toadmin" && (
           <Grid container mt={2} sx={{ backroundColor: "#000000 " }}>
             <Grid item xs={5}>
-              <DetailModalInfo
-                label="Manager"
-                description={data.data.manager}
-              />
+              <DetailModalInfo label="Manager" description="-" />
             </Grid>
             <Grid item xs={7}>
-              {/* <Button
-                sx={{
-                  textTransform: "none",
-                  fontFamily: "Poppins",
-                  fontWeight: "medium",
-                }}
-                disabled={data.data.status === "toAdmin" ? false : true}
-                onClick={askApproval}
-              >
-                {data.data.status === "tomanager"
-                  ? "Minta Persetujuan"
-                  : "Menunggu Persetujuan"}
-              </Button> */}
-
               <DetailModalInfo
                 label="Status Pengajuan"
                 description={
@@ -261,12 +245,12 @@ const DetailModal = () => {
             <Grid item xs={8} sx={buttonContainer}>
               {data && data.data.status === "toadmin" && (
                 <>
-                  <Button sx={cancellationButton} onClick={handleDecline}>
+                  <Button sx={backButton} onClick={handleDecline}>
                     Tolak
                   </Button>
                   <Button
                     variant="contained"
-                    sx={backButton}
+                    sx={backButtonGreen}
                     onClick={handleAccept}
                   >
                     Terima Permohonan
@@ -276,13 +260,13 @@ const DetailModal = () => {
 
               {data && data.data.status === "toreturn" && (
                 <>
-                  <Button sx={cancellationButton} onClick={handleDecline}>
+                  <Button sx={backButton} onClick={handleDecline}>
                     Tolak
                   </Button>
                   <Button
                     variant="contained"
                     onClick={handleReturn}
-                    sx={backButton}
+                    sx={backButtonGreen}
                   >
                     Terima Permohonan
                   </Button>
@@ -291,12 +275,12 @@ const DetailModal = () => {
 
               {data && data.data.status === "toaccept" && (
                 <>
-                  <Button sx={cancellationButton} onClick={handleDecline}>
+                  <Button sx={backButton} onClick={handleDecline}>
                     Tolak
                   </Button>
                   <Button
                     variant="contained"
-                    sx={backButton}
+                    sx={backButtonGreen}
                     onClick={handleAccept}
                   >
                     Terima Permohonan
