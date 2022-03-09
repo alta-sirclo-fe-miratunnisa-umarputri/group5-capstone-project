@@ -279,9 +279,11 @@ const DetailModal = () => {
                   <Button sx={cancellationButton} onClick={handleDecline}>
                     Tolak
                   </Button>
-                  <Button variant="contained" sx={backButton}>
-                    {" "}
+                  <Button
+                    variant="contained"
                     onClick={handleReturn}
+                    sx={backButton}
+                  >
                     Terima Permohonan
                   </Button>
                 </>
