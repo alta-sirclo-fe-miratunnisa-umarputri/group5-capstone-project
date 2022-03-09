@@ -1,10 +1,10 @@
 import { SxProps } from "@mui/material";
-import { bgwhite, secondary } from "../../styles/color.styles";
+import { bgwhite, theGreen } from "../../styles/color.styles";
 
 export const container: SxProps = {
   width: { xs: "80%", sm: "60%", md: "80%", lg: "80%" },
   height: "40px",
-  bgcolor: secondary.color,
+  bgcolor: theGreen.color,
   mb: 2,
   borderRadius: "5px",
   px: 2,
