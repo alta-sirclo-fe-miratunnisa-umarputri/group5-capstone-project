@@ -1,7 +1,7 @@
 import { SxProps, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import { primary, tertiary } from "../styles/color.styles";
+import { theBlack } from "../styles/color.styles";
 
 export const container: SxProps = {
   display: "flex",
@@ -10,7 +10,7 @@ export const container: SxProps = {
 };
 
 export const formLabel: SxProps = {
-  ...primary,
+  ...theBlack,
   mb: 1,
   fontFamily: "Poppins",
   fontSize: "20px",
@@ -18,22 +18,20 @@ export const formLabel: SxProps = {
 };
 
 export const CustomTextField = styled(TextField)({
-  input: primary,
-  "& label.Mui-focused": {
-    color: tertiary.color,
-  },
+  input: theBlack.color,
+  "& label.Mui-focused": theBlack,
   "& .MuiInput-underline:after": {
-    borderBottomColor: tertiary.color,
+    borderBottomColor: theBlack.color,
   },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: tertiary.color,
+      borderColor: theBlack.color,
     },
     "&:hover fieldset": {
-      borderColor: tertiary.color,
+      borderColor: theBlack.color,
     },
     "&.Mui-focused fieldset": {
-      borderColor: tertiary.color,
+      borderColor: theBlack.color,
     },
   },
 });

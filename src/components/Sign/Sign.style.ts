@@ -1,9 +1,8 @@
 import { SxProps } from "@mui/material";
-
-import { primary, tertiary } from "../../styles/color.styles";
+import { theBlack, theLightGreen } from "../../styles/color.styles";
 
 export const complimentContent: SxProps = {
-  backgroundColor: primary.color,
+  backgroundColor: theLightGreen.color,
   display: { xs: "none", md: "flex" },
   justifyContent: "center",
 };
@@ -15,7 +14,7 @@ export const mainContent: SxProps = {
 };
 
 export const help: SxProps = {
-  ...tertiary,
+  ...theBlack,
   textAlign: "end",
   fontFamily: "Poppins",
   fontWeight: "medium",
@@ -24,5 +23,5 @@ export const help: SxProps = {
 
 export const link = {
   textDecoration: "underline",
-  textDecorationColor: primary.color,
+  textDecorationColor: theLightGreen.color,
 };

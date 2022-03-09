@@ -12,7 +12,7 @@ import Help from "../components/Sign/Help";
 import Error from "../components/Alert/Error";
 
 import { capstoneAxios } from "../axios-instance";
-import logo from "../assets/logo.svg";
+import logo from "../assets/new-logo-wine.svg";
 import { complimentContent, mainContent } from "../components/Sign/Sign.style";
 
 type SignInData = {
@@ -65,7 +65,7 @@ const SignIn = () => {
 
           <Greetings
             title="Selamat Datang"
-            subtitle="Masuk dengan akun Avengers Anda"
+            subtitle="Masuk dengan akun Sipangseet Anda"
           />
 
           <Box component="form" marginY={2} onSubmit={handleSubmit}>
@@ -94,7 +94,7 @@ const SignIn = () => {
       </Grid>
 
       <Grid item xs={12} md={6} sx={complimentContent}>
-        <img src={logo} alt="Logo" width="60%" height="auto" />
+        <img src={logo} alt="Logo" width="100%" height="auto" />
       </Grid>
     </Grid>
   );

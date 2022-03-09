@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-import logo from "../../assets/logo-small.svg";
+import logo from "../../assets/new-logo.svg";
 import {
   innerContainerLogo,
   outerContainerLogo,
@@ -11,7 +11,7 @@ const LogoSmallScreen = () => {
     <>
       <Box sx={outerContainerLogo}>
         <Box sx={innerContainerLogo}>
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="logo" width="50%" />
         </Box>
       </Box>
     </>

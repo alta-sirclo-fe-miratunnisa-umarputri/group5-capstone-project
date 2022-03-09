@@ -1,6 +1,6 @@
 import { SxProps } from "@mui/material";
 
-import { primary } from "../../styles/color.styles";
+import { theWhite } from "../../styles/color.styles";
 
 const center: SxProps = {
   flexDirection: "column",
@@ -15,7 +15,7 @@ export const outerContainerLogo: SxProps = {
 };
 
 export const innerContainerLogo: SxProps = {
-  backgroundColor: primary.color,
+  backgroundColor: theWhite.color,
   width: "10rem",
   height: "10rem",
   borderRadius: 100,

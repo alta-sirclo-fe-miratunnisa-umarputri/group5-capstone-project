@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
-import { primary } from "../../styles/color.styles";
+import { theLightGreen } from "../../styles/color.styles";
 import { SignHelp } from "../../types/sign";
 import { help, link } from "./Sign.style";
 
@@ -12,7 +12,7 @@ const Help = ({ tag, instruction, path }: SignHelp) => {
         {tag}
         <Link to={path} style={link}>
           {" "}
-          <span style={primary}>{instruction}</span>
+          <span style={theLightGreen}>{instruction}</span>
         </Link>
       </Box>
     </Typography>
