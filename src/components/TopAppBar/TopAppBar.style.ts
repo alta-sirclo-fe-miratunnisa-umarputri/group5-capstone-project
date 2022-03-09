@@ -1,5 +1,10 @@
 import { SxProps } from "@mui/material";
-import { bgwhite, primary } from "../../styles/color.styles";
+import {
+  bgwhite,
+  primary,
+  theBlack,
+  theLightGreen,
+} from "../../styles/color.styles";
 
 const mobile = {
   display: {
@@ -12,14 +17,14 @@ export const mobileLeft: SxProps = { ...mobile, flexGrow: 1 };
 
 export const mobileRight: SxProps = { ...mobile, flexGrow: 0 };
 
-export const mobileIcon = { color: bgwhite.backgroundColor };
+export const mobileIcon = { color: theBlack.color };
 
 export const mobileLeftMenu: SxProps = {
   display: { xs: "block", md: "none" },
 };
 
 export const mobileMenu: SxProps = {
-  ...primary,
+  color: theLightGreen.color,
   textAlign: "center",
   fontFamily: "Poppins",
   fontWeight: "medium",

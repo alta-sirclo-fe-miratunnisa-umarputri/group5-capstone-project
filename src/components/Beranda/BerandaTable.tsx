@@ -5,7 +5,14 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
 import { makeStyles } from "@mui/styles";
 
-import { bgwhite, primary, tertiary } from "../../styles/color.styles";
+import {
+  bgwhite,
+  primary,
+  tertiary,
+  theBlack,
+  theGreen,
+  theWhite,
+} from "../../styles/color.styles";
 import { dotMenu, titleCarousel } from "./Employee/ActivityCarousel.style";
 import { ROLE } from "../../constants";
 import { capstoneAxios } from "../../axios-instance";
@@ -14,14 +21,14 @@ import { useNavigate } from "react-router-dom";
 const useStyles = makeStyles({
   root: {
     "& .super-app-theme--header": {
-      backgroundColor: tertiary.color,
-      color: bgwhite.backgroundColor,
+      backgroundColor: theGreen.color,
       fontFamily: "Poppins",
       fontSize: "16px",
       fontWeight: "normal",
+      color: theWhite.color,
     },
     "& .super-app-theme--cell": {
-      ...primary,
+      color: theBlack.color,
       fontFamily: "Poppins",
       fontSize: "14px",
     },

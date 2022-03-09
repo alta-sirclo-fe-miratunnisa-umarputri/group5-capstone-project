@@ -1,9 +1,17 @@
 import { SxProps } from "@mui/material";
-import { bgwhite, primary, quaternary } from "../../../styles/color.styles";
+import {
+  bgwhite,
+  primary,
+  quaternary,
+  theBlack,
+  theLightGreen,
+  theWhite,
+} from "../../../styles/color.styles";
 
 export const titleCarousel: SxProps = {
   fontFamily: "Poppins",
   fontWeight: "medium",
+  color: theBlack.color,
 };
 
 export const activityCarousel: SxProps = {
@@ -18,12 +26,12 @@ export const outerContItem: SxProps = {
 };
 
 export const card: SxProps = {
-  ...quaternary,
   height: 160,
   marginX: 0.5,
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
+  backgroundColor: theWhite.color,
 };
 
 export const avatarGrid: SxProps = {
@@ -42,7 +50,9 @@ export const itemFont: SxProps = {
   fontWeight: "medium",
 };
 
-export const bottomCont: SxProps = { bgcolor: primary.color };
+export const bottomCont: SxProps = {
+  // bgcolor: theLightGreen.color,
+};
 
 export const statusGrid: SxProps = {
   display: "flex",
@@ -66,10 +76,10 @@ export const cardActions: SxProps = {
   justifyContent: "center",
 };
 
-export const dot: SxProps = { color: bgwhite.backgroundColor };
+export const dot: SxProps = { color: theBlack.color };
 
 export const dotMenu: SxProps = {
-  ...primary,
+  color: theBlack.color,
   textAlign: "center",
   fontFamily: "Poppins",
   fontWeight: "medium",

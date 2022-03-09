@@ -1,7 +1,7 @@
-import { primary } from "./color.styles";
+import { theBlack } from "./color.styles";
 
 export const generalFont = {
-  ...primary,
+  color: theBlack.color,
   fontFamily: "Poppins",
   fontWeight: "medium",
 };
