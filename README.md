@@ -1,12 +1,16 @@
-# Avengers
+# Sipangseet
 
-Group Capstone Project by Group 5 Sirclo Tech Academy 2022
-{(FE : Jemi Damanik and Miratunnisa Umarputri) &&
-(BE : Eldy Hidayat && M Najib)
+## Group Capstone Project by Avenger Team (Group 5 Sirclo Tech Academy 2022)
 
-## Deploy Link
+Application created for asset's management that provides user to have access on creating application to use asset, creating procurement, adding assets, accepting or rejecting application and procurement. With Sipangseet, no more papers, no more face to face, just one click away!
 
-https://group5-capstone-project-35gulwa5v-ratuuaw.vercel.app/
+FE : Jemi Damanik & Miratunnisa Umarputri
+
+BE : Eldy Hidayat & M Najib
+
+## Deployment Link
+
+https://group5-capstone-project.vercel.app/
 
 ## Prototype and WireFrame
 
@@ -14,35 +18,35 @@ https://www.figma.com/file/RIUf4ssTfGccwwN3zRpANU/Capstone
 
 ## Features
 
-#### Sign In and Sign Out
+- Sign In and Sign Out
 
-#### Direktori Aset
+- Direktori Aset
 
-#### Search and Filter Asets
+- Search and Filter Asets
 
-#### Aset's last users list
+- Aset's last users list
 
-#### Update Maintanance status
+- Update Maintanance status
 
-#### List of total aset
+- List of total aset
 
-#### Employee Activities
+- Employee Activities
 
-#### Request to use available aset
+- Request to use available aset
 
-#### Request for a new aset
+- Request for a new aset
 
-#### Approve the request
+- Approve the request
 
-#### Decline the request
+- Decline the request
 
-#### Detail of every request
+- Detail of every request
 
-| Role     | Login | Directori Aset | Beranda | Pengguna Aset | Permohonan Persetujuan | Pengadaan Aset | Permohonan Pengadaan |
-| -------- | ----- | -------------- | ------- | ------------- | ---------------------- | -------------- | -------------------- |
-| Employee | Yes   | Yes            | Yes     | No            | No                     | No             | No                   |
-| Admin    | Yes   | Yes            | Yes     | Yes           | No                     | Yes            | No                   |
-| Manager  | Yes   | Yes            | Yes     | No            | Yes                    | No             | Yes                  |
+| Role     | Login | Directori Aset | Beranda | Pengguna Aset | Permohonan Peminjaman | Pengadaan Aset | Permohonan Pengadaan |
+| -------- | ----- | -------------- | ------- | ------------- | --------------------- | -------------- | -------------------- |
+| Employee | Yes   | Yes            | Yes     | No            | No                    | No             | No                   |
+| Admin    | Yes   | Yes            | Yes     | Yes           | Yes                   | Yes            | Yes                  |
+| Manager  | Yes   | No             | Yes     | No            | Yes                   | No             | Yes                  |
 
 ## Acknowledgements
 
@@ -64,11 +68,10 @@ https://beeldy.site/
 
 | Color                 | Hex       |
 | --------------------- | --------- |
-| Primary Color         | [#3D4251] |
-| Secondary Color       | [#D35E35] |
-| Tertiary Font Color   | [#666F88] |
-| Quaternary Font Color | [#CACBD5] |
-| White Color           | [#FFFFFF] |
+| Primary Color         | [#00AA46] |
+| Secondary Color       | [#004E29] |
+| Tertiary Font Color   | [#000000] |
+| Quaternary Font Color | [#FFFFFF] |
 
 ## Running Tests
 
@@ -79,7 +82,7 @@ Clone this repo
 
 ```
 
-Install Avengers with yarn
+Install Sipangseet with yarn
 
 ```bash
   yarn install
