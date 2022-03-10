@@ -1,5 +1,5 @@
 import { SxProps } from "@mui/material";
-import { theBlack, theLightGreen } from "../../styles/color.styles";
+import { theBlack, theGreen, theLightGreen } from "../../styles/color.styles";
 
 export const complimentContent: SxProps = {
   backgroundColor: theLightGreen.color,
@@ -23,5 +23,5 @@ export const help: SxProps = {
 
 export const link = {
   textDecoration: "underline",
-  textDecorationColor: theLightGreen.color,
+  textDecorationColor: theGreen.color,
 };
