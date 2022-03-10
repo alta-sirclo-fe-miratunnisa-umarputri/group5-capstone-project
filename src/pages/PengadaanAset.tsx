@@ -197,7 +197,7 @@ const PengadaanAset = () => {
         return (
           <>
             <IconButton
-              onClick={e => {
+              onClick={(e) => {
                 setStatusItem(params.row.status);
                 handleClickAction(e, params.id, params);
               }}
@@ -341,7 +341,10 @@ const PengadaanAset = () => {
 
   return (
     <Layout>
-      <Header title="Pengadaan Aset" description="" />
+      <Header
+        title="Pengadaan Aset"
+        description="Halaman untuk melihat proses pengadaan aset berdasarkan status"
+      />
 
       <Box
         sx={{
@@ -363,7 +366,7 @@ const PengadaanAset = () => {
             boxShadow: 0,
           }}
         >
-          {buttonStatusPengadaanAset.map(item => (
+          {buttonStatusPengadaanAset.map((item) => (
             <Button
               key={item.id}
               variant="contained"
@@ -429,7 +432,7 @@ const PengadaanAset = () => {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList id="split-button-menu">
-                    {buttonStatusPengadaanAset.map(item => (
+                    {buttonStatusPengadaanAset.map((item) => (
                       <MenuItem
                         key={item.id}
                         selected={item.id === selectedIndex}

@@ -192,7 +192,7 @@ const PermohonanPengadaan = () => {
         return (
           <>
             <IconButton
-              onClick={e => {
+              onClick={(e) => {
                 setStatusItem(params.row.status);
                 handleClickAction(e, params.id, params);
               }}
@@ -338,7 +338,10 @@ const PermohonanPengadaan = () => {
 
   return (
     <Layout>
-      <Header title="Permohonan Pengadaan" description="" />
+      <Header
+        title="Permohonan Pengadaan"
+        description="Halaman untuk melihat permohonan pengadaan aset berdasarkan status"
+      />
 
       <Box
         sx={{
@@ -360,7 +363,7 @@ const PermohonanPengadaan = () => {
             boxShadow: 0,
           }}
         >
-          {buttonStatusPermohonanPengadaan.map(item => (
+          {buttonStatusPermohonanPengadaan.map((item) => (
             <Button
               key={item.id}
               variant="contained"
@@ -426,7 +429,7 @@ const PermohonanPengadaan = () => {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList id="split-button-menu">
-                    {buttonStatusPermohonanPengadaan.map(item => (
+                    {buttonStatusPermohonanPengadaan.map((item) => (
                       <MenuItem
                         key={item.id}
                         selected={item.id === selectedIndex}
