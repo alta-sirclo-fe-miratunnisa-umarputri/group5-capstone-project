@@ -1,10 +1,5 @@
 import { SxProps } from "@mui/material";
-import {
-  primary,
-  bgwhite,
-  theBlack,
-  theGreen,
-} from "../../styles/color.styles";
+import { bgwhite, theBlack, theGreen } from "../../styles/color.styles";
 
 export const masonry: SxProps = { mt: 2 };
 
@@ -74,7 +69,7 @@ export const groupAvatar: SxProps = {
 export const avatar: SxProps = { width: 25, height: 25 };
 
 export const avatarText: SxProps = {
-  ...primary,
+  color: theBlack.color,
   fontFamily: "Poppins",
   fontSize: "12px",
   display: "flex",

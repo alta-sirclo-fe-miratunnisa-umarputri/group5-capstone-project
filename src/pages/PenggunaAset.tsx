@@ -212,7 +212,7 @@ const PenggunaAset = () => {
         return (
           <>
             <IconButton
-              onClick={e => {
+              onClick={(e) => {
                 setStatusItem(params.row.status);
                 handleClickAction(e, params.id, params);
               }}
@@ -380,7 +380,7 @@ const PenggunaAset = () => {
 
   const handleClick = () => {};
   const handleToggle = () => {
-    setOpen(prevOpen => !prevOpen);
+    setOpen((prevOpen) => !prevOpen);
     setMbDdown("30%");
     setMbDdownxs("50%");
   };
@@ -407,7 +407,10 @@ const PenggunaAset = () => {
 
   return (
     <Layout>
-      <Header title="Pengguna Aset" description="" />
+      <Header
+        title="Pengguna Aset"
+        description="Halaman untuk melihat proses pengguna aset berdasarkan status"
+      />
 
       <Box
         sx={{
@@ -430,7 +433,7 @@ const PenggunaAset = () => {
             boxShadow: 0,
           }}
         >
-          {buttonStatusPenggunaAset.map(item => (
+          {buttonStatusPenggunaAset.map((item) => (
             <Button
               key={item.id}
               variant="contained"
@@ -496,7 +499,7 @@ const PenggunaAset = () => {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList id="split-button-menu">
-                    {buttonStatusPenggunaAset.map(item => (
+                    {buttonStatusPenggunaAset.map((item) => (
                       <MenuItem
                         key={item.id}
                         selected={item.id === selectedIndex}

@@ -1,5 +1,5 @@
 import { SxProps } from "@mui/material";
-import { theBlack, theLightGreen } from "../../styles/color.styles";
+import { theBlack, theGreen } from "../../styles/color.styles";
 
 const mobile = {
   display: {
@@ -19,7 +19,7 @@ export const mobileLeftMenu: SxProps = {
 };
 
 export const mobileMenu: SxProps = {
-  color: theLightGreen.color,
+  color: theGreen.color,
   textAlign: "center",
   fontFamily: "Poppins",
   fontWeight: "medium",

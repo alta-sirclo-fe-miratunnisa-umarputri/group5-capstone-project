@@ -5,14 +5,15 @@ import { Grid, Typography } from "@mui/material";
 
 import Layout from "../components/Layout";
 import ContentContainer from "../components/ContentContainer";
-import Carousel from "../components/Beranda/Carousel";
 import RightButton from "../components/Beranda/RightButton";
 import Statistics from "../components/Beranda/Statistics";
 import ActivityCarousel from "../components/Beranda/Employee/ActivityCarousel";
 import BerandaTable from "../components/Beranda/BerandaTable";
 import Loading from "../components/Loading";
 import Error from "../components/Alert/Error";
+import Success from "../components/Alert/Success";
 
+import banner from "../assets/sipangseet3.jpg";
 import { ROLE } from "../constants";
 import {
   botCarousel,
@@ -24,7 +25,6 @@ import {
 } from "../components/Beranda/Beranda.style";
 import { capstoneAxios } from "../axios-instance";
 import { useState } from "react";
-import Success from "../components/Alert/Success";
 
 const Beranda = () => {
   const role = localStorage.getItem("role")!;
@@ -88,9 +88,17 @@ const Beranda = () => {
             </Typography>
           </Grid>
 
-          <Grid item xs={12} md={8} lg={9}>
-            <Carousel />
-          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={8}
+            lg={9}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            borderRadius={5}
+            sx={{ backgroundImage: `url(${banner})`, backgroundSize: "cover" }}
+          />
 
           <Grid item xs={12} md={4} lg={3} sx={statisticsContainer}>
             <Statistics />

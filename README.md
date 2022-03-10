@@ -1,6 +1,6 @@
 # Sipangseet
 
-## Group Capstone Project by Avenger Team (Group 5 Sirclo Tech Academy 2022)
+Project Capstone by Avenger Team (Group 5 Sirclo Tech Academy 2022)
 
 Application created for asset's management that provides user to have access on creating application to use asset, creating procurement, adding assets, accepting or rejecting application and procurement. With Sipangseet, no more papers, no more face to face, just one click away!
 
@@ -66,12 +66,12 @@ https://beeldy.site/
 
 ## Color Reference
 
-| Color                 | Hex       |
-| --------------------- | --------- |
-| Primary Color         | [#00AA46] |
-| Secondary Color       | [#004E29] |
-| Tertiary Font Color   | [#000000] |
-| Quaternary Font Color | [#FFFFFF] |
+| Color                 | Hex     |
+| --------------------- | ------- |
+| Primary Color         | #00AA46 |
+| Secondary Color       | #004E29 |
+| Tertiary Font Color   | #000000 |
+| Quaternary Font Color | #FFFFFF |
 
 ## Running Tests
 

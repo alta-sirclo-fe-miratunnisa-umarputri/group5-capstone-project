@@ -1,8 +1,10 @@
-import { Box, Button, Typography } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
+import { Box, Button, Typography } from "@mui/material";
+
 import ContentContainer from "../components/ContentContainer";
 import Header from "../components/Header";
-import { secondary } from "../styles/color.styles";
+
+import { theGreen } from "../styles/color.styles";
 import { generalFont } from "../styles/font.style";
 
 const NotFound = () => {
@@ -14,11 +16,8 @@ const NotFound = () => {
   return (
     <>
       <Header
-        title="Hi There!"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-        dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit."
+        title="Selamat Datang"
+        description="Terima kasih telah mengunjungi situs kami"
       />
       <Outlet />
       <ContentContainer>
@@ -26,7 +25,7 @@ const NotFound = () => {
           variant="h4"
           sx={{ ...generalFont, mt: 10, textAlign: "center" }}
         >
-          Maaf, halaman yang anda cari tidak ditemukan.
+          Maaf, halaman yang anda cari tidak ditemukan
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "center", px: 25, py: 3 }}>
           <Button
@@ -36,8 +35,8 @@ const NotFound = () => {
               textTransform: "none",
               fontFamily: "Poppins",
               fontWeight: "medium",
-              bgcolor: secondary.color,
-              "&:hover": { bgcolor: secondary.color },
+              bgcolor: theGreen.color,
+              "&:hover": { bgcolor: theGreen.color },
             }}
             onClick={handleBackToBeranda}
           >

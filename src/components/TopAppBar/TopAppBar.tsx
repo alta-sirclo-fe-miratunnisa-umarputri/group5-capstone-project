@@ -1,7 +1,9 @@
 import { AppBar, Toolbar, Container } from "@mui/material";
-import { theWhite } from "../../styles/color.styles";
+
 import LeftMenu from "./LeftMenu";
 import RightMenu from "./RightMenu";
+
+import { theWhite } from "../../styles/color.styles";
 
 const TopAppBar = () => {
   return (
