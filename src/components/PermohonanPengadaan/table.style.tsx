@@ -1,20 +1,20 @@
 import { makeStyles } from "@mui/styles";
-import { bgwhite, primary, quaternary } from "../../styles/color.styles";
+import { theBlack, theGreen, theWhite } from "../../styles/color.styles";
 
 export const useStyles = makeStyles({
   root: {
     "& .super-app-theme--header": {
-      backgroundColor: primary.color,
-      color: bgwhite.backgroundColor,
+      backgroundColor: theGreen.color,
+      color: theWhite.color,
       fontFamily: "Poppins",
       fontSize: "16px",
       fontWeight: "normal",
     },
     "& .super-app-theme--cell": {
-      ...primary,
+      ...theBlack,
       fontFamily: "Poppins",
       fontSize: "14px",
-      backgroundColor: quaternary.backgroundColor,
+      backgroundColor: theWhite.color,
     },
   },
 });

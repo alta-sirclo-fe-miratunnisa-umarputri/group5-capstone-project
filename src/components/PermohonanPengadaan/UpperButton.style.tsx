@@ -1,29 +1,31 @@
 import { SxProps } from "@mui/material";
-import { primary, tertiary, bgwhite } from "../../styles/color.styles";
+import { theWhite, theGreen, theLightGreen } from "../../styles/color.styles";
 
 export const button: SxProps = {
   fontWeight: "medium",
-  outlineColor: tertiary.color,
+  outlineColor: theLightGreen.color,
   width: "20%",
   fontFamily: "Poppins",
-  color: bgwhite.backgroundColor,
+  color: theWhite.color,
   textTransform: "none",
-  backgroundColor: tertiary.color,
+  borderColor: theLightGreen.color,
+  backgroundColor: theLightGreen.color,
   "&:hover": {
-    backgroundColor: tertiary.color,
+    backgroundColor: theLightGreen.color,
   },
 };
 
 export const buttonOutlined: SxProps = {
   fontWeight: "medium",
+  outlineColor: theLightGreen.color,
   width: "20%",
   fontFamily: "Poppins",
-  color: primary.color,
+  color: theLightGreen.color,
   textTransform: "none",
-  backgroundColor: bgwhite.backgroundColor,
+  backgroundColor: theWhite.color,
   "&:hover": {
-    backgroundColor: tertiary.color,
-    color: bgwhite.backgroundColor,
+    backgroundColor: theLightGreen.color,
+    color: theWhite.color,
   },
 };
 
@@ -35,13 +37,13 @@ export const buttonStatus = [
 
 export const buttonSelect: SxProps = {
   fontWeight: "medium",
-  outlineColor: tertiary.color,
+  outlineColor: theLightGreen.color,
   fontFamily: "Poppins",
-  color: bgwhite.backgroundColor,
+  color: theWhite.color,
   textTransform: "none",
-  backgroundColor: tertiary.color,
+  backgroundColor: theLightGreen.color,
   "&:hover": {
-    backgroundColor: tertiary.color,
+    backgroundColor: theLightGreen.color,
   },
 };
 

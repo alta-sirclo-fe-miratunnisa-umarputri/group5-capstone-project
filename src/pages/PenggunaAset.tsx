@@ -12,7 +12,7 @@ import Layout from "../components/Layout";
 import Header from "../components/Header";
 import { Outlet, useNavigate } from "react-router-dom";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { primary } from "../styles/color.styles";
+import { primary, theLightGreen } from "../styles/color.styles";
 import { useStyles } from "../components/PermohonanPengadaan/table.style";
 import {
   Box,
@@ -418,26 +418,18 @@ const PenggunaAset = () => {
       >
         <ButtonGroup
           variant="contained"
+          color="inherit"
           aria-label="contained primary button group"
           sx={{
             width: "100%",
             display: "flex",
             flexDirection: "row",
             justifyContent: "center",
-            backgroundColor: "white",
+            backgroundColor: theLightGreen.color,
+            borderColor: theLightGreen.color,
             boxShadow: 0,
           }}
         >
-          {/* <Button
-            sx={filter === "" ? button : buttonOutlined}
-            onClick={data => {
-              setFilter("");
-              setStatus("all");
-              fetchData();
-            }}
-          >
-            Semua Pengguna
-          </Button> */}
           {buttonStatusPenggunaAset.map(item => (
             <Button
               key={item.id}

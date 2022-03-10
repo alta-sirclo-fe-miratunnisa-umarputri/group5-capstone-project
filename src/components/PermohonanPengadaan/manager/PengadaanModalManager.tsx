@@ -12,11 +12,12 @@ import {
   DialogActions,
 } from "@mui/material";
 
-import DetailModalInfo from "./DetailModalInfo";
+import DetailModalInfo from "../../PenggunaAset/admin/DetailModalInfo";
 import {
   avatar,
   avatarContainer,
   backButton,
+  backButtonGreen,
   buttonContainer,
   buttonContainerStart,
   cancellationButton,
@@ -197,7 +198,7 @@ const PengadaanModalManager = () => {
                   </Button>
                   <Button
                     variant="contained"
-                    sx={backButton}
+                    sx={backButtonGreen}
                     onClick={handleAccept}
                   >
                     Terima Permohonan
