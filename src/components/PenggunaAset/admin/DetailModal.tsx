@@ -159,7 +159,7 @@ const DetailModal = () => {
               <DetailModalInfo
                 label="Manager"
                 description={
-                  data.data.managerid !== 0
+                  data.data.managerid !== null
                     ? data.data.managername
                     : "belum ditentukan"
                 }
@@ -194,16 +194,20 @@ const DetailModal = () => {
               <DetailModalInfo
                 label="Waktu Pengembalian"
                 description={
-                  data.data.status !== "toAdmin" ||
+                  data.data.status !== "toadmin" ||
                   data.data.status !== "tomanager"
-                    ? new Date(data.data.returnDate).toLocaleString()
+                    ? new Date(data.data.returndate).toLocaleString()
                     : "belum ditentukan"
                 }
               />
-              <DetailModalInfo label="Sisa Waktu" description="3 hari" />
+
               <DetailModalInfo
                 label="Keterangan"
-                description={data.data.duration}
+                description={data.data.description}
+              />
+              <DetailModalInfo
+                label="Kategori"
+                description={data.data.categoryname}
               />
             </Grid>
           </Grid>
@@ -212,11 +216,20 @@ const DetailModal = () => {
         {data && data.data.status !== "toadmin" && (
           <Grid container mt={2} sx={{ backroundColor: "#000000 " }}>
             <Grid item xs={5}>
-              <DetailModalInfo label="Manager" description="-" />
+              <DetailModalInfo
+                label="Manager"
+                description={
+                  data.data.status === "toadmin" ||
+                  data.data.status === "tomanager" ||
+                  data.data.status === "decline"
+                    ? "-"
+                    : data.data.managername
+                }
+              />
             </Grid>
             <Grid item xs={7}>
               <DetailModalInfo
-                label="Status Pengajuan"
+                label="Status Dari Manager"
                 description={
                   data.data.status === "toadmin" ||
                   data.data.status === "tomanager"
@@ -251,7 +264,7 @@ const DetailModal = () => {
                   <Button
                     variant="contained"
                     sx={backButtonGreen}
-                    onClick={handleAccept}
+                    onClick={askApproval}
                   >
                     Terima Permohonan
                   </Button>

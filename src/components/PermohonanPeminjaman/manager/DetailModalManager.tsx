@@ -139,8 +139,10 @@ const DetailModal = () => {
               <DetailModalInfo
                 label="Manager"
                 description={
-                  data.data.managerid !== 0
+                  data.data.managerid !== null
                     ? data.data.managername
+                    : data.data.status === "decline"
+                    ? "-"
                     : "belum ditentukan"
                 }
               />
@@ -166,7 +168,7 @@ const DetailModal = () => {
                 label="Waktu Pengembalian"
                 description={data.data.returndate.toLocaleString()}
               />
-              <DetailModalInfo label="Sisa Waktu" description="3 hari" />
+
               <DetailModalInfo
                 label="Keterangan"
                 description={data.data.description}
