@@ -137,14 +137,7 @@ const PengadaanModalManager = () => {
                 label="Pemohon"
                 description={data.data.employeeName}
               />
-              <DetailModalInfo
-                label="Manager"
-                description={
-                  data.data.managerName !== null
-                    ? data.data.managerName
-                    : "belum ditentukan"
-                }
-              />
+
               <DetailModalInfo label="Divisi" description="Tech" />
 
               <DetailModalInfo
